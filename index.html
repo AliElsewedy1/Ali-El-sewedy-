@@ -29,7 +29,6 @@
       --font-display: 'Syne', 'Cairo', sans-serif;
       --font-title-tech: 'Syne', 'Cairo', sans-serif;
       --font-body: 'Space Grotesk', 'Cairo', sans-serif;
-      --font-hand: 'Permanent Marker', cursive;
       --logo-primary: #ffffff;
     }
 
@@ -109,12 +108,12 @@
       100% { transform: translate(-25px, 35px) scale(0.92); }
     }
 
-    /* Tracing Beam Thread (0.5px width) */
+    /* Tracing Beam Thread */
     .tracing-beam-line {
       position: fixed;
       top: 0;
       right: 18px;
-      width: 0.5px;
+      width: 1px;
       height: 100vh;
       background: rgba(255, 255, 255, 0.04);
       z-index: 99;
@@ -123,9 +122,7 @@
       transition: opacity 0.4s ease;
     }
 
-    .tracing-beam-line.visible {
-      opacity: 1;
-    }
+    .tracing-beam-line.visible { opacity: 1; }
 
     .tracing-beam-thumb {
       position: absolute;
@@ -139,10 +136,7 @@
       will-change: transform, height;
     }
 
-    html[dir="rtl"] .tracing-beam-line {
-      right: auto;
-      left: 18px;
-    }
+    html[dir="rtl"] .tracing-beam-line { right: auto; left: 18px; }
 
     .app-screen-frame {
       width: 100%;
@@ -155,7 +149,7 @@
       z-index: 10;
     }
 
-    /* Top Floating Bar: Starts 15px radius -> contracts to 8px on scroll */
+    /* Top Floating Bar */
     .top-floating-bar {
       display: flex;
       align-items: center;
@@ -164,7 +158,7 @@
       backdrop-filter: blur(10px) saturate(130%);
       -webkit-backdrop-filter: blur(10px) saturate(130%);
       border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 15px;
+      border-radius: 40px;
       padding: 9px 18px;
       position: sticky;
       top: 6px;
@@ -199,7 +193,7 @@
     .top-floating-bar.scrolled {
       transform: translate3d(0, 0, 0) scale(1);
       padding: 7px 14px;
-      border-radius: 8px;
+      border-radius: 6px;
       background: rgba(10, 12, 16, 0.18);
       backdrop-filter: blur(14px) saturate(150%);
       -webkit-backdrop-filter: blur(14px) saturate(150%);
@@ -212,6 +206,16 @@
     [data-theme="light"] .top-floating-bar.scrolled {
       background: rgba(255, 255, 255, 0.38);
       border-color: rgba(0, 0, 0, 0.08);
+    }
+
+    .top-floating-bar.scrolled .hide-on-scroll {
+      opacity: 0;
+      width: 0;
+      margin: 0;
+      padding: 0;
+      pointer-events: none;
+      overflow: hidden;
+      transition: opacity 0.25s ease, width 0.25s ease, margin 0.25s ease;
     }
 
     .as-media-brand-mark {
@@ -258,22 +262,33 @@
       gap: 10px;
     }
 
-    /* Celestial Switcher & Lang Toggle */
-    .celestial-toggle-pill, .lang-toggle-pill {
-      height: 28px;
+    /* Clean, Professional Theme Toggle Switch & Lang Toggle */
+    .simple-theme-btn, .lang-toggle-pill {
+      height: 32px;
       background: rgba(20, 23, 31, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
       position: relative;
       cursor: pointer;
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .celestial-toggle-pill { width: 56px; animation: pillWelcomePulse 2s ease-in-out 1.2s 1; }
+    .simple-theme-btn {
+      width: 36px;
+      color: #fbbf24;
+      font-size: 0.85rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .simple-theme-btn:hover {
+      transform: scale(1.08);
+      border-color: var(--accent-red);
+      background: rgba(229, 27, 36, 0.12);
+    }
+
     .lang-toggle-pill { 
       width: 40px; 
       font-family: var(--font-display); 
@@ -281,88 +296,19 @@
       font-weight: 800; 
       color: var(--text-pure);
       letter-spacing: 0.5px;
-      animation: pillWelcomePulse 2s ease-in-out 1.4s 1;
     }
 
-    @keyframes pillWelcomePulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 rgba(229, 27, 36, 0); }
-      30% { transform: scale(1.12); box-shadow: 0 0 14px var(--accent-red-glow); border-color: rgba(229, 27, 36, 0.6); }
-      60% { transform: scale(0.96); box-shadow: 0 0 4px rgba(229, 27, 36, 0.2); }
-      100% { transform: scale(1); box-shadow: 0 0 0 rgba(229, 27, 36, 0); }
+    [data-theme="light"] .simple-theme-btn {
+      background: #e0f2fe;
+      color: #0369a1;
+      border-color: rgba(56, 189, 248, 0.4);
     }
 
-    .sky-stars {
-      position: absolute;
-      inset: 0;
-      background-image: 
-        radial-gradient(1.2px 1.2px at 10px 8px, #38bdf8, transparent),
-        radial-gradient(1.5px 1.5px at 22px 16px, rgba(255,255,255,0.9), transparent),
-        radial-gradient(1.2px 1.2px at 32px 10px, #f43f5e, transparent);
-      opacity: 0.95;
-      animation: neonTwinkle 3s ease-in-out infinite alternate;
-      transition: opacity 0.35s ease;
+    [data-theme="light"] .lang-toggle-pill {
+      background: #e2e8f0;
+      color: #0b0c10;
+      border-color: rgba(0,0,0,0.1);
     }
-
-    @keyframes neonTwinkle {
-      0% { opacity: 0.7; filter: drop-shadow(0 0 2px rgba(56, 189, 248, 0.5)); }
-      100% { opacity: 1; filter: drop-shadow(0 0 5px rgba(244, 63, 94, 0.8)); }
-    }
-
-    .moon-crescent-shape {
-      width: 20px;
-      height: 20px;
-      background: transparent;
-      border-radius: 50%;
-      position: absolute;
-      right: 6px;
-      box-shadow: -4px 1px 0px 0px #e2e8f0;
-      filter: drop-shadow(0 0 8px rgba(226, 232, 240, 0.85));
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .sun-cloud-wrapper {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transform: translateX(28px) scale(0.6);
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .sun-core {
-      width: 16px;
-      height: 16px;
-      background: #f59e0b;
-      border-radius: 50%;
-      box-shadow: 0 0 12px #f59e0b, 0 0 20px rgba(245, 158, 11, 0.6);
-      position: relative;
-      animation: sunPulseRays 2.5s ease-in-out infinite alternate;
-    }
-
-    @keyframes sunPulseRays {
-      0% { transform: scale(0.9); box-shadow: 0 0 8px #f59e0b; }
-      100% { transform: scale(1.1); box-shadow: 0 0 18px #f59e0b, 0 0 28px rgba(245, 158, 11, 0.7); }
-    }
-
-    .sun-cloud-shape {
-      position: absolute;
-      width: 24px;
-      height: 12px;
-      background: #ffffff;
-      border-radius: 10px;
-      bottom: 4px;
-      right: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.4));
-    }
-
-    /* Button-only theme classes */
-    .celestial-toggle-pill.btn-light-mode { background: #e0f2fe; border-color: rgba(56, 189, 248, 0.3); }
-    .celestial-toggle-pill.btn-light-mode .sky-stars,
-    .celestial-toggle-pill.btn-light-mode .moon-crescent-shape { opacity: 0; transform: translateX(-28px) scale(0.5); }
-    .celestial-toggle-pill.btn-light-mode .sun-cloud-wrapper { opacity: 1; transform: translateX(0) scale(1); }
 
     /* Burger Menu Button */
     .menu-burger-btn {
@@ -491,8 +437,8 @@
 
     .title-stacked-3d {
       position: relative;
-      font-family: var(--font-display);
-      font-size: 1.3rem;
+      font-family: var(--font-title-tech);
+      font-size: 1.85rem;
       font-weight: 800;
       line-height: 0.95;
       text-transform: uppercase;
@@ -523,7 +469,7 @@
 
     .author-surname-red {
       font-family: var(--font-display);
-      font-size: 0.77rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: var(--accent-red);
       line-height: 0.95;
@@ -899,26 +845,33 @@
     .sheet-nav-tile.cta-red { background: var(--accent-red); color: #ffffff; border: none; justify-content: center; margin-top: 10px; box-shadow: 0 4px 20px var(--accent-red-glow); }
     
     .sheet-bottom-theme-toggle { display: flex; justify-content: center; margin-top: 26px; }
-    
-    .sheet-bottom-theme-toggle .celestial-toggle-pill {
-      width: 124px;
-      height: 44px;
-      border-radius: 26px;
+
+    /* Nubian Sub-dialects Overlay Modal */
+    .nubi-overlay-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2500;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
-    .sheet-bottom-theme-toggle .celestial-toggle-pill .moon-crescent-shape {
-      width: 28px;
-      height: 28px;
-      right: 10px;
+    .nubi-overlay-backdrop.open { display: flex; }
+
+    .nubi-modal-box {
+      width: 100%;
+      max-width: 390px;
+      background: var(--sheet-bg);
+      border: 1px solid var(--accent-red);
+      border-radius: 22px;
+      padding: 24px 20px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.8);
+      animation: modalScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .sheet-bottom-theme-toggle .celestial-toggle-pill .sun-core {
-      width: 24px;
-      height: 24px;
-    }
-    .sheet-bottom-theme-toggle .celestial-toggle-pill .sun-cloud-shape {
-      width: 36px;
-      height: 16px;
-      right: 14px;
-    }
+    @keyframes modalScaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
     .toast-pill { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(14, 16, 21, 0.92); border: 1px solid var(--accent-red); backdrop-filter: blur(14px); padding: 10px 20px; border-radius: 30px; display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.8); opacity: 0; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); z-index: 3000; pointer-events: none; }
     .toast-pill.show { transform: translateX(-50%) translateY(0); opacity: 1; }
@@ -952,15 +905,13 @@
       </a>
 
       <div class="bar-controls-group">
-        <div class="lang-toggle-pill" id="navLangToggleBtn" onclick="toggleNavbarLanguage()" title="Switch EN/AR">EN</div>
-        <div class="celestial-toggle-pill" id="navThemeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-          <div class="sky-stars"></div>
-          <div class="moon-crescent-shape"></div>
-          <div class="sun-cloud-wrapper">
-            <div class="sun-core"></div>
-            <div class="sun-cloud-shape"></div>
-          </div>
-        </div>
+        <div class="lang-toggle-pill hide-on-scroll" onclick="toggleNavbarLanguage()" title="Switch EN/AR">EN</div>
+        
+        <!-- Clean & Simple Theme Toggle Switch -->
+        <button class="simple-theme-btn hide-on-scroll" id="navThemeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+
         <button class="menu-burger-btn" onclick="openDrawer()" aria-label="Open Navigation">
           <span class="burger-line burger-line-1"></span>
           <span class="burger-line burger-line-2"></span>
@@ -976,25 +927,25 @@
         <div class="hero-split-stage">
           
           <div class="hero-typography-col">
-            <div class="title-stacked-3d" data-en="ABOUT" data-ar="نبذة" data-es="ACERCA" data-tr="HAKKINDA" data-it="INFORMAZIONI" data-zh="关于" data-ru="ОБ АВТОРЕ">ABOUT</div>
-            <div class="author-name-lead" data-en="ALI" data-ar="علي" data-es="ALI" data-tr="ALİ" data-it="ALI" data-zh="阿里" data-ru="АЛИ">ALI</div>
-            <div class="author-surname-red" data-en="ELSEWEDY" data-ar="السويدي" data-es="ELSEWEDY" data-tr="ELSEWEDY" data-it="ELSEWEDY" data-zh="埃尔苏韦迪" data-ru="ЭЛЬСЕВИДИ">ELSEWEDY</div>
+            <div class="title-stacked-3d" data-en="ABOUT" data-ar="نبذة" data-es="ACERCA" data-tr="HAKKINDA" data-zh="关于" data-ru="ОБ АВТОРЕ" data-fr="À PROPOS" data-nu-mattokki="أَبُوت" data-nu-fadidja="أَبُوت">ABOUT</div>
+            <div class="author-name-lead" data-en="ALI" data-ar="علي" data-es="ALI" data-tr="ALİ" data-zh="阿里" data-ru="АЛИ" data-fr="ALI" data-nu-mattokki="عَلِي" data-nu-fadidja="عَلِي">ALI</div>
+            <div class="author-surname-red" data-en="ELSEWEDY" data-ar="السويدي" data-es="ELSEWEDY" data-tr="ELSEWEDY" data-zh="埃尔苏韦迪" data-ru="ЭЛЬСЕВИДИ" data-fr="ELSEWEDY" data-nu-mattokki="السُوَيْدِي" data-nu-fadidja="السُوَيْدِي">ELSEWEDY</div>
 
             <div class="roles-unified-pod">
-              <span class="role-pod-item" data-en="Designer" data-ar="مصمم" data-es="Diseñador" data-tr="Tasarımcı" data-it="Designer" data-zh="设计师" data-ru="Дизайнер">Designer</span>
-              <span class="role-pod-item" data-en="Photographer" data-ar="مصور" data-es="Fotógrafo" data-tr="Fotoğrafçı" data-it="Fotografo" data-zh="摄影师" data-ru="Фотограф">Photographer</span>
-              <span class="role-pod-item" data-en="Director" data-ar="مخرج" data-es="Director" data-tr="Yönetmen" data-it="Regista" data-zh="导演" data-ru="Режиссер">Director</span>
+              <span class="role-pod-item" data-en="Designer" data-ar="مصمم" data-es="Diseñador" data-tr="Tasarımcı" data-zh="设计师" data-ru="Дизайнер" data-fr="Designer" data-nu-mattokki="مُصَمِّم" data-nu-fadidja="مُصَمِّم">Designer</span>
+              <span class="role-pod-item" data-en="Photographer" data-ar="مصور" data-es="Fotógrafo" data-tr="Fotoğrafçı" data-zh="摄影师" data-ru="Фотограф" data-fr="Photographe" data-nu-mattokki="مُصَوِّر" data-nu-fadidja="مُصَوِّر">Photographer</span>
+              <span class="role-pod-item" data-en="Director" data-ar="مخرج" data-es="Director" data-tr="Yönetmen" data-zh="导演" data-ru="Режиссер" data-fr="Directeur" data-nu-mattokki="مُخْرِج" data-nu-fadidja="مُخْرِج">Director</span>
             </div>
 
-            <p class="creator-bio-snippet" data-en="Turning high-energy automotive scenes & bespoke digital systems into powerful visual stories." data-ar="تحويل مشاهد السيارات الحماسية وأنظمة التصميم الرقمي إلى قصص بصرية ملهمة ومؤثرة." data-es="Transformando escenas automotrices de alta energía y sistemas digitales a medida en poderosas historias visuales." data-tr="Yüksek enerjili otomotiv sahnelerini ve özel dijital sistemleri güçlü görsel hikayelere dönüştürüyorum." data-it="Trasformando scene automobilistiche ad alta energia e sistemi digitali su misura in potenti storie visive." data-zh="将高能量的汽车场景和定制数字系统转化为强有力的视觉故事。" data-ru="Превращаю динамичные автомобильные сцены и индивидуальные цифровые системы в мощные визуальные истории.">
+            <p class="creator-bio-snippet" data-en="Turning high-energy automotive scenes & bespoke digital systems into powerful visual stories." data-ar="تحويل مشاهد السيارات الحماسية وأنظمة التصميم الرقمي إلى قصص بصرية ملهمة ومؤثرة." data-es="Transformando escenas automotrices de alta energía y sistemas digitales a medida en poderosas historias visuales." data-tr="Yüksek enerjili otomotiv sahnelerini ve özel dijital sistemleri güçlü görsel hikayelere dönüştürüyorum." data-zh="将高能量的汽车场景和定制数字系统转化为强有力的视觉故事。" data-ru="Превращаю динамичные автомобильные сцены и индивидуальные цифровые системы в мощные визуальные истории." data-fr="Transformer des scènes automobiles à haute énergie et des systèmes numériques sur mesure en puissantes histoires visuelles." data-nu-mattokki="تَحْوِيل مَشَاهِد السِّيَّارَات الحَمَاسِيَّة إلَى قِصَص بَصَرِيَّة مُؤَثِّرَة." data-nu-fadidja="تَحْوِيل مَشَاهِد السِّيَّارَات الحَمَاسِيَّة إلَى قِصَص بَصَرِيَّة مُؤَثِّرَة.">
               Turning high-energy automotive scenes & bespoke digital systems into powerful visual stories.
             </p>
-            <span class="punchy-sub-line" data-en="Built to move. Designed to stand out." data-ar="صُممت لتنطلق. أُبدعت لتتميز." data-es="Creado para moverse. Diseñado para destacar." data-tr="Hareket için üretildi. Öne çıkmak için tasarlandı." data-it="Creato per muoversi. Progettato per distinguersi." data-zh="为运动而生。为卓越而设计." data-ru="Создан двигаться. Разработан выделяться.">
+            <span class="punchy-sub-line" data-en="Built to move. Designed to stand out." data-ar="صُممت لتنطلق. أُبدعت لتتميز." data-es="Creado para moverse. Diseñado para destacar." data-tr="Hareket için üretildi. Öne çıkmak için tasarlandı." data-zh="为运动而生。为卓越而设计." data-ru="Создан двигаться. Разработан выделяться." data-fr="Conçu pour bouger. Conçu pour se démarquer." data-nu-mattokki="صُمِّمَت لِلتَّحَرُّك. أُبْدِعَت لِلتَّمَيُّز." data-nu-fadidja="صُمِّمَت لِلتَّحَرُّك. أُبْدِعَت لِلتَّمَيُّز.">
               Built to move. Designed to stand out.
             </span>
           </div>
 
-          <div class="hero-standee-col" id="heroStandeeCol">
+          <div class="hero-standee-col">
             <img src="https://lh3.googleusercontent.com/d/13GRXgFwKlE6F0bjhGDwEyxz-_8eIoofF" alt="Ali Elsewedy" class="creator-cutout-img dark-photo-mode" style="display: block;" />
             <img src="https://lh3.googleusercontent.com/d/1Nq0-KeCEBnMofq2nPp7PMowbY_jxB_Lg" alt="Ali Elsewedy Light" class="creator-cutout-img light-photo-mode" style="display: none;" />
           </div>
@@ -1004,101 +955,101 @@
         <div class="stats-triad">
           <div class="stat-pod spotlight-card">
             <div class="stat-number">2016</div>
-            <div class="stat-label" data-en="Since" data-ar="البداية" data-es="Desde" data-tr="Kuruluş" data-it="Dal" data-zh="始于" data-ru="С">Since</div>
+            <div class="stat-label" data-en="Since" data-ar="البداية" data-es="Desde" data-tr="Kuruluş" data-zh="始于" data-ru="С" data-fr="Depuis" data-nu-mattokki="مِنْذُ" data-nu-fadidja="مِنْذُ">Since</div>
           </div>
           <div class="stat-pod spotlight-card">
             <div class="stat-number">100<span class="red">+</span></div>
-            <div class="stat-label" data-en="Projects" data-ar="مشروعاً" data-es="Proyectos" data-tr="Proje" data-it="Progetti" data-zh="项目" data-ru="Проектов">Projects</div>
+            <div class="stat-label" data-en="Projects" data-ar="مشروعاً" data-es="Proyectos" data-tr="Proje" data-zh="项目" data-ru="Проектов" data-fr="Projets" data-nu-mattokki="مَشَارِيع" data-nu-fadidja="مَشَارِيع">Projects</div>
           </div>
           <div class="stat-pod spotlight-card">
             <div class="stat-number">AI <span class="red">∞</span></div>
-            <div class="stat-label" data-en="Workflow" data-ar="بالذكاء الاصطناعي" data-es="Flujo IA" data-tr="İş Akışı" data-it="Flusso" data-zh="工作流" data-ru="Процесс">Workflow</div>
+            <div class="stat-label" data-en="Workflow" data-ar="بالذكاء الاصطناعي" data-es="Flujo IA" data-tr="İş Akışı" data-zh="工作流" data-ru="Процесс" data-fr="Flux IA" data-nu-mattokki="تِقْنِيَّة" data-nu-fadidja="تِقْنِيَّة">Workflow</div>
           </div>
         </div>
 
         <button class="primary-action-btn" onclick="navigateTo('about')">
-          <span data-en="More About Me" data-ar="المزيد عن سيرتي" data-es="Más Sobre Mí" data-tr="Hakkımda Daha Fazla" data-it="Altro su di me" data-zh="关于我" data-ru="Обо мне">More About Me</span>
+          <span data-en="More About Me" data-ar="المزيد عن سيرتي" data-es="Más Sobre Mí" data-tr="Hakkımda Daha Fazla" data-zh="关于我" data-ru="Обо мне" data-fr="À propos de moi" data-nu-mattokki="مَازِيد عَنِّي" data-nu-fadidja="مَازِيد عَنِّي">More About Me</span>
           <div class="action-icon-circle"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
         </button>
 
         <div class="section-header-bar">
-          <div class="section-headline" data-en="Photography" data-ar="التصوير الفوتوغرافي" data-es="Fotografía" data-tr="Fotoğrafçılık" data-it="Fotografia" data-zh="摄影作品" data-ru="Фотография">Photography</div>
-          <div class="section-spec-tag" data-en="// 4 Categories" data-ar="// 4 أقسام" data-es="// 4 Categorías" data-tr="// 4 Kategori" data-it="// 4 Categorie" data-zh="// 4个分类" data-ru="// 4 Категории">// 4 Categories</div>
+          <div class="section-headline" data-en="Photography" data-ar="التصوير الفوتوغرافي" data-es="Fotografía" data-tr="Fotoğrafçılık" data-zh="摄影作品" data-ru="Фотография" data-fr="Photographie" data-nu-mattokki="التَّصْوِير" data-nu-fadidja="التَّصْوِير">Photography</div>
+          <div class="section-spec-tag" data-en="// 4 Categories" data-ar="// 4 أقسام" data-es="// 4 Categorías" data-tr="// 4 Kategori" data-zh="// 4个分类" data-ru="// 4 Категории" data-fr="// 4 Catégories" data-nu-mattokki="// 4 أَقْسَام" data-nu-fadidja="// 4 أَقْسَام">// 4 Categories</div>
         </div>
         <div class="category-duo-grid">
           <div class="category-slate-card spotlight-card" onclick="openPhotoCategory('events')">
             <div class="card-matrix-index">01</div>
-            <h4 data-en="EVENTS" data-ar="الفعاليات" data-es="EVENTOS" data-tr="ETKİNLİKLER" data-it="EVENTI" data-zh="活动赛事" data-ru="СОБЫТИЯ">EVENTS</h4>
-            <p data-en="Stance, drift & time attack coverages." data-ar="تغطيات بطولات الدريفت والتثبيت والسباقات." data-es="Coberturas de stance, drift y time attack." data-tr="Stance, drift ve time attack çekimleri." data-it="Copertura di stance, drift e time attack." data-zh="姿态、漂移与时间赛报道。" data-ru="Освещение стенс, дрифт и тайм-аттак заездов.">Stance, drift & time attack coverages.</p>
+            <h4 data-en="EVENTS" data-ar="الفعاليات" data-es="EVENTOS" data-tr="ETKİNLİKLER" data-zh="活动赛事" data-ru="СОБЫТИЯ" data-fr="ÉVÉNEMENTS" data-nu-mattokki="فَعَالِيَات" data-nu-fadidja="فَعَالِيَات">EVENTS</h4>
+            <p data-en="Stance, drift & time attack coverages." data-ar="تغطيات بطولات الدريفت والتثبيت والسباقات." data-es="Coberturas de stance, drift y time attack." data-tr="Stance, drift ve time attack çekimleri." data-zh="姿态、漂移与时间赛报道。" data-ru="Освещение стенс, дрифт и тайм-аттак заездов." data-fr="Couvertures de drift et de courses." data-nu-mattokki="تَغْطِيَات الدريفت وَالسِّبَاقَات." data-nu-fadidja="تَغْطِيَات الدريفت وَالسِّبَاقَات.">Stance, drift & time attack coverages.</p>
             <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
           </div>
           <div class="category-slate-card spotlight-card" onclick="openPhotoCategory('showroom')">
             <div class="card-matrix-index">02</div>
-            <h4 data-en="SHOWROOM & PPF" data-ar="المعرض والحماية" data-es="SHOWROOM Y PPF" data-tr="SHOWROOM VE PPF" data-it="SHOWROOM & PPF" data-zh="展厅与车衣" data-ru="ШОУРУМ И PPF">SHOWROOM & PPF</h4>
-            <p data-en="Commercial detailing & automotive staging." data-ar="تصوير معارض السيارات وعروض حماية الطلاء." data-es="Detallado comercial y puesta en escena automotriz." data-tr="Ticari detaylandırma ve otomotiv sergileme." data-it="Detailing commerciale e staging automobilistico." data-zh="商业精修与汽车布景。" data-ru="Коммерческий детелинг и авто-стайлинг.">Commercial detailing & automotive staging.</p>
+            <h4 data-en="SHOWROOM & PPF" data-ar="المعرض والحماية" data-es="SHOWROOM Y PPF" data-tr="SHOWROOM VE PPF" data-zh="展厅与车衣" data-ru="ШОУРУМ И PPF" data-fr="SHOWROOM & PPF" data-nu-mattokki="المَعْرِض وَالحِمَايَة" data-nu-fadidja="المَعْرِض وَالحِمَايَة">SHOWROOM & PPF</h4>
+            <p data-en="Commercial detailing & automotive staging." data-ar="تصوير معارض السيارات وعروض حماية الطلاء." data-es="Detallado comercial y puesta en escena automotriz." data-tr="Ticari detaylandırma ve otomotiv sergileme." data-zh="商业精修与汽车布景。" data-ru="Коммерческий детелинг и авто-стайлинг." data-fr="Détails commerciaux et mise en scène automobile." data-nu-mattokki="تَصْوِير مَعَارِض السِّيَّارَات." data-nu-fadidja="تَصْوِير مَعَارِض السِّيَّارَات.">Commercial detailing & automotive staging.</p>
             <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
           </div>
           <div class="category-slate-card spotlight-card" onclick="openPhotoCategory('products')">
             <div class="card-matrix-index">03</div>
-            <h4 data-en="PRODUCT SHOTS" data-ar="لقطات المنتجات" data-es="FOTOS DE PRODUCTO" data-tr="ÜRÜN ÇEKİMLERİ" data-zh="产品特写" data-ru="ПРЕДМЕТКА">PRODUCT SHOTS</h4>
-            <p data-en="Spare parts, calipers & forged wheel systems." data-ar="قطع الغيار، المكابح والجنوط الرياضية." data-es="Repuestos, pinzas y sistemas de rines forjados." data-tr="Yedek parçalar, kaliperler ve forged jant sistemleri." data-zh="配件、卡钳与锻造轮毂系统。" data-ru="Запчасти, суппорты и кованые диски.">Spare parts, calipers & forged wheel systems.</p>
+            <h4 data-en="PRODUCT SHOTS" data-ar="لقطات المنتجات" data-es="FOTOS DE PRODUCTO" data-tr="ÜRÜN ÇEKİMLERİ" data-zh="产品特写" data-ru="ПРЕДМЕТКА" data-fr="PHOTOS DE PRODUITS" data-nu-mattokki="لَقَطَات المُنْتَجَات" data-nu-fadidja="لَقَطَات المُنْتَجَات">PRODUCT SHOTS</h4>
+            <p data-en="Spare parts, calipers & forged wheel systems." data-ar="قطع الغيار، المكابح والجنوط الرياضية." data-es="Repuestos, pinzas y sistemas de rines forjados." data-tr="Yedek parçalar, kaliperler ve forged jant sistemleri." data-zh="配件、卡钳与锻造轮毂系统。" data-ru="Запчасти, суппорты и кованые диски." data-fr="Pièces de rechange, étriers et jantes forgées." data-nu-mattokki="قِطَع الغِيَار وَالمَكَابِح." data-nu-fadidja="قِطَع الغِيَار وَالمَكَابِح.">Spare parts, calipers & forged wheel systems.</p>
             <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
           </div>
           <div class="category-slate-card spotlight-card" onclick="openPhotoCategory('sessions')">
             <div class="card-matrix-index">04</div>
-            <h4 data-en="PHOTO SESSIONS" data-ar="جلسات تصوير خاصة" data-es="SESIONES FOTOGRÁFICAS" data-tr="FOTOĞRAF ÇEKİMLERİ" data-it="SESSIONI FOTOGRAFICHE" data-zh="专属拍摄" data-ru="ФОТОСЕССИИ">PHOTO SESSIONS</h4>
-            <p data-en="Light painting & dramatic aesthetic night rolling." data-ar="الرسم بالضوء وتصوير الحركة الليلية." data-es="Light painting y rodaje nocturno estético dramático." data-tr="Light painting ve dramatik estetik gece çekimleri." data-zh="光绘摄影与震撼的夜间动态拍摄。" data-ru="Лайтпейнтинг и ночная динамика.">Light painting & dramatic aesthetic night rolling.</p>
+            <h4 data-en="PHOTO SESSIONS" data-ar="جلسات تصوير خاصة" data-es="SESIONES FOTOGRÁFICAS" data-tr="FOTOĞRAF ÇEKİMLERİ" data-zh="专属拍摄" data-ru="ФОТОСЕССИИ" data-fr="SESSIONS PHOTO" data-nu-mattokki="جَلَسَات تَصْوِير" data-nu-fadidja="جَلَسَات تَصْوِير">PHOTO SESSIONS</h4>
+            <p data-en="Light painting & dramatic aesthetic night rolling." data-ar="الرسم بالضوء وتصوير الحركة الليلية." data-es="Light painting y rodaje nocturno estético dramático." data-tr="Light painting ve dramatik estetik gece çekimleri." data-zh="光绘摄影与震撼的夜间动态拍摄。" data-ru="Лайтпейнтинг и ночная динамика." data-fr="Light painting et roulage de nuit esthétique." data-nu-mattokki="الرَّسْم بِالضَّوْء وَالتَّصْوِير اللَّيْلِيّ." data-nu-fadidja="الرَّسْم بِالضَّوْء وَالتَّصْوِير اللَّيْلِيّ.">Light painting & dramatic aesthetic night rolling.</p>
             <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
           </div>
         </div>
 
         <div class="section-header-bar">
-          <div class="section-headline" data-en="Design" data-ar="التصميم الجرافيكي" data-es="Diseño" data-tr="Tasarım" data-it="Design" data-zh="平面设计" data-ru="Дизайн">Design</div>
-          <div class="section-spec-tag" data-en="// 5 Categories" data-ar="// 5 أقسام" data-es="// 5 Categorías" data-tr="// 5 Kategori" data-it="// 5 Categorie" data-zh="// 5个分类" data-ru="// 5 Категорий">// 5 Categories</div>
+          <div class="section-headline" data-en="Design" data-ar="التصميم الجرافيكي" data-es="Diseño" data-tr="Tasarım" data-zh="平面设计" data-ru="Дизайн" data-fr="Design" data-nu-mattokki="التَّصْمِيم" data-nu-fadidja="التَّصْمِيم">Design</div>
+          <div class="section-spec-tag" data-en="// 5 Categories" data-ar="// 5 أقسام" data-es="// 5 Categorías" data-tr="// 5 Kategori" data-zh="// 5个分类" data-ru="// 5 Категорий" data-fr="// 5 Catégories" data-nu-mattokki="// 5 أَقْسَام" data-nu-fadidja="// 5 أَقْسَام">// 5 Categories</div>
         </div>
         <div class="category-duo-grid">
           <div class="category-slate-card spotlight-card" onclick="openDesignCategory('social')">
             <div class="card-matrix-index">01</div>
-            <h4 data-en="SOCIAL" data-ar="السوشيال ميديا" data-es="REDES SOCIALES" data-tr="SOSYAL MEDYA" data-it="SOCIAL" data-zh="社交媒体" data-ru="СОЦСЕТИ">SOCIAL</h4>
-            <p data-en="High-converting campaign creatives." data-ar="تصاميم إعلانية عالية التأثير والتحويل." data-es="Creatividades de campaña de alta conversión." data-tr="Yüksek dönüşümlü kampanya görselleri." data-it="Creative per campagne ad alta conversione." data-zh="高转化率广告创意设计。" data-ru="Высоко конверсионные рекламные креативы.">High-converting campaign creatives.</p>
+            <h4 data-en="SOCIAL" data-ar="السوشيال ميديا" data-es="REDES SOCIALES" data-tr="SOSYAL MEDYA" data-zh="社交媒体" data-ru="СОЦСЕТИ" data-fr="RÉSEAUX SOCIAUX" data-nu-mattokki="السُّوشِيَال مِيدْيَا" data-nu-fadidja="السُّوشِيَال مِيدْيَا">SOCIAL</h4>
+            <p data-en="High-converting campaign creatives." data-ar="تصاميم إعلانية عالية التأثير والتحويل." data-es="Creatividades de campaña de alta conversión." data-tr="Yüksek dönüşümlü kampanya görselleri." data-zh="高转化率广告创意设计。" data-ru="Высоко конверсионные рекламные креативы." data-fr="Créations de campagnes publicitaires." data-nu-mattokki="تَصَامِيم إِعْلَانِيَّة." data-nu-fadidja="تَصَامِيم إِعْلَانِيَّة.">High-converting campaign creatives.</p>
             <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
           </div>
           <div class="category-slate-card spotlight-card" onclick="openDesignCategory('uiux')">
             <div class="card-matrix-index">02</div>
-            <h4 data-en="UI / UX" data-ar="واجهات المستخدم" data-es="UI / UX" data-tr="UI / UX" data-it="UI / UX" data-zh="界面交互" data-ru="UI / UX">UI / UX</h4>
-            <p data-en="App dashboards & wireframe prototypes." data-ar="تصميم لوحات التحكم والنماذج الأولية للتطبيقات." data-es="Paneles de aplicaciones y prototipos de estructura." data-tr="Uygulama panelleri ve prototipler." data-it="Dashboard app e prototipi." data-zh="应用仪表盘与原型框架。" data-ru="Панели приложений и прототипы.">App dashboards & wireframe prototypes.</p>
+            <h4 data-en="UI / UX" data-ar="واجهات المستخدم" data-es="UI / UX" data-tr="UI / UX" data-zh="界面交互" data-ru="UI / UX" data-fr="UI / UX" data-nu-mattokki="وَاجِهَات المُسْتَخْدِم" data-nu-fadidja="وَاجِهَات المُسْتَخْدِم">UI / UX</h4>
+            <p data-en="App dashboards & wireframe prototypes." data-ar="تصميم لوحات التحكم والنماذج الأولية للتطبيقات." data-es="Paneles de aplicaciones y prototipos de estructura." data-tr="Uygulama panelleri ve prototipler." data-zh="应用仪表盘与原型框架。" data-ru="Панели приложений и прототипы." data-fr="Tableaux de bord d'applications et prototypes." data-nu-mattokki="تَصْمِيم لَوْحَات التَّحَكُّم." data-nu-fadidja="تَصْمِيم لَوْحَات التَّحَكُّم.">App dashboards & wireframe prototypes.</p>
             <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
           </div>
           <div class="category-slate-card spotlight-card" onclick="openDesignCategory('branding')">
             <div class="card-matrix-index">03</div>
-            <h4 data-en="BRANDING" data-ar="الهوية البصرية" data-es="IDENTIDAD DE MARCA" data-tr="MARKALAŞMA" data-it="BRANDING" data-zh="品牌识别" data-ru="БРЕНДИНГ">BRANDING</h4>
-            <p data-en="Visual identity systems & lockups." data-ar="أنظمة الهوية والعلامات التجارية المتكاملة." data-es="Sistemas de identidad visual y bloqueos." data-tr="Görsel kimlik sistemleri ve logolar." data-it="Sistemi di identità visiva." data-zh="视觉识别系统与组合标志。" data-ru="Системы визуальной идентификации.">Visual identity systems & lockups.</p>
+            <h4 data-en="BRANDING" data-ar="الهوية البصرية" data-es="IDENTIDAD DE MARCA" data-tr="MARKALAŞMA" data-zh="品牌识别" data-ru="БРЕНДИНГ" data-fr="IDENTITÉ DE MARQUE" data-nu-mattokki="الهُوِيَّة البَصَرِيَّة" data-nu-fadidja="الهُوِيَّة البَصَرِيَّة">BRANDING</h4>
+            <p data-en="Visual identity systems & lockups." data-ar="أنظمة الهوية والعلامات التجارية المتكاملة." data-es="Sistemas de identidad visual y bloqueos." data-tr="Görsel kimlik sistemleri ve logolar." data-zh="视觉识别系统与组合标志。" data-ru="Системы визуальной идентификации." data-fr="Systèmes d'identité visuelle." data-nu-mattokki="أَنْظِمَة الهُوِيَّة." data-nu-fadidja="أَنْظِمَة الهُوِيَّة.">Visual identity systems & lockups.</p>
             <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
           </div>
           <div class="category-slate-card spotlight-card" onclick="openDesignCategory('logofolio')">
             <div class="card-matrix-index">04</div>
-            <h4 data-en="LOGOFOLIO" data-ar="الشعارات" data-es="LOGOFOLIO" data-tr="LOGOFOLIO" data-it="LOGOFOLIO" data-zh="标志集锦" data-ru="ЛОГОТИПЫ">LOGOFOLIO</h4>
-            <p data-en="Logomarks & bespoke vector badges." data-ar="تصاميم الشعارات وشارات الفيكتور المخصصة." data-es="Logotipos y emblemas vectoriales a medida." data-tr="Logolar ve özel vektörel rozetler." data-it="Loghi e badge vettoriali su misura." data-zh="标志与定制矢量徽章。" data-ru="Фирменные знаки и векторные бейджи.">Logomarks & bespoke vector badges.</p>
+            <h4 data-en="LOGOFOLIO" data-ar="الشعارات" data-es="LOGOFOLIO" data-tr="LOGOFOLIO" data-zh="标志集锦" data-ru="ЛОГОТИПЫ" data-fr="LOGOFOLIO" data-nu-mattokki="الشِّعَارَات" data-nu-fadidja="الشِّعَارَات">LOGOFOLIO</h4>
+            <p data-en="Logomarks & bespoke vector badges." data-ar="تصاميم الشعارات وشارات الفيكتور المخصصة." data-es="Logotipos y emblemas vectoriales a medida." data-tr="Logolar ve özel vektörel rozetler." data-zh="标志与定制矢量徽章。" data-ru="Фирменные знаки и векторные бейджи." data-fr="Logos et badges vectoriels sur mesure." data-nu-mattokki="تَصَامِيم الشِّعَارَات." data-nu-fadidja="تَصَامِيم الشِّعَارَات.">Logomarks & bespoke vector badges.</p>
             <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
           </div>
           <div class="category-slate-card spotlight-card" style="grid-column: span 2;" onclick="openDesignCategory('packaging')">
             <div class="card-matrix-index">05</div>
-            <h4 data-en="PACKAGING & MERCHANDISE" data-ar="التغليف والمنتجات" data-es="EMBALAJE Y MERCANCÍA" data-tr="AMBALAJ VE ÜRÜNLER" data-it="PACKAGING & MERCHANDISE" data-zh="包装与周边" data-ru="УПАКОВКА И МЕРЧ">PACKAGING & MERCHANDISE</h4>
-            <p data-en="Die-cut structural designs, boxes & technical vinyls." data-ar="تصميم الصناديق الهيكلية والفينيل التقني." data-es="Diseños estructurales trefilados, cajas y vinilos técnicos." data-tr="Özel kesim yapısal tasarımlar, kutular ve teknik viniller." data-it="Design strutturali fustellati e vinili tecnici." data-zh="压切结构设计、包装盒与特种车膜。" data-ru="Конструктивная упаковка и технические винилы.">Die-cut structural designs, boxes & technical vinyls.</p>
+            <h4 data-en="PACKAGING & MERCHANDISE" data-ar="التغليف والمنتجات" data-es="EMBALAJE Y MERCANCÍA" data-tr="AMBALAJ VE ÜRÜNLER" data-zh="包装与周边" data-ru="УПАКОВКА И МЕРЧ" data-fr="EMBALLAGE & MARCHANDISE" data-nu-mattokki="التَّغْلِيف وَالْمِنْشَدَات" data-nu-fadidja="التَّغْلِيف وَالْمِنْشَدَات">PACKAGING & MERCHANDISE</h4>
+            <p data-en="Die-cut structural designs, boxes & technical vinyls." data-ar="تصميم الصناديق الهيكلية والفينيل التقني." data-es="Diseños estructurales trefilados, cajas y vinilos técnicos." data-tr="Özel kesim yapısal tasarımlar, kutular ve teknik viniller." data-zh="压切结构设计、包装盒与特种车膜。" data-ru="Конструктивная упаковка и технические винилы." data-fr="Conceptions de boîtes structurelles et vinyles techniques." data-nu-mattokki="تَصْمِيم الْعَبَوَات الهَيْكَلِيَّة." data-nu-fadidja="تَصْمِيم الْعَبَوَات الهَيْكَلِيَّة.">Die-cut structural designs, boxes & technical vinyls.</p>
             <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
           </div>
         </div>
 
         <div class="section-header-bar">
-          <div class="section-headline" data-en="Let's Connect" data-ar="تواصل معي" data-es="Conectemos" data-tr="İletişime Geçin" data-it="Contattami" data-zh="联系我们" data-ru="Связаться">Let's Connect</div>
-          <div class="section-spec-tag" data-en="// Direct Links" data-ar="// روابط مباشرة" data-es="// Enlaces directos" data-tr="// Doğrudan Bağlantılar" data-it="// Link diretti" data-zh="// 快速直达" data-ru="// Прямые ссылки">// Direct Links</div>
+          <div class="section-headline" data-en="Let's Connect" data-ar="تواصل معي" data-es="Conectemos" data-tr="İletişime Geçin" data-zh="联系我们" data-ru="Связаться" data-fr="Restons connectés" data-nu-mattokki="تَوَاصَلْ مَعِي" data-nu-fadidja="تَوَاصَلْ مَعِي">Let's Connect</div>
+          <div class="section-spec-tag" data-en="// Direct Links" data-ar="// روابط مباشرة" data-es="// Enlaces directos" data-tr="// Doğrudan Bağlantılar" data-zh="// 快速直达" data-ru="// Прямые ссылки" data-fr="// Liens directs" data-nu-mattokki="// رَوَابِط مُبَاشَرَة" data-nu-fadidja="// رَوَابِط مُبَاشَرَة">// Direct Links</div>
         </div>
         <div class="whatsapp-direct-cell spotlight-card" onclick="navigateTo('connect')">
           <div class="wa-flex-lead">
             <div class="wa-icon-bubble"><i class="fa-solid fa-paper-plane"></i></div>
             <div class="wa-textual-meta">
-              <h4 data-en="Direct Inquiries" data-ar="استفسارات مباشرة" data-es="Consultas directas" data-tr="Doğrudan Sorular" data-it="Richieste dirette" data-zh="直接咨询" data-ru="Прямые запросы">Direct Inquiries</h4>
-              <p data-en="Start a new project or collaboration" data-ar="ابدأ مشروعك أو تعاونك القادم" data-es="Inicia un nuevo proyecto o colaboración" data-tr="Yeni bir projeye veya iş birliğine başlayın" data-it="Inizia un nuovo progetto o collaborazione" data-zh="开启新项目或合作" data-ru="Начать новый проект">Start a new project or collaboration</p>
+              <h4 data-en="Direct Inquiries" data-ar="استفسارات مباشرة" data-es="Consultas directas" data-tr="Doğrudan Sorular" data-zh="直接咨询" data-ru="Прямые запросы" data-fr="Demandes directes" data-nu-mattokki="اسْتِفْسَارَات مُبَاشَرَة" data-nu-fadidja="اسْتِفْسَارَات مُبَاشَرَة">Direct Inquiries</h4>
+              <p data-en="Start a new project or collaboration" data-ar="ابدأ مشروعك أو تعاونك القادم" data-es="Inicia un nuevo proyecto o colaboración" data-tr="Yeni bir projeye veya iş birliğine başlayın" data-zh="开启新项目或合作" data-ru="Начать новый проект" data-fr="Démarrez un nouveau projet ou collaboration" data-nu-mattokki="ابْدَأْ مَشْرُوعَكَ الْقَادِم" data-nu-fadidja="ابْدَأْ مَشْرُوعَكَ الْقَادِم">Start a new project or collaboration</p>
             </div>
           </div>
           <div class="wa-external-glyph"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
@@ -1107,69 +1058,27 @@
       </section>
 
       <section id="page-photography" class="view-page">
-        <div class="title-stacked-3d" style="font-size: 1.8rem; margin-bottom: 4px;" data-en="PHOTO" data-ar="معرض" data-es="FOTO" data-tr="FOTOĞRAF" data-zh="摄影" data-ru="ФОТО">PHOTO</div>
-        <div class="author-surname-red" style="font-size: 2.2rem; margin-bottom: 14px;" data-en="GALLERY" data-ar="التصوير" data-es="GALERÍA" data-tr="GALERİ" data-it="GALLERIA" data-zh="画廊" data-ru="ГАЛЕРЕЯ">GALLERY</div>
+        <div class="title-stacked-3d" style="font-size: 1.8rem; margin-bottom: 4px;" data-en="PHOTO" data-ar="معرض" data-es="FOTO" data-tr="FOTOĞRAF" data-zh="摄影" data-ru="ФОТО" data-fr="GALERIE" data-nu-mattokki="صُور" data-nu-fadidja="صُور">PHOTO</div>
+        <div class="author-surname-red" style="font-size: 2.2rem; margin-bottom: 14px;" data-en="GALLERY" data-ar="التصوير" data-es="GALERÍA" data-tr="GALERİ" data-zh="画廊" data-ru="ГАЛЕРЕЯ" data-fr="PHOTO" data-nu-mattokki="مَعْرِض" data-nu-fadidja="مَعْرِض">GALLERY</div>
 
         <div class="filter-pills-sticky-bar" id="photoFilterBar">
-          <button class="filter-pill-tab active-filter" onclick="filterPhotos('all', this)" data-en="All" data-ar="الكل" data-es="Todos" data-tr="Tümü" data-it="Tutti" data-zh="全部" data-ru="Все">All</button>
-          <button class="filter-pill-tab" onclick="filterPhotos('events', this)" data-en="Events" data-ar="الفعاليات" data-es="Eventos" data-tr="Etkinlikler" data-it="Eventi" data-zh="活动" data-ru="События">Events</button>
-          <button class="filter-pill-tab" onclick="filterPhotos('showroom', this)" data-en="Showroom & PPF" data-ar="المعرض والحماية" data-es="Showroom y PPF" data-tr="Showroom & PPF" data-it="Showroom & PPF" data-zh="展厅与车衣" data-ru="Шоурум и PPF">Showroom & PPF</button>
-          <button class="filter-pill-tab" onclick="filterPhotos('products', this)" data-en="Product Shots" data-ar="المنتجات" data-es="Productos" data-tr="Ürün Çekimleri" data-it="Prodotti" data-zh="产品特写" data-ru="Предметка">Product Shots</button>
-          <button class="filter-pill-tab" onclick="filterPhotos('sessions', this)" data-en="Photo Sessions" data-ar="جلسات التصوير" data-es="Sesiones" data-tr="Çekim Seansları" data-it="Sessioni" data-zh="专属拍摄" data-ru="Сессии">Photo Sessions</button>
+          <button class="filter-pill-tab active-filter" onclick="filterPhotos('all', this)" data-en="All" data-ar="الكل" data-es="Todos" data-tr="Tümü" data-zh="全部" data-ru="Все" data-fr="Tous" data-nu-mattokki="الْكُلّ" data-nu-fadidja="الْكُلّ">All</button>
+          <button class="filter-pill-tab" onclick="filterPhotos('events', this)" data-en="Events" data-ar="الفعاليات" data-es="Eventos" data-tr="Etkinlikler" data-zh="活动" data-ru="События" data-fr="Événements" data-nu-mattokki="فَعَالِيَات" data-nu-fadidja="فَعَالِيَات">Events</button>
+          <button class="filter-pill-tab" onclick="filterPhotos('showroom', this)" data-en="Showroom & PPF" data-ar="المعرض والحماية" data-es="Showroom y PPF" data-tr="Showroom & PPF" data-zh="展厅与车衣" data-ru="Шоурум и PPF" data-fr="Showroom & PPF" data-nu-mattokki="المَعْرِض" data-nu-fadidja="المَعْرِض">Showroom & PPF</button>
+          <button class="filter-pill-tab" onclick="filterPhotos('products', this)" data-en="Product Shots" data-ar="المنتجات" data-es="Productos" data-tr="Ürün Çekimleri" data-zh="产品" data-ru="Предметка" data-fr="Produits" data-nu-mattokki="مُنْتَجَات" data-nu-fadidja="مُنْتَجَات">Product Shots</button>
+          <button class="filter-pill-tab" onclick="filterPhotos('sessions', this)" data-en="Photo Sessions" data-ar="جلسات التصوير" data-es="Sesiones" data-tr="Çekim Seansları" data-zh="专属拍摄" data-ru="Сессии" data-fr="Sessions" data-nu-mattokki="جَلَسَات" data-nu-fadidja="جَلَسَات">Photo Sessions</button>
         </div>
 
         <div class="photo-gallery-grid" id="photoGalleryContainer">
           <div class="gallery-item-card spotlight-card" data-category="events">
             <div class="gallery-image-box">
-              <div class="gallery-category-tag" data-en="Events" data-ar="فعاليات" data-es="Eventos" data-tr="Etkinlikler" data-it="Eventi" data-zh="活动" data-ru="События">Events</div>
+              <div class="gallery-category-tag" data-en="Events" data-ar="فعاليات" data-es="Eventos" data-tr="Etkinlikler" data-zh="活动" data-ru="События" data-fr="Événements" data-nu-mattokki="فَعَالِيَات" data-nu-fadidja="فَعَالِيَات">Events</div>
               <img src="https://placehold.co/600x400/12141a/e51b24?text=Motorsport+Drift+Coverage" alt="Events" />
             </div>
             <div class="gallery-content-meta">
               <div class="gallery-title-group">
-                <h4 data-en="Time Attack & Drift Battle" data-ar="بطولات السباق والدريفت" data-es="Time Attack y Batalla de Drift" data-tr="Time Attack & Drift Savaşı" data-it="Time Attack & Drift" data-zh="时间赛与漂移大战" data-ru="Тайм-аттак и Дрифт">Time Attack & Drift Battle</h4>
-                <p data-en="Stance & high-speed rolling dynamics" data-ar="ديناميكيات التصوير السريع والحركة" data-es="Stance y dinámica de rodaje a alta velocidad" data-tr="Stance ve yüksek hızda hareket dinamikleri" data-it="Stance e dinamica di movimento" data-zh="姿态与高速动态抓拍" data-ru="Стенс и высокая динамика в движении">Stance & high-speed rolling dynamics</p>
-              </div>
-              <div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
-            </div>
-          </div>
-
-          <div class="gallery-item-card spotlight-card" data-category="showroom">
-            <div class="gallery-image-box">
-              <div class="gallery-category-tag" data-en="Showroom" data-ar="المعرض" data-es="Showroom" data-tr="Showroom" data-it="Showroom" data-zh="展厅" data-ru="Шоурум">Showroom</div>
-              <img src="https://placehold.co/600x400/12141a/e51b24?text=PPF+Ceramic+Detailing" alt="Showroom" />
-            </div>
-            <div class="gallery-content-meta">
-              <div class="gallery-title-group">
-                <h4 data-en="Matte PPF Supercar Staging" data-ar="عروض السيارات الخارقة وحماية الطلاء" data-es="Puesta en escena PPF" data-tr="Mat PPF Süper Araba Sergileme" data-zh="哑光车衣超跑布景" data-ru="Стайлинг суперкаров">Matte PPF Supercar Staging</h4>
-                <p data-en="Commercial detailing & studio reflections" data-ar="التفاصيل التجارية وانعكاسات الاستوديو" data-es="Detallado comercial y reflejos de estudio" data-tr="Ticari detaylandırma ve stüdyo yansımaları" data-it="Detailing commerciale e riflessi" data-zh="商业精修与影棚反光" data-ru="Коммерческий детелинг">Commercial detailing & studio reflections</p>
-              </div>
-              <div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
-            </div>
-          </div>
-
-          <div class="gallery-item-card spotlight-card" data-category="products">
-            <div class="gallery-image-box">
-              <div class="gallery-category-tag" data-en="Products" data-ar="منتجات" data-es="Productos" data-tr="Ürünler" data-it="Prodotti" data-zh="产品" data-ru="Продукты">Products</div>
-              <img src="https://placehold.co/600x400/12141a/e51b24?text=Forged+Calipers+Parts" alt="Products" />
-            </div>
-            <div class="gallery-content-meta">
-              <div class="gallery-title-group">
-                <h4 data-en="Big Brake Kit & Forged Wheels" data-ar="أنظمة المكابح والجنوط المزورة" data-es="Kit de frenos y rines forjados" data-tr="Büyük Fren Kiti ve Forged Jantlar" data-it="Kit Freni & Cerchi Forgiati" data-zh="大刹车盘与锻造轮毂" data-ru="Тормозные системы и диски">Big Brake Kit & Forged Wheels</h4>
-                <p data-en="Precision spare parts & metallic textures" data-ar="قطع الغيار الدقيقة والخامات المعدنية" data-es="Repuestos de precisión y texturas metálicas" data-tr="Hassas yedek parçalar ve metalik dokular" data-it="Ricambi di precisione e texture" data-zh="精密配件与金属质感" data-ru="Точные запчасти">Precision spare parts & metallic textures</p>
-              </div>
-              <div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
-            </div>
-          </div>
-
-          <div class="gallery-item-card spotlight-card" data-category="sessions">
-            <div class="gallery-image-box">
-              <div class="gallery-category-tag" data-en="Sessions" data-ar="جلسات" data-es="Sesiones" data-tr="Çekimler" data-it="Sessioni" data-zh="拍摄" data-ru="Сессии">Sessions</div>
-              <img src="https://placehold.co/600x400/12141a/e51b24?text=Night+Light+Painting" alt="Sessions" />
-            </div>
-            <div class="gallery-content-meta">
-              <div class="gallery-title-group">
-                <h4 data-en="Aesthetic Night Rolling Rig" data-ar="التصوير الليلي المتحرك" data-es="Rodaje nocturno estético" data-tr="Estetik Gece Hareket Çekimi" data-it="Rolling Rig Notturno" data-zh="唯美夜间动态拍摄" data-ru="Ночная съемка в движении">Aesthetic Night Rolling Rig</h4>
-                <p data-en="Light painting & dramatic contrast grading" data-ar="الرسم بالضوء وتدرج الألوان الدرامي" data-es="Pintura con luz y gradación de contraste" data-tr="Light painting ve dramatik kontrast düzenleme" data-it="Light painting e grading" data-zh="光绘与戏剧性对比调色" data-ru="Лайтпейнтинг и грейдинг">Light painting & dramatic contrast grading</p>
+                <h4 data-en="Time Attack & Drift Battle" data-ar="بطولات السباق والدريفت" data-es="Time Attack y Batalla de Drift" data-tr="Time Attack & Drift Savaşı" data-zh="时间赛与漂移大战" data-ru="Тайм-аттак и Дрифт" data-fr="Time Attack & Drift" data-nu-mattokki="سِبَاقَات الدريفت" data-nu-fadidja="سِبَاقَات الدريفت">Time Attack & Drift Battle</h4>
+                <p data-en="Stance & high-speed rolling dynamics" data-ar="ديناميكيات التصوير السريع والحركة" data-es="Stance y dinámica de rodaje a alta velocidad" data-tr="Stance ve yüksek hızda hareket dinamikleri" data-zh="姿态与高速动态抓拍" data-ru="Стенс и высокая динамика в движении" data-fr="Dynamique de roulage haute vitesse" data-nu-mattokki="دِينَامِيكِيَّات الحَرَكَة" data-nu-fadidja="دِينَامِيكِيَّات الحَرَكَة">Stance & high-speed rolling dynamics</p>
               </div>
               <div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
             </div>
@@ -1177,90 +1086,34 @@
         </div>
 
         <button class="primary-action-btn" onclick="navigateTo('connect')">
-          <span data-en="Book Photo Session" data-ar="حجز جلسة تصوير" data-es="Reservar sesión" data-tr="Fotoğraf Seansı Rezerve Et" data-it="Prenota Sessione" data-zh="预约拍摄" data-ru="Забронировать сессию">Book Photo Session</span>
+          <span data-en="Book Photo Session" data-ar="حجز جلسة تصوير" data-es="Reservar sesión" data-tr="Fotoğraf Seansı Rezerve Et" data-zh="预约拍摄" data-ru="Забронировать сессию" data-fr="Réserver une session" data-nu-mattokki="احْجِزْ جَلَسَة تَصْوِير" data-nu-fadidja="احْجِزْ جَلَسَة تَصْوِير">Book Photo Session</span>
           <div class="action-icon-circle"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
         </button>
       </section>
 
       <section id="page-design" class="view-page">
-        <div class="title-stacked-3d" style="font-size: 1.8rem; margin-bottom: 4px;" data-en="DESIGN" data-ar="معرض" data-es="DISEÑO" data-tr="TASARIM" data-zh="设计" data-ru="ДИЗАЙН">DESIGN</div>
-        <div class="author-surname-red" style="font-size: 2.2rem; margin-bottom: 14px;" data-en="GALLERY" data-ar="التصميم" data-es="GALERÍA" data-tr="GALERİ" data-it="GALLERIA" data-zh="画廊" data-ru="ГАЛЕРЕЯ">GALLERY</div>
+        <div class="title-stacked-3d" style="font-size: 1.8rem; margin-bottom: 4px;" data-en="DESIGN" data-ar="معرض" data-es="DISEÑO" data-tr="TASARIM" data-zh="设计" data-ru="ДИЗАЙН" data-fr="DESIGN" data-nu-mattokki="تَصْمِيم" data-nu-fadidja="تَصْمِيم">DESIGN</div>
+        <div class="author-surname-red" style="font-size: 2.2rem; margin-bottom: 14px;" data-en="GALLERY" data-ar="التصميم" data-es="GALERÍA" data-tr="GALERİ" data-zh="画廊" data-ru="ГАЛЕРЕЯ" data-fr="GALERIE" data-nu-mattokki="مَعْرِض" data-nu-fadidja="مَعْرِض">GALLERY</div>
 
         <div class="filter-pills-sticky-bar" id="designFilterBar">
-          <button class="filter-pill-tab active-filter" onclick="filterDesigns('all', this)" data-en="All" data-ar="الكل" data-es="Todos" data-tr="Tümü" data-it="Tutti" data-zh="全部" data-ru="Все">All</button>
-          <button class="filter-pill-tab" onclick="filterDesigns('social', this)" data-en="Social" data-ar="السوشيال" data-es="Social" data-tr="Sosyal" data-it="Social" data-zh="社交" data-ru="Соцсети">Social</button>
-          <button class="filter-pill-tab" onclick="filterDesigns('uiux', this)" data-en="UI / UX" data-ar="واجهات" data-es="UI / UX" data-tr="UI / UX" data-it="UI / UX" data-zh="界面交互" data-ru="UI / UX">UI / UX</button>
-          <button class="filter-pill-tab" onclick="filterDesigns('branding', this)" data-en="Branding" data-ar="الهوية" data-es="Branding" data-tr="Marka" data-it="Branding" data-zh="品牌识别" data-ru="Брендинг">Branding</button>
-          <button class="filter-pill-tab" onclick="filterDesigns('logofolio', this)" data-en="Logofolio" data-ar="الشعارات" data-es="Logofolio" data-tr="Logofolio" data-it="Logofolio" data-zh="标志集锦" data-ru="Логотипы">Logofolio</button>
-          <button class="filter-pill-tab" onclick="filterDesigns('packaging', this)" data-en="Packaging" data-ar="التغليف" data-es="Embalaje" data-tr="Ambalaj" data-it="Packaging" data-zh="包装" data-ru="Упаковка">Packaging</button>
+          <button class="filter-pill-tab active-filter" onclick="filterDesigns('all', this)" data-en="All" data-ar="الكل" data-es="Todos" data-tr="Tümü" data-zh="全部" data-ru="Все" data-fr="Tous" data-nu-mattokki="الْكُلّ" data-nu-fadidja="الْكُلّ">All</button>
+          <button class="filter-pill-tab" onclick="filterDesigns('social', this)" data-en="Social" data-ar="السوشيال" data-es="Social" data-tr="Sosyal" data-zh="社交" data-ru="Соцсети" data-fr="Social" data-nu-mattokki="سُوشِيَال" data-nu-fadidja="سُوشِيَال">Social</button>
+          <button class="filter-pill-tab" onclick="filterDesigns('uiux', this)" data-en="UI / UX" data-ar="واجهات" data-es="UI / UX" data-tr="UI / UX" data-zh="界面" data-ru="UI / UX" data-fr="UI / UX" data-nu-mattokki="وَاجِهَات" data-nu-fadidja="وَاجِهَات">UI / UX</button>
+          <button class="filter-pill-tab" onclick="filterDesigns('branding', this)" data-en="Branding" data-ar="الهوية" data-es="Branding" data-tr="Marka" data-zh="品牌" data-ru="Брендинг" data-fr="Branding" data-nu-mattokki="هُوِيَّة" data-nu-fadidja="هُوِيَّة">Branding</button>
+          <button class="filter-pill-tab" onclick="filterDesigns('logofolio', this)" data-en="Logofolio" data-ar="الشعارات" data-es="Logofolio" data-tr="Logofolio" data-zh="标志" data-ru="Логотипы" data-fr="Logos" data-nu-mattokki="شِعَارَات" data-nu-fadidja="شِعَارَات">Logofolio</button>
+          <button class="filter-pill-tab" onclick="filterDesigns('packaging', this)" data-en="Packaging" data-ar="التغليف" data-es="Embalaje" data-tr="Ambalaj" data-zh="包装" data-ru="Упаковка" data-fr="Emballage" data-nu-mattokki="تَغْلِيف" data-nu-fadidja="تَغْلِيف">Packaging</button>
         </div>
 
         <div class="design-gallery-grid" id="designGalleryContainer">
           <div class="gallery-item-card spotlight-card" data-category="social">
             <div class="gallery-image-box">
-              <div class="gallery-category-tag" data-en="Social" data-ar="سوشيال" data-es="Social" data-tr="Sosyal" data-it="Social" data-zh="社交" data-ru="Соцсети">Social</div>
+              <div class="gallery-category-tag" data-en="Social" data-ar="سوشيال" data-es="Social" data-tr="Sosyal" data-zh="社交" data-ru="Соцсети" data-fr="Social" data-nu-mattokki="سُوشِيَال" data-nu-fadidja="سُوشِيَال">Social</div>
               <img src="https://placehold.co/600x400/12141a/e51b24?text=Social+Campaign+Creatives" alt="Social" />
             </div>
             <div class="gallery-content-meta">
               <div class="gallery-title-group">
-                <h4 data-en="Automotive Ad Campaign" data-ar="حملات إعلانية للسيارات" data-es="Campaña publicitaria" data-tr="Otomotiv Reklam Kampanyası" data-it="Campagna Auto" data-zh="汽车广告活动" data-ru="Автомобильная кампания">Automotive Ad Campaign</h4>
-                <p data-en="High-converting social media creatives" data-ar="تصاميم سوشيال ميديا ترويجية جذابة" data-es="Creatividades de redes sociales de alta conversión" data-tr="Yüksek dönüşümlü sosyal medya görselleri" data-it="Creative social ad alta conversione" data-zh="高转化率社交媒体创意" data-ru="Высоко конверсионные креативы">High-converting social media creatives</p>
-              </div>
-              <div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
-            </div>
-          </div>
-
-          <div class="gallery-item-card spotlight-card" data-category="uiux">
-            <div class="gallery-image-box">
-              <div class="gallery-category-tag" data-en="UI / UX" data-ar="واجهات" data-es="UI / UX" data-tr="UI / UX" data-it="UI / UX" data-zh="界面" data-ru="UI / UX">UI / UX</div>
-              <img src="https://placehold.co/600x400/12141a/e51b24?text=App+Dashboard+UIUX" alt="UIUX" />
-            </div>
-            <div class="gallery-content-meta">
-              <div class="gallery-title-group">
-                <h4 data-en="Telemetry & Dealer Dashboard" data-ar="لوحات تحكم وتطبيقات" data-es="Panel de telemetría" data-tr="Telemetri ve Bayi Paneli" data-it="Dashboard Telemetria" data-zh="遥测与经销商仪表盘" data-ru="Панель приборов">Telemetry & Dealer Dashboard</h4>
-                <p data-en="App wireframes & dark mode prototypes" data-ar="نماذج أولية وتصاميم ليلية متطورة" data-es="Prototipos en modo oscuro" data-tr="Uygulama tel kafesleri ve koyu mod prototipleri" data-it="Wireframe e prototipi dark mode" data-zh="应用线框与暗黑模式原型" data-ru="Прототипы в темном режиме">App wireframes & dark mode prototypes</p>
-              </div>
-              <div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
-            </div>
-          </div>
-
-          <div class="gallery-item-card spotlight-card" data-category="branding">
-            <div class="gallery-image-box">
-              <div class="gallery-category-tag" data-en="Branding" data-ar="هوية" data-es="Branding" data-tr="Markalaşma" data-it="Branding" data-zh="品牌" data-ru="Брендинг">Branding</div>
-              <img src="https://placehold.co/600x400/12141a/e51b24?text=Visual+Identity+Branding" alt="Branding" />
-            </div>
-            <div class="gallery-content-meta">
-              <div class="gallery-title-group">
-                <h4 data-en="Tuning Garage Brand Identity" data-ar="هوية ورش التعديل والسيارات" data-es="Identidad de taller de tuning" data-tr="Modifiye Garajı Marka Kimliği" data-it="Identità Officina Tuning" data-zh="改装车行品牌形象" data-ru="Брендинг тюнинг-ателье">Tuning Garage Brand Identity</h4>
-                <p data-en="Visual systems, stationery & guidelines" data-ar="أنظمة بصرية متكاملة ودليلات الهوية" data-es="Sistemas visuales y papelería" data-tr="Görsel sistemler, kırtasiye ve kılavuzlar" data-it="Sistemi visivi e linee guida" data-zh="视觉系统与规范" data-ru="Визуальные системы">Visual systems, stationery & guidelines</p>
-              </div>
-              <div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
-            </div>
-          </div>
-
-          <div class="gallery-item-card spotlight-card" data-category="logofolio">
-            <div class="gallery-image-box">
-              <div class="gallery-category-tag" data-en="Logofolio" data-ar="شعارات" data-es="Logofolio" data-tr="Logofolio" data-it="Logofolio" data-zh="标志" data-ru="Логотипы">Logofolio</div>
-              <img src="https://placehold.co/600x400/12141a/e51b24?text=Vector+Logomarks+Badges" alt="Logofolio" />
-            </div>
-            <div class="gallery-content-meta">
-              <div class="gallery-title-group">
-                <h4 data-en="Bespoke Vector Badges" data-ar="شارات فيكتور مخصصة" data-es="Emblemas vectoriales a medida" data-tr="Özel Vektör Rozetler" data-it="Badge Vettoriali" data-zh="定制矢量徽章" data-ru="Векторные эмблемы">Bespoke Vector Badges</h4>
-                <p data-en="Minimalist logomarks & motorsport emblems" data-ar="علامات تجارية وشارات سباقات مميزة" data-es="Logotipos minimalistas y emblemas" data-tr="Minimalist logolar ve motor sporları amblemleri" data-it="Loghi e badge motorsport" data-zh="极简标志与赛车徽章" data-ru="Минималистичные знаки">Minimalist logomarks & motorsport emblems</p>
-              </div>
-              <div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
-            </div>
-          </div>
-
-          <div class="gallery-item-card spotlight-card" data-category="packaging">
-            <div class="gallery-image-box">
-              <div class="gallery-category-tag" data-en="Packaging" data-ar="تغليف" data-es="Embalaje" data-tr="Ambalaj" data-it="Packaging" data-zh="包装" data-ru="Упаковка">Packaging</div>
-              <img src="https://placehold.co/600x400/12141a/e51b24?text=Die-cut+Packaging+Vinyls" alt="Packaging" />
-            </div>
-            <div class="gallery-content-meta">
-              <div class="gallery-title-group">
-                <h4 data-en="PPF Box & Vinyl Roll Packaging" data-ar="تغليف رولات الفينيل وحماية الطلاء" data-es="Caja PPF y rollos de vinilo" data-tr="PPF Kutusu ve Vinil Rulo Ambalajı" data-it="Packaging Scatole PPF" data-zh="车衣盒与车膜卷包装" data-ru="Упаковка рулонов винила">PPF Box & Vinyl Roll Packaging</h4>
-                <p data-en="Die-cut structural box & foil labels" data-ar="تصميم العبوات الهيكلية واللاصقات" data-es="Caja estructural troquelada y etiquetas" data-tr="Özel kesim yapısal kutu ve folyo etiketler" data-it="Scatole fustellate ed etichette" data-zh="压切结构盒与烫金标签" data-ru="Структурные коробки">Die-cut structural box & foil labels</p>
+                <h4 data-en="Automotive Ad Campaign" data-ar="حملات إعلانية للسيارات" data-es="Campaña publicitaria" data-tr="Otomotiv Reklam Kampanyası" data-zh="汽车广告活动" data-ru="Автомобильная кампания" data-fr="Campagne automobile" data-nu-mattokki="حَمَلَات إِعْلَانِيَّة" data-nu-fadidja="حَمَلَات إِعْلَانِيَّة">Automotive Ad Campaign</h4>
+                <p data-en="High-converting social media creatives" data-ar="تصاميم سوشيال ميديا ترويجية جذابة" data-es="Creatividades de redes sociales de alta conversión" data-tr="Yüksek dönüşümlü sosyal medya görselleri" data-zh="高转化率社交媒体创意" data-ru="Высоко конверсионные креативы" data-fr="Créations publicitaires" data-nu-mattokki="تَصَامِيم ترويجية" data-nu-fadidja="تَصَامِيم ترويجية">High-converting social media creatives</p>
               </div>
               <div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
             </div>
@@ -1268,31 +1121,31 @@
         </div>
 
         <button class="primary-action-btn" onclick="navigateTo('connect')">
-          <span data-en="Start Design Project" data-ar="بدء مشروع تصميم" data-es="Iniciar proyecto" data-tr="Tasarım Projesine Başla" data-it="Inizia Progetto" data-zh="开始设计项目" data-ru="Начать проект">Start Design Project</span>
+          <span data-en="Start Design Project" data-ar="بدء مشروع تصميم" data-es="Iniciar proyecto" data-tr="Tasarım Projesine Başla" data-zh="开始设计项目" data-ru="Начать проект" data-fr="Démarrer un projet" data-nu-mattokki="ابْدَأْ مَشْرُوعَ التَّصْمِيم" data-nu-fadidja="ابْدَأْ مَشْرُوعَ التَّصْمِيم">Start Design Project</span>
           <div class="action-icon-circle"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
         </button>
       </section>
 
       <section id="page-about" class="view-page">
-        <div class="title-stacked-3d" style="font-size: 1.8rem;" data-en="ABOUT" data-ar="نبذة" data-es="ACERCA" data-tr="HAKKINDA" data-it="INFORMAZIONI" data-zh="关于" data-ru="ОБ АВТОРЕ">ABOUT</div>
-        <div class="author-name-lead" data-en="ALI" data-ar="علي" data-es="ALI" data-tr="ALİ" data-it="ALI" data-zh="阿里" data-ru="АЛИ">ALI</div>
-        <div class="author-surname-red" data-en="ELSEWEDY" data-ar="السويدي" data-es="ELSEWEDY" data-tr="ELSEWEDY" data-it="ELSEWEDY" data-zh="埃尔苏韦迪" data-ru="ЭЛЬСЕВИДИ" style="font-size: 1.1rem;">ELSEWEDY</div>
+        <div class="title-stacked-3d" style="font-size: 1.8rem;" data-en="ABOUT" data-ar="نبذة" data-es="ACERCA" data-tr="HAKKINDA" data-zh="关于" data-ru="ОБ АВТОРЕ" data-fr="À PROPOS" data-nu-mattokki="أَبُوت" data-nu-fadidja="أَبُوت">ABOUT</div>
+        <div class="author-name-lead" data-en="ALI" data-ar="علي" data-es="ALI" data-tr="ALİ" data-zh="阿里" data-ru="АЛИ" data-fr="ALI" data-nu-mattokki="عَلِي" data-nu-fadidja="عَلِي">ALI</div>
+        <div class="author-surname-red" data-en="ELSEWEDY" data-ar="السويدي" data-es="ELSEWEDY" data-tr="ELSEWEDY" data-zh="埃尔苏韦迪" data-ru="ЭЛЬСЕВИДИ" data-fr="ELSEWEDY" data-nu-mattokki="السُوَيْدِي" data-nu-fadidja="السُوَيْدِي" style="font-size: 1.1rem;">ELSEWEDY</div>
 
         <div class="roles-unified-pod" style="margin-top: 4px; margin-bottom: 14px;">
-          <span class="role-pod-item" data-en="Designer" data-ar="مصمم" data-es="Diseñador" data-tr="Tasarımcı" data-it="Designer" data-zh="设计师" data-ru="Дизайнер">Designer</span>
-          <span class="role-pod-item" data-en="Photographer" data-ar="مصور" data-es="Fotógrafo" data-tr="Fotoğrafçı" data-it="Fotografo" data-zh="摄影师" data-ru="Фотограф">Photographer</span>
-          <span class="role-pod-item" data-en="Art Director" data-ar="مدير فني" data-es="Director de arte" data-tr="Sanat Yönetmeni" data-it="Art Director" data-zh="艺术总监" data-ru="Арт-директор">Art Director</span>
+          <span class="role-pod-item" data-en="Designer" data-ar="مصمم" data-es="Diseñador" data-tr="Tasarımcı" data-zh="设计师" data-ru="Дизайнер" data-fr="Designer" data-nu-mattokki="مُصَمِّم" data-nu-fadidja="مُصَمِّم">Designer</span>
+          <span class="role-pod-item" data-en="Photographer" data-ar="مصور" data-es="Fotógrafo" data-tr="Fotoğrafçı" data-zh="摄影师" data-ru="Фотограф" data-fr="Photographe" data-nu-mattokki="مُصَوِّر" data-nu-fadidja="مُصَوِّر">Photographer</span>
+          <span class="role-pod-item" data-en="Art Director" data-ar="مدير فني" data-es="Director de arte" data-tr="Sanat Yönetmeni" data-zh="艺术总监" data-ru="Арт-директор" data-fr="Directeur Artistique" data-nu-mattokki="مُدِير فَنِّيّ" data-nu-fadidja="مُدِير فَنِّيّ">Art Director</span>
         </div>
 
-        <div class="section-headline" style="font-size: 1rem; margin-bottom: 6px;" data-en="HELLO!" data-ar="مرحباً!" data-es="¡HOLA!" data-tr="MERHABA!" data-zh="你好！" data-ru="ПРИВЕТ!">HELLO!</div>
-        <p style="font-family: var(--font-body); font-size: 0.8rem; line-height: 1.65; color: var(--text-muted); margin-bottom: 24px;" data-en="Creating has never been just a craft to me—it's how I bring bold identities to life. From capturing high-energy automotive scenes and precision detailing to crafting end-to-end visual systems and digital experiences, I partner with regional and global brands to transform concepts into powerful visual stories." data-ar="لم يكن التصميم يوماً مجرد حرفة بالنسبة لي، بل هو وسيلتي لإحياء الهويات الجريئة. من توثيق تفاصيل السيارات وعالم الحماسة إلى هندسة الأنظمة البصرية الرقمية المتكاملة، أتعاون مع العلامات التجارية المحلية والعالمية لترجمة الأفكار إلى قصص بصرية استثنائية." data-es="Crear nunca ha sido solo un oficio para mí; es la forma en que doy vida a identidades audaces. Desde capturar escenas automotrices de alta energía hasta diseñar sistemas visuales integrales, colaboro con marcas regionales y globales para transformar conceptos en historias visuales poderosas." data-tr="Yaratmak benim için asla sadece bir zanaat olmadı; cesur kimlikleri hayata geçirme biçimimdir. Yüksek enerjili otomotiv sahnelerini yakalamaktan uçtan uca görsel sistemler tasarlamaya kadar, bölgesel ve küresel markalarla ortaklık kuruyorum." data-it="Creare non è mai stato solo un mestiere per me; è il modo in cui do vita a identità audaci. Dalla cattura di scene automobilistiche ad alta energia alla progettazione di sistemi visivi completi, collaboro con marchi regionali e globali." data-zh="对我而言，创作从不仅仅是一门手艺——这是我赋予大胆身份生命力的方式。从捕捉高能量的汽车场景到打造端到端的视觉系统，我与区域及全球品牌携手，将概念转化为强有力的视觉故事。" data-ru="Создание для меня никогда не было просто ремеслом — это способ воплотить смелые идентичности в жизнь. От динамичных автомобильных сцен до комплексных визуальных систем — я сотрудничаю с брендами, превращая концепции в мощные истории.">
+        <div class="section-headline" style="font-size: 1rem; margin-bottom: 6px;" data-en="HELLO!" data-ar="مرحباً!" data-es="¡HOLA!" data-tr="MERHABA!" data-zh="你好！" data-ru="ПРИВЕТ!" data-fr="BONJOUR !" data-nu-mattokki="مَرْحَبًا!" data-nu-fadidja="مَرْحَبًا!">HELLO!</div>
+        <p style="font-family: var(--font-body); font-size: 0.8rem; line-height: 1.65; color: var(--text-muted); margin-bottom: 24px;" data-en="Creating has never been just a craft to me—it's how I bring bold identities to life. From capturing high-energy automotive scenes and precision detailing to crafting end-to-end visual systems and digital experiences, I partner with regional and global brands to transform concepts into powerful visual stories." data-ar="لم يكن التصميم يوماً مجرد حرفة بالنسبة لي، بل هو وسيلتي لإحياء الهويات الجريئة. من توثيق تفاصيل السيارات وعالم الحماسة إلى هندسة الأنظمة البصرية الرقمية المتكاملة، أتعاون مع العلامات التجارية المحلية والعالمية لترجمة الأفكار إلى قصص بصرية استثنائية." data-es="Crear nunca ha sido solo un oficio para mí; es la forma en que doy vida a identidades audaces. Desde capturar escenas automotrices de alta energía hasta diseñar sistemas visuales integrales, colaboro con marcas regionales y globales para transformar conceptos en historias visuales poderosas." data-tr="Yaratmak benim için asla sadece bir zanaat olmadı; cesur kimlikleri hayata geçirme biçimimdir. Yüksek enerjili otomotiv sahnelerini yakalamaktan uçtan uca görsel sistemler tasarlamaya kadar, bölgesel ve küresel markalarla ortaklık kuruyorum." data-zh="对我而言，创作从不仅仅是一门手艺——这是我赋予大胆身份生命力的方式。从捕捉高能量的汽车场景到打造端到端的视觉系统，我与区域及全球品牌携手，将概念转化为强有力的视觉故事。" data-ru="Создание для меня никогда не было просто ремеслом — это способ воплотить смелые идентичности в жизнь. От динамичных автомобильных сцен до комплексных визуальных систем — я сотрудничаю с брендами, превращая концепции в мощные истории." data-fr="Créer n'a jamais été seulement un métier pour moi — c'est ainsi que je donne vie à des identités audacieuses." data-nu-mattokki="إِحْيَاء الْهُوِيَّات الْجَرِيئَة وَقِصَص النَّجَاح الْبَصَرِيَّة." data-nu-fadidja="إِحْيَاء الْهُوِيَّات الْجَرِيئَة وَقِصَص النَّجَاح الْبَصَرِيَّة.">
           Creating has never been just a craft to me—it's how I bring bold identities to life. From capturing high-energy automotive scenes and precision detailing to crafting end-to-end visual systems and digital experiences, I partner with regional and global brands to transform concepts into powerful visual stories.
         </p>
 
         <div class="expertise-editorial-section">
           <div class="editorial-header-wrap">
             <div class="diamond-lead">
-              <span class="dia">◆</span> <span data-en="EXPERTISE" data-ar="مجالات الخبرة" data-es="EXPERTISE" data-tr="UZMANLIK" data-zh="专业领域" data-ru="ЭКСПЕРТИЗА">EXPERTISE</span>
+              <span class="dia">◆</span> <span data-en="EXPERTISE" data-ar="مجالات الخبرة" data-es="EXPERTISE" data-tr="UZMANLIK" data-zh="专业领域" data-ru="ЭКСПЕРТИЗА" data-fr="EXPERTISE" data-nu-mattokki="مَجالات الْخِبْرَة" data-nu-fadidja="مَجالات الْخِبْرَة">EXPERTISE</span>
             </div>
             <svg class="hand-squiggle-svg" viewBox="0 0 80 8">
               <path d="M2 5 C16 1, 28 8, 42 4 C54 1, 68 7, 78 4" />
@@ -1309,10 +1162,10 @@
                 </svg>
                 <div class="expertise-meta">
                   <span class="expertise-num">01.</span>
-                  <h4 class="expertise-col-heading" data-en="AUTOMOTIVE & COMMERCIAL PHOTOGRAPHY" data-ar="تصوير السيارات والتصوير التجاري" data-es="FOTOGRAFÍA AUTOMOTRIZ Y COMERCIAL" data-tr="OTOMOTİV VE TİCARİ FOTOĞRAFÇILIK" data-it="FOTOGRAFIA AUTOMOTIVE E COMMERCIALE" data-zh="汽车与商业摄影" data-ru="АВТОМОБИЛЬНАЯ ФОТОГРАФИЯ">AUTOMOTIVE & COMMERCIAL PHOTOGRAPHY</h4>
+                  <h4 class="expertise-col-heading" data-en="AUTOMOTIVE & COMMERCIAL PHOTOGRAPHY" data-ar="تصوير السيارات والتصوير التجاري" data-es="FOTOGRAFÍA AUTOMOTRIZ Y COMERCIAL" data-tr="OTOMOTİV VE TİCARİ FOTOĞRAFÇILIK" data-zh="汽车与商业摄影" data-ru="АВТОМОБИЛЬНАЯ ФОТОГРАФИЯ" data-fr="PHOTOGRAPHIE AUTOMOBILE" data-nu-mattokki="تَصْوِير السِّيَّارَات وَالتِّجَارِيّ" data-nu-fadidja="تَصْوِير السِّيَّارَات وَالتِّجَارِيّ">AUTOMOTIVE & COMMERCIAL PHOTOGRAPHY</h4>
                 </div>
               </div>
-              <p class="expertise-col-body" data-en="Specializing in car showrooms, PPF/detailing, light painting, motorsport coverage (stance, drift, time attack), and commercial product photography." data-ar="متخصص في معارض السيارات، حماية الطلاء والتفصيل، الرسم بالضوء، تغطية رياضة المحركات، وتصوير المنتجات التجارية بدقة فائقة." data-es="Especializado en salas de exposición de automóviles, PPF/detallado, light painting, cobertura de automovilismo y fotografía comercial de productos." data-tr="Otomotiv showroomları, PPF/detaylandırma, light painting, motor sporları çekimleri ve ticari ürün fotoğrafçılığı konularında uzmanlaşmıştır." data-it="Specializzato in showroom auto, PPF/detailing, light painting, motorsport e fotografia di prodotto." data-zh="专注于汽车展厅、车衣/精修、光绘、赛车运动报道（姿态、漂移、时间赛）以及商业产品摄影。" data-ru="Специализируюсь на автосалонах, PPF, лайтпейнтинге, автоспорте и коммерческой предметной съемке.">
+              <p class="expertise-col-body" data-en="Specializing in car showrooms, PPF/detailing, light painting, motorsport coverage (stance, drift, time attack), and commercial product photography." data-ar="متخصص في معارض السيارات، حماية الطلاء والتفصيل، الرسم بالضوء، تغطية رياضة المحركات، وتصوير المنتجات التجارية بدقة فائقة." data-es="Especializado en salas de exposición de automóviles, PPF/detallado, light painting, cobertura de automovilismo y fotografía comercial de productos." data-tr="Otomotiv showroomları, PPF/detaylandırma, light painting, motor sporları çekimleri ve ticari ürün fotoğrafçılığı konularında uzmanlaşmıştır." data-zh="专注于汽车展厅、车衣/精修、光绘、赛车运动报道（姿态、漂移、时间赛）以及商业产品摄影。" data-ru="Специализируюсь на автосалонах, PPF, лайтпейнтинге, автоспорте и коммерческой предметной съемке." data-fr="Spécialisé dans les showrooms automobiles et le detailing." data-nu-mattokki="مُتَخَصِّص فِي مَعَارِض السِّيَّارَات والدريفت." data-nu-fadidja="مُتَخَصِّص فِي مَعَارِض السِّيَّارَات والدريفت.">
                 Specializing in car showrooms, PPF/detailing, light painting, motorsport coverage (stance, drift, time attack), and commercial product photography.
               </p>
             </div>
@@ -1327,10 +1180,10 @@
                 </svg>
                 <div class="expertise-meta">
                   <span class="expertise-num">02.</span>
-                  <h4 class="expertise-col-heading" data-en="GRAPHIC & BRAND DESIGN" data-ar="تصميم الهوية والجرافيك" data-es="DISEÑO GRÁFICO Y DE MARCA" data-tr="GRAFİK VE MARKA TASARIMI" data-it="GRAFICA E BRAND DESIGN" data-zh="平面与品牌设计" data-ru="ГРАФИЧЕСКИЙ ДИЗАЙН">GRAPHIC & BRAND DESIGN</h4>
+                  <h4 class="expertise-col-heading" data-en="GRAPHIC & BRAND DESIGN" data-ar="تصميم الهوية والجرافيك" data-es="DISEÑO GRÁFICO Y DE MARCA" data-tr="GRAFİK VE MARKA TASARIMI" data-zh="平面与品牌设计" data-ru="ГРАФИЧЕСКИЙ ДИЗАЙН" data-fr="DESIGN GRAPHIQUE" data-nu-mattokki="تَصْمِيم الْهُوِيَّة وَالْجْرَافِيك" data-nu-fadidja="تَصْمِيم الْهُوِيَّة وَالْجْرَافِيك">GRAPHIC & BRAND DESIGN</h4>
                 </div>
               </div>
-              <p class="expertise-col-body" data-en="End-to-end design solutions including UI/UX, visual identity, packaging design, social media visual systems, and company profile development." data-ar="حلول تصميم متكاملة تتضمن واجهات المستخدم، الهوية البصرية، تصميم التغليف، أنظمة السوشيال ميديا، وتطوير الملفات التعريفية." data-es="Soluciones de diseño integrales que incluyen UI/UX, identidad visual, diseño de packaging y sistemas visuales." data-tr="UI/UX, görsel kimlik, ambalaj tasarımı, sosyal medya görsel sistemleri ve şirket profili geliştirme dahil uçtan uca tasarım çözümleri." data-it="Soluzioni di design complete tra cui UI/UX, identità visiva, packaging e sistemi social." data-zh="端到端设计解决方案，包括 UI/UX、视觉识别、包装设计、社交媒体视觉系统以及公司简介开发。" data-ru="Комплексные дизайнерские решения, включая UI/UX, визуальную идентичность, упаковку и фирменный стиль.">
+              <p class="expertise-col-body" data-en="End-to-end design solutions including UI/UX, visual identity, packaging design, social media visual systems, and company profile development." data-ar="حلول تصميم متكاملة تتضمن واجهات المستخدم، الهوية البصرية، تصميم التغليف، أنظمة السوشيال ميديا، وتطوير الملفات التعريفية." data-es="Soluciones de diseño integrales que incluyen UI/UX, identidad visual, diseño de packaging y sistemas visuales." data-tr="UI/UX, görsel kimlik, ambalaj tasarımı, sosyal medya görsel sistemleri ve şirket profili geliştirme dahil uçtan uca tasarım çözümleri." data-zh="端到端设计解决方案，包括 UI/UX、视觉识别、包装设计、社交媒体视觉系统以及公司简介开发。" data-ru="Комплексные дизайнерские решения, включая UI/UX, визуальную идентичность, упаковку и фирменный стиль." data-fr="Solutions de design de bout en bout." data-nu-mattokki="حُلُول تَصْمِيم مُتَكَامِلَة." data-nu-fadidja="حُلُول تَصْمِيم مُتَكَامِلَة.">
                 End-to-end design solutions including UI/UX, visual identity, packaging design, social media visual systems, and company profile development.
               </p>
             </div>
@@ -1338,8 +1191,8 @@
         </div>
 
         <div class="section-header-bar">
-          <div class="section-headline" data-en="Tools I Use" data-ar="الأدوات التي أستخدمها" data-es="Herramientas" data-tr="Kullandığım Araçlar" data-it="Strumenti" data-zh="使用的工具" data-ru="Инструменты">Tools I Use</div>
-          <div class="section-spec-tag" data-en="// Ecosystem" data-ar="// المنظومة التقنية" data-es="// Ecosistema" data-tr="// Ekosistem" data-it="// Ecosistema" data-zh="// 生态系统" data-ru="// Экосистема">// Ecosystem</div>
+          <div class="section-headline" data-en="Tools I Use" data-ar="الأدوات التي أستخدمها" data-es="Herramientas" data-tr="Kullandığım Araçlar" data-zh="使用的工具" data-ru="Инструменты" data-fr="Outils" data-nu-mattokki="الْأَدَوَات الْمُسْتَخْدَمَة" data-nu-fadidja="الْأَدَوَات الْمُسْتَخْدَمَة">Tools I Use</div>
+          <div class="section-spec-tag" data-en="// Ecosystem" data-ar="// المنظومة التقنية" data-es="// Ecosistema" data-tr="// Ekosistem" data-zh="// 生态系统" data-ru="// Экосистема" data-fr="// Écosystème" data-nu-mattokki="// الْمَنْظُومَة التِّقْنِيَّة" data-nu-fadidja="// الْمَنْظُومَة التِّقْنِيَّة">// Ecosystem</div>
         </div>
 
         <div class="tools-flex-container">
@@ -1360,43 +1213,43 @@
         <div class="dual-story-columns">
           <div>
             <div class="story-section-title">
-              <span class="diamond">◆</span> <span data-en="EXPERIENCE" data-ar="الخبرة العملية" data-es="EXPERIENCIA" data-tr="DENEYİM" data-it="ESPERIENZA" data-zh="工作经验" data-ru="ОПЫТ">EXPERIENCE</span>
+              <span class="diamond">◆</span> <span data-en="EXPERIENCE" data-ar="الخبرة العملية" data-es="EXPERIENCIA" data-tr="DENEYİM" data-zh="工作经验" data-ru="ОПЫТ" data-fr="EXPÉRIENCE" data-nu-mattokki="الْخِبْرَة الْعَمَلِيَّة" data-nu-fadidja="الْخِبْرَة الْعَمَلِيَّة">EXPERIENCE</span>
             </div>
             
             <div class="career-timeline-node" style="padding-top: 4px;">
-              <div class="timeline-date-stamp" data-en="2021 - PRESENT" data-ar="٢٠٢١ - الآن" data-es="2021 - PRESENTE" data-tr="2021 - BUGÜN" data-it="2021 - PRESENTE" data-zh="2021 -至今" data-ru="2021 - НАСТОЯЩЕЕ ВРЕМЯ">2021 - PRESENT</div>
-              <div class="timeline-job-title" data-en="Graphic Designer / Photographer" data-ar="مصمم جرافيك / مصور فوتوغرافي" data-es="Diseñador / Fotógrafo" data-tr="Grafik Tasarımcı / Fotoğrafçı" data-it="Graphic Designer / Fotografo" data-zh="平面设计师 / 摄影师" data-ru="Графический дизайнер / Фотограф">Graphic Designer / Photographer</div>
-              <div class="timeline-location" data-en="Freelance Worldwide" data-ar="عمل حر دولي" data-es="Freelance mundial" data-tr="Dünya Çapında Serbest Çalışan" data-it="Freelance in tutto il mondo" data-zh="全球自由职业" data-ru="Фриланс по всему миру">Freelance Worldwide</div>
+              <div class="timeline-date-stamp" data-en="2021 - PRESENT" data-ar="٢٠٢١ - الآن" data-es="2021 - PRESENTE" data-tr="2021 - BUGÜN" data-zh="2021 -至今" data-ru="2021 - НАСТОЯЩЕЕ ВРЕМЯ" data-fr="2021 - PRÉSENT" data-nu-mattokki="٢٠٢١ - الْآن" data-nu-fadidja="٢٠٢١ - الْآن">2021 - PRESENT</div>
+              <div class="timeline-job-title" data-en="Graphic Designer / Photographer" data-ar="مصمم جرافيك / مصور فوتوغرافي" data-es="Diseñador / Fotógrafo" data-tr="Grafik Tasarımcı / Fotoğrafçı" data-zh="平面设计师 / 摄影师" data-ru="Графический дизайнер / Фотограф" data-fr="Designer / Photographe" data-nu-mattokki="مُصَمِّم / مُصَوِّر" data-nu-fadidja="مُصَمِّم / مُصَوِّر">Graphic Designer / Photographer</div>
+              <div class="timeline-location" data-en="Freelance Worldwide" data-ar="عمل حر دولي" data-es="Freelance mundial" data-tr="Dünya Çapında Serbest Çalışan" data-zh="全球自由职业" data-ru="Фриланс по всему миру" data-fr="Freelance mondial" data-nu-mattokki="عَمَل حُرّ دَوْلِيّ" data-nu-fadidja="عَمَل حُرّ دَوْلِيّ">Freelance Worldwide</div>
             </div>
 
             <div class="career-timeline-node">
-              <div class="timeline-date-stamp" data-en="2018 - 2021" data-ar="٢٠١٨ - ٢٠٢١" data-es="2018 - 2021" data-tr="2018 - 2021" data-it="2018 - 2021" data-zh="2018 - 2021" data-ru="2018 - 2021">2018 - 2021</div>
-              <div class="timeline-job-title" data-en="Graphic Designer" data-ar="مصمم جرافيك" data-es="Diseñador Gráfico" data-tr="Grafik Tasarımcı" data-it="Graphic Designer" data-zh="平面设计师" data-ru="Графический дизайнер">Graphic Designer</div>
-              <div class="timeline-location" data-en="Various Agency Projects" data-ar="مشاريع وكالات متعددة" data-es="Varios proyectos de agencia" data-tr="Çeşitli Ajans Projeleri" data-it="Vari progetti di agenzia" data-zh="各大机构项目" data-ru="Проекты агентств">Various Agency Projects</div>
+              <div class="timeline-date-stamp" data-en="2018 - 2021" data-ar="٢٠١٨ - ٢٠٢١" data-es="2018 - 2021" data-tr="2018 - 2021" data-zh="2018 - 2021" data-ru="2018 - 2021" data-fr="2018 - 2021" data-nu-mattokki="٢٠١٨ - ٢٠٢١" data-nu-fadidja="٢٠١٨ - ٢٠٢١">2018 - 2021</div>
+              <div class="timeline-job-title" data-en="Graphic Designer" data-ar="مصمم جرافيك" data-es="Diseñador Gráfico" data-tr="Grafik Tasarımcı" data-zh="平面设计师" data-ru="Графический дизайнер" data-fr="Designer Graphique" data-nu-mattokki="مُصَمِّم جْرَافِيك" data-nu-fadidja="مُصَمِّم جْرَافِيك">Graphic Designer</div>
+              <div class="timeline-location" data-en="Various Agency Projects" data-ar="مشاريع وكالات متعددة" data-es="Varios proyectos de agencia" data-tr="Çeşitli Ajans Projeleri" data-zh="各大机构项目" data-ru="Проекты агентств" data-fr="Projets d'agence" data-nu-mattokki="مَشَارِيع وَكَالات" data-nu-fadidja="مَشَارِيع وَكَالات">Various Agency Projects</div>
             </div>
 
             <div class="career-timeline-node">
-              <div class="timeline-date-stamp" data-en="2016 - 2018" data-ar="٢٠١٦ - ٢٠١٨" data-es="2016 - 2018" data-tr="2016 - 2018" data-it="2016 - 2018" data-zh="2016 - 2018" data-ru="2016 - 2018">2016 - 2018</div>
-              <div class="timeline-job-title" data-en="Photographer" data-ar="مصور فوتوغرافي" data-es="Fotógrafo" data-tr="Fotoğrafçı" data-it="Fotografo" data-zh="摄影师" data-ru="Фотограф">Photographer</div>
-              <div class="timeline-location" data-en="Automotive & Commercial" data-ar="سيارات وتصوير تجاري" data-es="Automotriz y Comercial" data-tr="Otomotiv ve Ticari" data-it="Automotive & Commerciale" data-zh="汽车与商业" data-ru="Автомобильная и коммерческая">Automotive & Commercial</div>
+              <div class="timeline-date-stamp" data-en="2016 - 2018" data-ar="٢٠١٦ - ٢٠١٨" data-es="2016 - 2018" data-tr="2016 - 2018" data-zh="2016 - 2018" data-ru="2016 - 2018" data-fr="2016 - 2018" data-nu-mattokki="٢٠١٦ - ٢٠١٨" data-nu-fadidja="٢٠١٦ - ٢٠١٨">2016 - 2018</div>
+              <div class="timeline-job-title" data-en="Photographer" data-ar="مصور فوتوغرافي" data-es="Fotógrafo" data-tr="Fotoğrafçı" data-zh="摄影师" data-ru="Фотограф" data-fr="Photographe" data-nu-mattokki="مُصَوِّر فوتوغرافي" data-nu-fadidja="مُصَوِّر فوتوغرافي">Photographer</div>
+              <div class="timeline-location" data-en="Automotive & Commercial" data-ar="سيارات وتصوير تجاري" data-es="Automotriz y Comercial" data-tr="Otomotiv ve Ticari" data-zh="汽车与商业" data-ru="Автомобильная и коммерческая" data-fr="Automobile et Commercial" data-nu-mattokki="سَيَّارَات وَتِجَارِيّ" data-nu-fadidja="سَيَّارَات وَتِجَارِيّ">Automotive & Commercial</div>
             </div>
           </div>
 
           <div>
             <div class="story-section-title">
-              <span class="diamond">◆</span> <span data-en="EDUCATION" data-ar="التعليم" data-es="EDUCACIÓN" data-tr="EĞİTİM" data-it="FORMAZIONE" data-zh="教育背景" data-ru="ОБРАЗОВАНИЕ">EDUCATION</span>
+              <span class="diamond">◆</span> <span data-en="EDUCATION" data-ar="التعليم" data-es="EDUCACIÓN" data-tr="EĞİTİM" data-zh="教育背景" data-ru="ОБРАЗОВАНИЕ" data-fr="ÉDUCATION" data-nu-mattokki="التَّعْلِيم" data-nu-fadidja="التَّعْلِيم">EDUCATION</span>
             </div>
 
             <div class="career-timeline-node">
-              <div class="timeline-job-title" data-en="Economics & Political Science" data-ar="اقتصاد وعلوم سياسية" data-es="Economía y Ciencias Políticas" data-tr="İktisat ve Siyaset Bilimi" data-it="Economia e Scienze Politiche" data-zh="经济学与政治学" data-ru="Экономика и политология">Economics & Political Science</div>
-              <div class="timeline-location" data-en="B.Sc. in Economics (2018 – 2023)" data-ar="بكالوريوس اقتصاد (٢٠١٨ - ٢٠٢٣)" data-es="Licenciatura en Economía (2018 – 2023)" data-tr="İktisat Lisans Mezunu (2018 – 2023)" data-it="Laurea in Economia (2018 – 2023)" data-zh="经济学学士 (2018 – 2023)" data-ru="Бакалавр экономики (2018 – 2023)">B.Sc. in Economics (2018 – 2023)</div>
+              <div class="timeline-job-title" data-en="Economics & Political Science" data-ar="اقتصاد وعلوم سياسية" data-es="Economía y Ciencias Políticas" data-tr="İktisat ve Siyaset Bilimi" data-zh="经济学与政治学" data-ru="Экономика и политология" data-fr="Économie et Sciences Politiques" data-nu-mattokki="اِقْتِصَاد وَعُلُوم سِيَاسِيَّة" data-nu-fadidja="اِقْتِصَاد وَعُلُوم سِيَاسِيَّة">Economics & Political Science</div>
+              <div class="timeline-location" data-en="B.Sc. in Economics (2018 – 2023)" data-ar="بكالوريوس اقتصاد (٢٠١٨ - ٢٠٢٣)" data-es="Licenciatura en Economía (2018 – 2023)" data-tr="İktisat Lisans Mezunu (2018 – 2023)" data-zh="经济学学士 (2018 – 2023)" data-ru="Бакалавр экономики (2018 – 2023)" data-fr="Licence en Économie (2018 – 2023)" data-nu-mattokki="بَكَالُورِيُوس اِقْتِصَاد" data-nu-fadidja="بَكَالُورِيُوس اِقْتِصَاد">B.Sc. in Economics (2018 – 2023)</div>
             </div>
 
             <div class="passion-manifesto-badge">
               <div class="manifesto-label">
-                <span>◆</span> <span data-en="PASSIONATE ABOUT" data-ar="شغوف بـ" data-es="APASIONADO DE" data-tr="TUTKULU OLDUĞUM" data-it="APPASSIONATO DI" data-zh="热衷于" data-ru="УВЛЕЧЕН">PASSIONATE ABOUT</span>
+                <span>◆</span> <span data-en="PASSIONATE ABOUT" data-ar="شغوف بـ" data-es="APASIONADO DE" data-tr="TUTKULU OLDUĞUM" data-zh="热衷于" data-ru="УВЛЕЧЕН" data-fr="PASSIONNÉ PAR" data-nu-mattokki="شَغُوف بـ" data-nu-fadidja="شَغُوف بـ">PASSIONATE ABOUT</span>
               </div>
-              <div class="manifesto-words" data-en="CARS, DESIGN, DETAILS & STORIES." data-ar="السيارات، التصميم، التفاصيل والقصص." data-es="AUTOS, DISEÑO, DETALLES E HISTORIAS." data-tr="ARABALAR, TASARIM, DETAYLAR VE HİKAYELER." data-it="AUTO, DESIGN, DETTAGLI E STORIE." data-zh="汽车、设计、细节与故事。" data-ru="АВТОМОБИЛИ, ДИЗАЙН, ДЕТАЛИ.">
+              <div class="manifesto-words" data-en="CARS, DESIGN, DETAILS & STORIES." data-ar="السيارات، التصميم، التفاصيل والقصص." data-es="AUTOS, DISEÑO, DETALLES E HISTORIAS." data-tr="ARABALAR, TASARIM, DETAYLAR VE HİKAYELER." data-zh="汽车、设计、细节与故事。" data-ru="АВТОМОБИЛИ, ДИЗАЙН, ДЕТАЛИ." data-fr="VOITURES, DESIGN, DÉTAILS ET HISTOIRES." data-nu-mattokki="السَّيَّارَات وَالتَّصْمِيم وَالتَّفَاصِيل." data-nu-fadidja="السَّيَّارَات وَالتَّصْمِيم وَالتَّفَاصِيل.">
                 CARS, DESIGN, DETAILS & STORIES.
               </div>
             </div>
@@ -1404,7 +1257,7 @@
         </div>
 
         <button class="primary-action-btn" onclick="navigateTo('connect')">
-          <span data-en="View My Work / Contact" data-ar="تواصل معي / استعرض أعمالي" data-es="Ver trabajos / Contacto" data-tr="Çalışmalarımı Gör / İletişim" data-it="Visualizza lavori / Contatti" data-zh="查看作品 / 联系方式" data-ru="Смотреть работы / Контакты">View My Work / Contact</span>
+          <span data-en="View My Work / Contact" data-ar="تواصل معي / استعرض أعمالي" data-es="Ver trabajos / Contacto" data-tr="Çalışmalarımı Gör / İletişim" data-zh="查看作品 / 联系方式" data-ru="Смотреть работы / Контакты" data-fr="Voir mes travaux / Contact" data-nu-mattokki="تَوَاصَلْ مَعِي / اسْتَعْرِضْ أَعْمَالِي" data-nu-fadidja="تَوَاصَلْ مَعِي / اسْتَعْرِضْ أَعْمَالِي">View My Work / Contact</span>
           <div class="action-icon-circle"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
         </button>
       </section>
@@ -1412,20 +1265,20 @@
       <section id="page-connect" class="view-page">
         <div class="status-capsule-badge">
           <div class="status-live-beacon"></div>
-          <span class="status-text" data-en="Available For Direct Inquiries" data-ar="متاح لتلقي الاستفسارات المباشرة" data-es="Disponible para consultas" data-tr="Doğrudan Sorular İçin Müsait" data-it="Disponibile per richieste" data-zh="可接受直接咨询" data-ru="Доступен для запросов">Available For Direct Inquiries</span>
+          <span class="status-text" data-en="Available For Direct Inquiries" data-ar="متاح لتلقي الاستفسارات المباشرة" data-es="Disponible para consultas" data-tr="Doğrudan Sorular İçin Müsait" data-zh="可接受直接咨询" data-ru="Доступен для запросов" data-fr="Disponible pour demandes" data-nu-mattokki="مُتَاح لِلتَّوَاصُل" data-nu-fadidja="مُتَاح لِلتَّوَاصُل">Available For Direct Inquiries</span>
         </div>
 
-        <div class="title-stacked-3d" data-en="LET'S" data-ar="تواصل" data-es="VAMOS A" data-tr="BAĞLANTI" data-it="PARLIAMO" data-zh="联络" data-ru="ДАВАЙ">LET'S</div>
-        <div class="author-surname-red" style="font-size: 2.5rem; margin-bottom: 14px;" data-en="CONNECT" data-ar="معي" data-es="CONECTAR" data-tr="KURUN" data-it="DI" data-zh="我们" data-ru="СВЯЖЕМСЯ">CONNECT</div>
+        <div class="title-stacked-3d" data-en="LET'S" data-ar="تواصل" data-es="VAMOS A" data-tr="BAĞLANTI" data-zh="联络" data-ru="ДАВАЙ" data-fr="RESTONS" data-nu-mattokki="تَوَاصَلْ" data-nu-fadidja="تَوَاصَلْ">LET'S</div>
+        <div class="author-surname-red" style="font-size: 2.5rem; margin-bottom: 14px;" data-en="CONNECT" data-ar="معي" data-es="CONECTAR" data-tr="KURUN" data-zh="我们" data-ru="СВЯЖЕМСЯ" data-fr="CONNECTÉS" data-nu-mattokki="مَعِي" data-nu-fadidja="مَعِي">CONNECT</div>
 
-        <p style="font-family: var(--font-body); font-size: 0.82rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 24px;" data-en="Follow the latest releases, browse recent work decks, or jump into a quick direct chat via WhatsApp." data-ar="تابع أحدث الإصدارات، استعرض ملفات الأعمال، أو ابدأ محادثة مباشرة وسريعة عبر واتساب." data-es="Sigue los últimos lanzamientos, explora portafolios o inicia un chat directo por WhatsApp." data-tr="En son çalışmaları takip edin veya WhatsApp üzerinden hızlıca sohbet başlatın." data-it="Segui gli ultimi rilasci o chatta su WhatsApp." data-zh="关注最新发布、浏览近期工作集锦或通过 WhatsApp 快速发起直接对话。" data-ru="Следите за последними релизами или начните чат в WhatsApp.">
+        <p style="font-family: var(--font-body); font-size: 0.82rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 24px;" data-en="Follow the latest releases, browse recent work decks, or jump into a quick direct chat via WhatsApp." data-ar="تابع أحدث الإصدارات، استعرض ملفات الأعمال، أو ابدأ محادثة مباشرة وسريعة عبر واتساب." data-es="Sigue los últimos lanzamientos, explora portafolios o inicia un chat directo por WhatsApp." data-tr="En son çalışmaları takip edin veya WhatsApp üzerinden hızlıca sohbet başlatın." data-zh="关注最新发布、浏览近期工作集锦或通过 WhatsApp 快速发起直接对话。" data-ru="Следите за последними релизами или начните чат в WhatsApp." data-fr="Suivez les dernières sorties ou discutez directement sur WhatsApp." data-nu-mattokki="تَابِعْ أَحْدَث الْإِصْدَارَات وَعَبْر وَاتْسَاب." data-nu-fadidja="تَابِعْ أَحْدَث الْإِصْدَارَات وَعَبْر وَاتْسَاب.">
           Follow the latest releases, browse recent work decks, or jump into a quick direct chat via WhatsApp.
         </p>
 
         <div class="direct-channels-pod spotlight-card">
           <div class="channels-header-row">
-            <span data-en="CHANNELS & PROFILES" data-ar="المنصات والملفات" data-es="CANALES Y PERFILES" data-tr="KANALLAR VE PROFİLLER" data-it="CANALI E PROFILI" data-zh="社交频道与主页" data-ru="КАНАЛЫ">CHANNELS & PROFILES</span>
-            <span class="direct" data-en="// DIRECT" data-ar="// مباشرة" data-es="// DIRECTO" data-tr="// DOĞRUDAN" data-it="// DIRETTO" data-zh="// 直接" data-ru="// ПРЯМО">// DIRECT</span>
+            <span data-en="CHANNELS & PROFILES" data-ar="المنصات والملفات" data-es="CANALES Y PERFILES" data-tr="KANALLAR VE PROFİLLER" data-zh="社交频道与主页" data-ru="КАНАЛЫ" data-fr="CANAUX & PROFILS" data-nu-mattokki="الْمَنَصَّات وَالْمِلَفَّات" data-nu-fadidja="الْمَنَصَّات وَالْمِلَفَّات">CHANNELS & PROFILES</span>
+            <span class="direct" data-en="// DIRECT" data-ar="// مباشرة" data-es="// DIRECTO" data-tr="// DOĞRUDAN" data-zh="// 直接" data-ru="// ПРЯМО" data-fr="// DIRECT" data-nu-mattokki="// مُبَاشِر" data-nu-fadidja="// مُبَاشِر">// DIRECT</span>
           </div>
           <div class="social-quad-row">
             <a href="https://www.behance.net/aliel-sewedy" target="_blank" class="social-anchor-cube spotlight-card" title="Behance">
@@ -1451,8 +1304,8 @@
           <div class="wa-flex-lead">
             <div class="wa-icon-bubble"><i class="fa-brands fa-whatsapp"></i></div>
             <div class="wa-textual-meta">
-              <h4 data-en="CHAT ON WHATSAPP" data-ar="محادثة واتساب" data-es="CHAT EN WHATSAPP" data-tr="WHATSAPP'TA SOHBET ET" data-it="CHAT SU WHATSAPP" data-zh="通过 WhatsApp 聊天" data-ru="ЧАТ В WHATSAPP">CHAT ON WHATSAPP</h4>
-              <p data-en="DIRECT LINE & INSTANT RESPONSE" data-ar="خط مباشر واستجابة فورية" data-es="LÍNEA DIRECTA Y RESPUESTA" data-tr="DOĞRUDAN HAT VE ANINDA YANIT" data-it="LINEA DIRETTA E RISPOSTA" data-zh="直达专线与即时回复" data-ru="ПРЯМАЯ СВЯЗЬ">DIRECT LINE & INSTANT RESPONSE</p>
+              <h4 data-en="CHAT ON WHATSAPP" data-ar="محادثة واتساب" data-es="CHAT EN WHATSAPP" data-tr="WHATSAPP'TA SOHBET ET" data-zh="通过 WhatsApp 聊天" data-ru="ЧАТ В WHATSAPP" data-fr="CHAT WHATSAPP" data-nu-mattokki="مُحَادَثَة وَاتْسَاب" data-nu-fadidja="مُحَادَثَة وَاتْسَاب">CHAT ON WHATSAPP</h4>
+              <p data-en="DIRECT LINE & INSTANT RESPONSE" data-ar="خط مباشر واستجابة فورية" data-es="LÍNEA DIRECTA Y RESPUESTA" data-tr="DOĞRUDAN HAT VE ANINDA YANIT" data-zh="直达专线与即时回复" data-ru="ПРЯМАЯ СВЯЗЬ" data-fr="LIGNE DIRECTE & RÉPONSE" data-nu-mattokki="خَطّ مُبَاشِر وَاسْتِجَابَة فَوْرِيَّة" data-nu-fadidja="خَطّ مُبَاشِر وَاسْتِجَابَة فَوْرِيَّة">DIRECT LINE & INSTANT RESPONSE</p>
             </div>
           </div>
           <div class="wa-external-glyph">
@@ -1476,7 +1329,7 @@
         </svg>
       </div>
       <p class="brand-mark-copy">AS MEDIA © 2026</p>
-      <p class="brand-sub-disclaimer" data-en="All Visuals & Creative Direction by Ali Elsewedy" data-ar="جميع الأعمال البصرية والإخراج الفني بواسطة علي السويدي" data-es="Todos los visuales por Ali Elsewedy" data-tr="Tüm Görseller ve Sanat Yönetmenliği Ali Elsewedy'ye Aittir" data-it="Tutti i visual e direzione artistica di Ali Elsewedy" data-zh="所有视觉效果与创意指导由 Ali Elsewedy 呈现" data-ru="Все визуальные эффекты: Али Эльсевиди">All Visuals & Creative Direction by Ali Elsewedy</p>
+      <p class="brand-sub-disclaimer" data-en="All Visuals & Creative Direction by Ali Elsewedy" data-ar="جميع الأعمال البصرية والإخراج الفني بواسطة علي السويدي" data-es="Todos los visuales por Ali Elsewedy" data-tr="Tüm Görseller ve Sanat Yönetmenliği Ali Elsewedy'ye Aittir" data-zh="所有视觉效果与创意指导由 Ali Elsewedy 呈现" data-ru="Все визуальные эффекты: Али Эльсевиди" data-fr="Tous les visuels par Ali Elsewedy" data-nu-mattokki="جَمِيع الْأَعْمَال الْبَصَرِيَّة بِوَاسِطَة عَلِي السُّوَيْدِي" data-nu-fadidja="جَمِيع الْأَعْمَال الْبَصَرِيَّة بِوَاسِطَة عَلِي السُّوَيْدِي">All Visuals & Creative Direction by Ali Elsewedy</p>
     </footer>
 
   </div>
@@ -1486,56 +1339,93 @@
     <div class="drawer-bottom-sheet" onclick="event.stopPropagation()">
       <div class="sheet-handle-pill"></div>
       <div class="sheet-top-row">
-        <h3 data-en="QUICK MENU" data-ar="القائمة السريعة" data-es="MENÚ RÁPIDO" data-tr="HIZLI MENÜ" data-it="MENU RAPIDO" data-zh="快捷菜单" data-ru="БЫСТРОЕ МЕНЮ">QUICK MENU</h3>
+        <h3 id="drawerTitle" data-en="QUICK MENU" data-ar="القائمة السريعة" data-es="MENÚ RÁPIDO" data-tr="HIZLI MENÜ" data-zh="快捷菜单" data-ru="БЫСТРОЕ МЕНЮ" data-fr="MENU RAPIDE" data-nu-mattokki="الْقَائِمَة السَّرِيعَة" data-nu-fadidja="الْقَائِمَة السَّرِيعَة">QUICK MENU</h3>
         <button class="sheet-close-x-btn" onclick="closeDrawer()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <!-- Language Selector Grid with Flags & English Names -->
+      <!-- Language Selector Grid with Flags -->
       <div style="margin-bottom: 18px;">
         <div style="font-family: var(--font-display); font-size: 0.65rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
           <i class="fa-solid fa-globe" style="color: var(--accent-red); transition: transform 0.3s ease;" onmouseover="this.style.transform='rotate(180deg)'" onmouseout="this.style.transform='rotate(0deg)'"></i> 
-          <span data-en="SELECT LANGUAGE" data-ar="اختر اللغة" data-es="SELECCIONAR IDIOMA" data-tr="DİLİ SEÇİN" data-it="SELEZIONA LINGUA" data-zh="选择语言" data-ru="ВЫБРАТЬ ЯЗЫК">SELECT LANGUAGE</span>
+          <span id="selectLangLabel" data-en="SELECT LANGUAGE" data-ar="اختر اللغة" data-es="SELECCIONAR IDIOMA" data-tr="DİLİ SEÇİN" data-zh="选择语言" data-ru="ВЫБРАТЬ ЯЗЫК" data-fr="CHOISIR LA LANGUE" data-nu-mattokki="اخْتَرْ اللُّغَة" data-nu-fadidja="اخْتَرْ اللُّغَة">SELECT LANGUAGE</span>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;">
-          <button onclick="setLanguage('en')" id="lang-btn-en" class="lang-select-pill" style="background: var(--accent-red); color: #fff; border: none; padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.58rem; font-weight: 800; cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇬🇧</span> English</button>
-          <button onclick="setLanguage('ar')" id="lang-btn-ar" class="lang-select-pill" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.58rem; font-weight: 800; cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇸🇦</span> Arabic</button>
-          <button onclick="setLanguage('tr')" id="lang-btn-tr" class="lang-select-pill" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.58rem; font-weight: 800; cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇹🇷</span> Turkish</button>
-          <button onclick="setLanguage('es')" id="lang-btn-es" class="lang-select-pill" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.58rem; font-weight: 800; cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇪🇸</span> Spanish</button>
-          <button onclick="setLanguage('it')" id="lang-btn-it" class="lang-select-pill" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.58rem; font-weight: 800; cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; justify-content: center; gap: 3px; grid-column: span 2;"><span>🇮🇹</span> Italian</button>
-          <button onclick="setLanguage('zh')" id="lang-btn-zh" class="lang-select-pill" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.58rem; font-weight: 800; cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; justify-content: center; gap: 3px; grid-column: span 2;"><span>🇨🇳</span> Chinese</button>
-          <button onclick="setLanguage('ru')" id="lang-btn-ru" class="lang-select-pill" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.58rem; font-weight: 800; cursor: pointer; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); display: flex; align-items: center; justify-content: center; gap: 3px; grid-column: span 4;"><span>🇷🇺</span> Russian</button>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;">
+          <button onclick="setLanguage('en')" id="lang-btn-en" class="lang-select-pill" style="background: var(--accent-red); color: #fff; border: none; padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;"><span>🇬🇧</span> English</button>
+          <button onclick="setLanguage('ar')" id="lang-btn-ar" class="lang-select-pill" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;"><span>🇪🇬</span> Arabic</button>
+          <button onclick="setLanguage('fr')" id="lang-btn-fr" class="lang-select-pill" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;"><span>🇫🇷</span> French</button>
+          <button onclick="setLanguage('tr')" id="lang-btn-tr" class="lang-select-pill" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;"><span>🇹🇷</span> Turkish</button>
+          <button onclick="setLanguage('es')" id="lang-btn-es" class="lang-select-pill" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;"><span>🇪🇸</span> Spanish</button>
+          <button onclick="setLanguage('zh')" id="lang-btn-zh" class="lang-select-pill" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;"><span>🇨🇳</span> Chinese</button>
+          <button onclick="setLanguage('ru')" id="lang-btn-ru" class="lang-select-pill" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;"><span>🇷🇺</span> Russian</button>
+          <button onclick="openNubiModal()" id="lang-btn-nu" class="lang-select-pill" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; grid-column: span 2;"><span>🇪🇬</span> نوبي (Nubi)</button>
         </div>
       </div>
 
       <div class="sheet-links-stack">
         <a href="javascript:void(0)" class="sheet-nav-tile" onclick="navigateTo('home')">
-          <span data-en="HOME" data-ar="الرئيسية" data-es="INICIO" data-tr="ANA SAYFA" data-it="HOME" data-zh="首页" data-ru="ГЛАВНАЯ">HOME</span>
+          <span data-en="HOME" data-ar="الرئيسية" data-es="INICIO" data-tr="ANA SAYFA" data-zh="首页" data-ru="ГЛАВНАЯ" data-fr="ACCUEIL" data-nu-mattokki="الرَّئِيسِيَّة" data-nu-fadidja="الرَّئِيسِيَّة">HOME</span>
           <i class="fa-solid fa-chevron-right menu-chevron"></i>
         </a>
         <a href="javascript:void(0)" class="sheet-nav-tile" onclick="navigateTo('about')">
-          <span data-en="ABOUT" data-ar="نبذة عني" data-es="ACERCA" data-tr="HAKKINDA" data-it="INFORMAZIONI" data-zh="关于" data-ru="ОБ АВТОРЕ">ABOUT</span>
+          <span data-en="ABOUT" data-ar="نبذة عني" data-es="ACERCA" data-tr="HAKKINDA" data-zh="关于" data-ru="ОБ АВТОРЕ" data-fr="À PROPOS" data-nu-mattokki="عَنِّي" data-nu-fadidja="عَنِّي">ABOUT</span>
           <i class="fa-solid fa-chevron-right menu-chevron"></i>
         </a>
         <a href="javascript:void(0)" class="sheet-nav-tile" onclick="openPhotoCategory('all')">
-          <span data-en="PHOTOGRAPHY" data-ar="التصوير" data-es="FOTOGRAFÍA" data-tr="FOTOĞRAFÇILIK" data-it="FOTOGRAFIA" data-zh="摄影" data-ru="ФОТОГРАФИЯ">PHOTOGRAPHY</span>
+          <span data-en="PHOTOGRAPHY" data-ar="التصوير" data-es="FOTOGRAFÍA" data-tr="FOTOĞRAFÇILIK" data-zh="摄影" data-ru="ФОТОГРАФИЯ" data-fr="PHOTOGRAPHIE" data-nu-mattokki="التَّصْوِير" data-nu-fadidja="التَّصْوِير">PHOTOGRAPHY</span>
           <i class="fa-solid fa-chevron-right menu-chevron"></i>
         </a>
         <a href="javascript:void(0)" class="sheet-nav-tile" onclick="openDesignCategory('all')">
-          <span data-en="DESIGN" data-ar="التصميم" data-es="DISEÑO" data-tr="TASARIM" data-it="DESIGN" data-zh="设计" data-ru="ДИЗАЙН">DESIGN</span>
+          <span data-en="DESIGN" data-ar="التصميم" data-es="DISEÑO" data-tr="TASARIM" data-zh="设计" data-ru="ДИЗАЙН" data-fr="DESIGN" data-nu-mattokki="التَّصْمِيم" data-nu-fadidja="التَّصْمِيم">DESIGN</span>
           <i class="fa-solid fa-chevron-right menu-chevron"></i>
         </a>
         <a href="javascript:void(0)" class="sheet-nav-tile cta-red" onclick="navigateTo('connect')">
-          <span data-en="LET'S CONNECT" data-ar="تواصل معي" data-es="CONECTEMOS" data-tr="İLETİŞİME GEÇİN" data-it="CONTATTAMI" data-zh="联系我们" data-ru="СВЯЗАТЬСЯ">LET'S CONNECT</span>
+          <span data-en="LET'S CONNECT" data-ar="تواصل معي" data-es="CONECTEMOS" data-tr="İLETİŞİME GEÇİN" data-zh="联系我们" data-ru="СВЯЗАТЬСЯ" data-fr="RESTONS CONNECTÉS" data-nu-mattokki="تَوَاصَلْ مَعِي" data-nu-fadidja="تَوَاصَلْ مَعِي">LET'S CONNECT</span>
         </a>
       </div>
 
       <div class="sheet-bottom-theme-toggle">
-        <div class="celestial-toggle-pill" onclick="toggleTheme()" title="Switch Theme">
-          <div class="sky-stars"></div>
-          <div class="moon-crescent-shape"></div>
-          <div class="sun-cloud-wrapper">
-            <div class="sun-core"></div>
-            <div class="sun-cloud-shape"></div>
+        <button class="simple-theme-btn" onclick="toggleTheme()" style="width: 44px; height: 44px; border-radius: 50%; font-size: 1.1rem;">
+          <i class="fa-solid fa-sun" id="drawerThemeIcon"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nubian Sub-dialects Overlay Modal -->
+  <div id="nubiOverlay" class="nubi-overlay-backdrop" onclick="closeNubiModal(event)">
+    <div class="nubi-modal-box" onclick="event.stopPropagation()" style="max-width: 410px; max-height: 85vh; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h4 style="font-family: var(--font-display); font-size: 0.95rem; font-weight: 800; color: var(--text-pure); text-transform: uppercase;">اختر الفرع النوبي في مصر</h4>
+        <button class="sheet-close-x-btn" onclick="closeNubiModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <p style="font-family: var(--font-body); font-size: 0.68rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.4;">
+        اللغة النوبية النيلية تنقسم لفرعين رئيسيين بمصر (نسبة التشابه ~67%):
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 6px;">
+        <div onclick="setNubianDialect('mattokki')" style="background: rgba(255,255,255,0.035); border: 1px solid var(--card-border); border-radius: 12px; padding: 12px 14px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-red)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <span style="font-family: var(--font-display); font-size: 0.8rem; font-weight: 800; color: var(--text-pure);">1. الماتوكية (Mattokki / Kenuzi)</span>
+            <span style="font-size: 0.58rem; background: rgba(229,27,36,0.15); color: var(--accent-red); padding: 2px 6px; border-radius: 4px; font-weight: 700;">أسوان والتهجير</span>
+          </div>
+          <p style="font-family: var(--font-body); font-size: 0.64rem; color: var(--text-muted); line-height: 1.35; margin-bottom: 8px;">
+            تُنتطق في قرى الكنوز وشمال أسوان.
+          </p>
+          <div style="background: rgba(0,0,0,0.25); border-radius: 8px; padding: 6px 10px; font-size: 0.62rem; color: var(--text-main); display: flex; flex-direction: column; gap: 3px;">
+            <div><strong style="color: var(--accent-red);">أمثلة:</strong> ماء = <em style="color:#fff;">أُوي</em> | بيت = <em style="color:#fff;">كاي</em> | خبز = <em style="color:#fff;">كُلُّوا</em></div>
+          </div>
+        </div>
+
+        <div onclick="setNubianDialect('fadidja')" style="background: rgba(255,255,255,0.035); border: 1px solid var(--card-border); border-radius: 12px; padding: 12px 14px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--accent-red)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <span style="font-family: var(--font-display); font-size: 0.8rem; font-weight: 800; color: var(--text-pure);">2. الفاديجة (Fadidja / Mahas)</span>
+            <span style="font-size: 0.58rem; background: rgba(56,189,248,0.15); color: #38bdf8; padding: 2px 6px; border-radius: 4px; font-weight: 700;">أبو سمبل والجنوب</span>
+          </div>
+          <p style="font-family: var(--font-body); font-size: 0.64rem; color: var(--text-muted); line-height: 1.35; margin-bottom: 8px;">
+            تُنتطق في قرى الجنوب وأبو سمبل.
+          </p>
+          <div style="background: rgba(0,0,0,0.25); border-radius: 8px; padding: 6px 10px; font-size: 0.62rem; color: var(--text-main); display: flex; flex-direction: column; gap: 3px;">
+            <div><strong style="color: #38bdf8;">أمثلة:</strong> ماء = <em style="color:#fff;">أَمَان</em> | بيت = <em style="color:#fff;">گُوو</em> | خبز = <em style="color:#fff;">كُلُّوا</em></div>
           </div>
         </div>
       </div>
@@ -1559,36 +1449,55 @@
       currentLang = langCode;
       const html = document.documentElement;
       html.setAttribute('lang', currentLang);
-      html.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+      html.setAttribute('dir', (currentLang === 'ar' || currentLang === 'nu-mattokki' || currentLang === 'nu-fadidja') ? 'rtl' : 'ltr');
       
       const langBtn = document.querySelector('.lang-toggle-pill');
-      if (langBtn) langBtn.textContent = currentLang.toUpperCase();
+      if (langBtn) langBtn.textContent = currentLang.startsWith('nu') ? 'نوبي' : currentLang.toUpperCase();
 
       document.querySelectorAll('.lang-select-pill').forEach(btn => {
         btn.style.background = 'rgba(255,255,255,0.05)';
         btn.style.color = 'var(--text-pure)';
         btn.style.borderColor = 'var(--card-border)';
-        btn.style.transform = 'scale(1)';
       });
-      const activeBtn = document.getElementById(`lang-btn-${currentLang}`);
+      const activeBtn = document.getElementById(`lang-btn-${currentLang.startsWith('nu') ? 'nu' : currentLang}`);
       if (activeBtn) {
         activeBtn.style.background = 'var(--accent-red)';
         activeBtn.style.color = '#fff';
         activeBtn.style.borderColor = 'var(--accent-red)';
-        activeBtn.style.transform = 'scale(1.05)';
-        setTimeout(() => { activeBtn.style.transform = 'scale(1)'; }, 200);
       }
 
       const elements = document.querySelectorAll('[data-en]');
       elements.forEach(el => {
-        if (el.hasAttribute(`data-${currentLang}`)) {
-          el.textContent = el.getAttribute(`data-${currentLang}`);
+        let attr = `data-${currentLang}`;
+        if (el.hasAttribute(attr)) {
+          el.textContent = el.getAttribute(attr);
+        } else if (currentLang.startsWith('nu') && el.hasAttribute('data-ar')) {
+          el.textContent = el.getAttribute('data-ar');
         }
       });
 
+      // Update drawer static text elements correctly based on active language
+      const drawerTitle = document.getElementById('drawerTitle');
+      const selectLangLabel = document.getElementById('selectLangLabel');
+      
+      const staticTexts = {
+        en: { title: 'QUICK MENU', label: 'SELECT LANGUAGE' },
+        ar: { title: 'القائمة السريعة', label: 'اختر اللغة' },
+        fr: { title: 'MENU RAPIDE', label: 'CHOISIR LA LANGUE' },
+        tr: { title: 'HIZLI MENÜ', label: 'DİLİ SEÇİN' },
+        es: { title: 'MENÚ RÁPIDO', label: 'SELECCIONAR IDIOMA' },
+        zh: { title: '快捷菜单', label: '选择语言' },
+        ru: { title: 'БЫСТРОЕ МЕНЮ', label: 'ВЫБРАТЬ ЯЗЫК' },
+        'nu-mattokki': { title: 'الْقَائِمَة السَّرِيعَة', label: 'اخْتَرْ اللُّغَة' },
+        'nu-fadidja': { title: 'الْقَائِمَة السَّرِيعَة', label: 'اخْتَرْ اللُّغَة' }
+      };
+
+      if (drawerTitle && staticTexts[currentLang]) drawerTitle.textContent = staticTexts[currentLang].title;
+      if (selectLangLabel && staticTexts[currentLang]) selectLangLabel.textContent = staticTexts[currentLang].label;
+
       const arrows = document.querySelectorAll('.dynamic-arrow');
       arrows.forEach(arr => {
-        if (currentLang === 'ar') {
+        if (currentLang === 'ar' || currentLang.startsWith('nu')) {
           arr.classList.remove('fa-arrow-right');
           arr.classList.add('fa-arrow-left');
         } else {
@@ -1599,7 +1508,7 @@
 
       const chevrons = document.querySelectorAll('.menu-chevron');
       chevrons.forEach(ch => {
-        if (currentLang === 'ar') {
+        if (currentLang === 'ar' || currentLang.startsWith('nu')) {
           ch.classList.remove('fa-chevron-right');
           ch.classList.add('fa-chevron-left');
         } else {
@@ -1608,8 +1517,30 @@
         }
       });
 
-      const langNames = { en: 'English', ar: 'العربية', tr: 'Türkçe', es: 'Español', it: 'Italiano', zh: '中文', ru: 'Русский' };
+      const langNames = { en: 'English', ar: 'العربية', fr: 'Français', tr: 'Türkçe', es: 'Español', zh: '中文', ru: 'Русский', 'nu-mattokki': 'نوبي (الماتوكية)', 'nu-fadidja': 'نوبي (الفاديجة)' };
       showToast((langNames[currentLang] || currentLang) + ' Active');
+    }
+
+    function openNubiModal() {
+      closeDrawer();
+      const modal = document.getElementById('nubiOverlay');
+      if (modal) modal.classList.add('open');
+    }
+
+    function closeNubiModal(e) {
+      const modal = document.getElementById('nubiOverlay');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function setNubianDialect(dialect) {
+      closeNubiModal();
+      if (dialect === 'mattokki') {
+        setLanguage('nu-mattokki');
+        showToast('تم تفعيل اللهجة الماتوكية');
+      } else {
+        setLanguage('nu-fadidja');
+        showToast('تم تفعيل اللهجة الفاديجية');
+      }
     }
 
     function navigateTo(pageId) {
@@ -1705,6 +1636,11 @@
       const next = current === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
 
+      const themeIcon = document.getElementById('themeIcon');
+      const drawerThemeIcon = document.getElementById('drawerThemeIcon');
+      if (themeIcon) themeIcon.className = next === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+      if (drawerThemeIcon) drawerThemeIcon.className = next === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+
       const darkPhoto = document.querySelector('.dark-photo-mode');
       const lightPhoto = document.querySelector('.light-photo-mode');
       if (darkPhoto && lightPhoto) {
@@ -1717,7 +1653,7 @@
         }
       }
 
-      showToast(next === 'light' ? (currentLang === 'ar' ? 'الوضع الفاتح مفعل' : 'Day Mode Active') : (currentLang === 'ar' ? 'الوضع المظلم مفعل' : 'Night Mode Active'));
+      showToast(next === 'light' ? 'Day Mode Active' : 'Night Mode Active');
     }
 
     function showToast(msg) {
@@ -1729,37 +1665,6 @@
         setTimeout(() => { toast.classList.remove('show'); }, 2000);
       }
     }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      // 1. Theme Button welcoming animation (Sun -> Moon -> Sun)
-      const themeBtn = document.getElementById('navThemeToggleBtn');
-      if (themeBtn) {
-        setTimeout(() => { themeBtn.classList.add('btn-light-mode'); }, 800);
-        setTimeout(() => { themeBtn.classList.remove('btn-light-mode'); }, 2200);
-      }
-
-      // 2. Language Button welcoming animation (EN -> AR -> EN)
-      const langBtn = document.getElementById('navLangToggleBtn');
-      if (langBtn) {
-        setTimeout(() => { 
-          langBtn.style.transform = 'scale(1.15)';
-          langBtn.style.background = 'var(--accent-red)';
-          langBtn.textContent = 'AR';
-        }, 1000);
-        setTimeout(() => { 
-          langBtn.style.transform = 'scale(1)';
-          langBtn.style.background = 'rgba(20, 23, 31, 0.85)';
-          langBtn.textContent = 'EN';
-        }, 2000);
-      }
-
-      const darkPhoto = document.querySelector('.dark-photo-mode');
-      const lightPhoto = document.querySelector('.light-photo-mode');
-      if (darkPhoto && lightPhoto) {
-        darkPhoto.style.display = 'block';
-        lightPhoto.style.display = 'none';
-      }
-    });
 
     const navBar = document.getElementById('appFloatingNav');
     const tracingBeam = document.getElementById('tracingBeamLine');
@@ -1773,10 +1678,9 @@
           const currentScroll = window.scrollY;
 
           let triggerPoint = 180;
-          const heroCol = document.getElementById('heroStandeeCol');
+          const heroCol = document.querySelector('.hero-standee-col');
           if (heroCol) {
-            const rect = heroCol.getBoundingClientRect();
-            triggerPoint = window.scrollY + rect.top + (rect.height / 2);
+            triggerPoint = heroCol.offsetTop + (heroCol.offsetHeight / 2) - 40;
           }
 
           if (navBar) {
@@ -1790,7 +1694,7 @@
           }
 
           if (tracingBeam && tracingThumb) {
-            if (currentScroll > (triggerPoint - 150)) {
+            if (currentScroll > triggerPoint) {
               tracingBeam.classList.add('visible');
               const docHeight = document.documentElement.scrollHeight - window.innerHeight;
               const scrollPercent = docHeight > 0 ? currentScroll / docHeight : 0;
