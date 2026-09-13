@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="nu-aswan">
+<head>
+<!-- Aswan Nubian mode: Nubian wording/pronunciation rendered in Arabic script. Existing established Nubian forms are preserved. -->
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AS MEDIA | Ali Elsewedy</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&amp;family=Michroma&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Syne:wght@600;700;800&amp;family=Permanent+Marker&amp;family=Syncopate:wght@700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+    :root {
+      --bg-color: #060709;
+      --card-bg: rgba(18, 20, 25, 0.82);
+      --card-border: rgba(255, 255, 255, 0.07);
+      --card-border-glow: rgba(255, 34, 50, 0.35);
+      --card-hover: rgba(26, 29, 36, 0.95);
+      --accent-red: #e51b24;
+      --accent-red-glow: rgba(229, 27, 36, 0.45);
+      --accent-green: #00e676;
+      --text-pure: #ffffff;
+      --text-main: #e6e9ee;
+      --text-muted: #848c96;
+      --sheet-bg: #0d0f12;
+      --pill-bg: rgba(255, 255, 255, 0.04);
+      --font-display: 'Syne', 'Cairo', sans-serif;
+      --font-title-tech: 'Syne', 'Cairo', sans-serif;
+      --font-body: 'Space Grotesk', 'Cairo', sans-serif;
+      --logo-primary: #ffffff;
+    }
+
+    [data-theme="light"] {
+      --bg-color: #f2f4f8;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --card-border: rgba(0, 0, 0, 0.08);
+      --card-border-glow: rgba(229, 27, 36, 0.4);
+      --card-hover: rgba(245, 247, 250, 1);
+      --text-pure: #0b0c10;
+      --text-main: #1d2129;
+      --text-muted: #626a76;
+      --sheet-bg: #ffffff;
+      --pill-bg: rgba(0, 0, 0, 0.04);
+      --logo-primary: #0b0c10;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(229, 27, 36, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(229, 27, 36, 0.06) 0%, transparent 40%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: auto, auto, 34px 34px, 34px 34px;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    [data-theme="light"] body {
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(229, 27, 36, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(229, 27, 36, 0.04) 0%, transparent 40%),
+        linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+    }
+
+    /* Ambient Bubbles */
+    .ambient-bubbles-wrapper {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .ambient-bubble {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, rgba(229, 27, 36, 0.28) 0%, rgba(229, 27, 36, 0.02) 70%);
+      filter: blur(35px); animation: floatBubble 14s ease-in-out infinite alternate;
+    }
+    .bubble-1 { width: 220px; height: 220px; top: 10%; left: -5%; animation-duration: 12s; }
+    .bubble-2 { width: 280px; height: 280px; bottom: 15%; right: -8%; animation-duration: 18s; animation-delay: -3s; }
+    .bubble-3 { width: 160px; height: 160px; top: 55%; left: 60%; animation-duration: 15s; animation-delay: -6s; }
+
+    @keyframes floatBubble {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(35px, -45px) scale(1.12); }
+      100% { transform: translate(-25px, 35px) scale(0.92); }
+    }
+
+    /* Tracing Beam Line */
+    .tracing-beam-line {
+      position: fixed; top: 0; right: 18px; width: 1px; height: 100vh;
+      background: rgba(255, 255, 255, 0.04); z-index: 99; pointer-events: none; opacity: 0; transition: opacity 0.4s ease;
+    }
+    .tracing-beam-line.visible { opacity: 1; }
+    .tracing-beam-thumb {
+      position: absolute; top: 0; left: 0; width: 100%; height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--accent-red), #ffffff);
+      box-shadow: 0 0 10px var(--accent-red), 0 0 4px #ffffff; border-radius: 2px; will-change: transform, height;
+    }
+    html[dir="rtl"] .tracing-beam-line { right: auto; left: 18px; }
+
+    .app-screen-frame {
+      width: 100%; max-width: 440px; min-height: 100vh; padding: 6px 16px 40px;
+      display: flex; flex-direction: column; position: relative; z-index: 10;
+    }
+
+    /* Navbar */
+    .top-floating-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(10, 12, 16, 0.38); backdrop-filter: blur(10px) saturate(130%);
+      -webkit-backdrop-filter: blur(10px) saturate(130%);
+      border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 40px; padding: 9px 18px;
+      position: sticky; top: 6px; z-index: 1000;
+      box-shadow: inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.35), inset 0 -1px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.2);
+      transform-origin: center top; transform: translate3d(0, 0, 0) scale(0.98);
+      will-change: transform, background-color, border-color, box-shadow, padding, border-radius;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    [data-theme="light"] .top-floating-bar {
+      background: rgba(255, 255, 255, 0.4); border-color: rgba(0, 0, 0, 0.12);
+      box-shadow: inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.9), 0 6px 16px rgba(0, 0, 0, 0.05);
+    }
+    .top-floating-bar.scrolled {
+      transform: translate3d(0, 0, 0) scale(1); padding: 7px 14px; border-radius: 6px;
+      background: rgba(10, 12, 16, 0.18); backdrop-filter: blur(14px) saturate(150%);
+      border-color: rgba(255, 255, 255, 0.1); box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2), 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+    [data-theme="light"] .top-floating-bar.scrolled { background: rgba(255, 255, 255, 0.38); border-color: rgba(0, 0, 0, 0.08); }
+    .top-floating-bar.scrolled .hide-on-scroll {
+      opacity: 0; width: 0; margin: 0; padding: 0; pointer-events: none; overflow: hidden;
+      transition: opacity 0.25s ease, width 0.25s ease, margin 0.25s ease;
+    }
+
+    .as-media-brand-mark {
+      position: relative; display: inline-flex; align-items: center; text-decoration: none; cursor: pointer; user-select: none;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .as-vector-logo-svg {
+      width: 72px; height: 34px; display: block;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease, width 0.35s cubic-bezier(0.16, 1, 0.3, 1), height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+    }
+    .as-media-brand-mark:hover .as-vector-logo-svg {
+      transform: scale(1.05); filter: drop-shadow(0 4px 12px var(--accent-red-glow));
+    }
+    .top-floating-bar.scrolled .as-vector-logo-svg { width: 80px; height: 38px; }
+    .logo-fill-adaptive { fill: var(--logo-primary); transition: fill 0.3s ease; }
+    .logo-red-accent { fill: var(--accent-red); filter: drop-shadow(0 1px 4px var(--accent-red-glow)); }
+
+    .bar-controls-group { display: flex; align-items: center; gap: 8px; transition: gap 0.3s ease; }
+    .top-floating-bar.scrolled .bar-controls-group { gap: 10px; }
+
+    .celestial-toggle-pill, .lang-toggle-pill {
+      height: 28px; background: rgba(20, 23, 31, 0.85); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 20px;
+      position: relative; cursor: pointer; overflow: hidden; display: flex; align-items: center; justify-content: center;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .celestial-toggle-pill { width: 56px; }
+    .lang-toggle-pill { width: 40px; font-family: var(--font-display); font-size: 0.68rem; font-weight: 800; color: var(--text-pure); letter-spacing: 0.5px; }
+
+    .sky-stars {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(1.2px 1.2px at 10px 8px, #38bdf8, transparent), radial-gradient(1.5px 1.5px at 22px 16px, rgba(255,255,255,0.9), transparent), radial-gradient(1.2px 1.2px at 32px 10px, #f43f5e, transparent);
+      opacity: 0.95; animation: neonTwinkle 3s ease-in-out infinite alternate; transition: opacity 0.35s ease;
+    }
+    @keyframes neonTwinkle { 0% { opacity: 0.7; filter: drop-shadow(0 0 2px rgba(56, 189, 248, 0.5)); } 100% { opacity: 1; filter: drop-shadow(0 0 5px rgba(244, 63, 94, 0.8)); } }
+
+    .moon-crescent-shape {
+      width: 20px; height: 20px; background: transparent; border-radius: 50%; position: absolute; right: 6px;
+      box-shadow: -4px 1px 0px 0px #e2e8f0; filter: drop-shadow(0 0 8px rgba(226, 232, 240, 0.85)); transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sun-cloud-wrapper {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateX(28px) scale(0.6); transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sun-core {
+      width: 16px; height: 16px; background: #f59e0b; border-radius: 50%;
+      box-shadow: 0 0 12px #f59e0b, 0 0 20px rgba(245, 158, 11, 0.6); position: relative; animation: sunPulseRays 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes sunPulseRays { 0% { transform: scale(0.9); box-shadow: 0 0 8px #f59e0b; } 100% { transform: scale(1.1); box-shadow: 0 0 18px #f59e0b, 0 0 28px rgba(245, 158, 11, 0.7); } }
+    .sun-cloud-shape {
+      position: absolute; width: 24px; height: 12px; background: #ffffff; border-radius: 10px; bottom: 4px; right: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.4));
+    }
+
+    [data-theme="light"] .celestial-toggle-pill { background: #e0f2fe; border-color: rgba(56, 189, 248, 0.3); }
+    [data-theme="light"] .sky-stars, [data-theme="light"] .moon-crescent-shape { opacity: 0; transform: translateX(-28px) scale(0.5); }
+    [data-theme="light"] .sun-cloud-wrapper { opacity: 1; transform: translateX(0) scale(1); }
+    [data-theme="light"] .lang-toggle-pill { background: #e2e8f0; color: #0b0c10; border-color: rgba(0,0,0,0.1); }
+
+
+    /* Professional theme toggle */
+    .theme-toggle-btn {
+      position: relative; width: 38px; height: 32px; display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(255,255,255,.14); border-radius: 10px; background: rgba(255,255,255,.055);
+      color: var(--text-pure); cursor: pointer; overflow: hidden;
+      transition: background .3s ease, border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+    }
+    .theme-toggle-btn:hover { background: rgba(229,27,36,.12); border-color: rgba(229,27,36,.5); box-shadow: 0 0 18px var(--accent-red-glow); transform: translateY(-1px); }
+    .theme-icon { position: absolute; font-size: 14px; transition: opacity .3s ease, transform .4s cubic-bezier(.16,1,.3,1), color .3s ease; }
+    .theme-icon-moon { opacity: 1; transform: rotate(0deg) scale(1); color: #e5e7eb; }
+    .theme-icon-sun { opacity: 0; transform: rotate(-90deg) scale(.4); color: #f59e0b; }
+    [data-theme="light"] .theme-icon-moon { opacity: 0; transform: rotate(90deg) scale(.4); }
+    [data-theme="light"] .theme-icon-sun { opacity: 1; transform: rotate(0deg) scale(1); }
+    [data-theme="light"] .theme-toggle-btn { background: rgba(255,255,255,.75); border-color: rgba(0,0,0,.12); color: #0b0c10; }
+    [data-theme="light"] .theme-toggle-btn:hover { background: rgba(229,27,36,.08); border-color: rgba(229,27,36,.4); }
+    .top-floating-bar.scrolled .theme-toggle-btn { width: 34px; height: 30px; }
+    .drawer-theme-toggle { width: 46px; height: 38px; }
+    .sheet-bottom-theme-toggle .theme-toggle-btn { margin: 0 auto; }
+
+    [data-theme="dark"] .logo-fill-adaptive { fill: #ffffff !important; }
+    [data-theme="light"] .logo-fill-adaptive { fill: #ffffff !important; }
+    .logo-red-accent { fill: var(--accent-red) !important; }
+
+    .menu-burger-btn {
+      background: rgba(255, 255, 255, 0.06); border: 1px solid var(--card-border); border-radius: 12px; width: 38px; height: 32px;
+      cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0;
+      position: relative; overflow: hidden; transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    [data-theme="light"] .menu-burger-btn { background: rgba(0, 0, 0, 0.05); }
+    .burger-line { display: block; height: 2px; background: var(--text-pure); border-radius: 2px; transition: all 0.28s ease; transform-origin: center; }
+    .burger-line-1, .burger-line-2, .burger-line-3 { width: 18px; }
+    .menu-burger-btn:hover { background: rgba(229, 27, 36, 0.12); border-color: rgba(229, 27, 36, 0.45); box-shadow: 0 0 16px var(--accent-red-glow); }
+
+    .spotlight-card { position: relative; overflow: hidden; --spotlight-x: -999px; --spotlight-y: -999px; --spotlight-opacity: 0; }
+    .spotlight-card::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
+      background: radial-gradient(220px circle at var(--spotlight-x) var(--spotlight-y), rgba(229, 27, 36, 0.22) 0%, rgba(229, 27, 36, 0.06) 40%, transparent 75%);
+      opacity: var(--spotlight-opacity); pointer-events: none; z-index: 1; transition: opacity 0.3s ease;
+    }
+    .spotlight-card::after {
+      content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1px;
+      background: radial-gradient(180px circle at var(--spotlight-x) var(--spotlight-y), rgba(229, 27, 36, 0.8) 0%, rgba(255, 255, 255, 0.4) 25%, transparent 65%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+      opacity: var(--spotlight-opacity); pointer-events: none; z-index: 2; transition: opacity 0.3s ease;
+    }
+    .spotlight-card > * { position: relative; z-index: 3; }
+
+    main { flex: 1; margin-top: 0px; }
+    .view-page { display: none; animation: viewSlideFade 0.28s ease-out forwards; }
+    .view-page.active-view { display: block; }
+    @keyframes viewSlideFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .status-capsule-badge { display: inline-flex; align-items: center; gap: 9px; background: rgba(0, 230, 118, 0.07); border: 1px solid rgba(0, 230, 118, 0.25); padding: 6px 14px; border-radius: 24px; margin-bottom: 20px; }
+    .status-live-beacon { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-green); box-shadow: 0 0 10px var(--accent-green); animation: beaconPulse 1.8s infinite; }
+    @keyframes beaconPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }
+    .status-text { font-family: var(--font-display); font-size: 0.72rem; font-weight: 700; color: var(--text-pure); letter-spacing: 0.8px; text-transform: uppercase; }
+
+    .hero-split-stage { display: flex; align-items: center; justify-content: space-between; position: relative; min-height: 250px; margin-top: 0px; margin-bottom: 6px; gap: 12px; }
+    .hero-typography-col { flex: 1; max-width: 52%; z-index: 2; }
+    .title-stacked-3d { position: relative; font-family: var(--font-title-tech); font-size: 1.85rem; font-weight: 800; line-height: 0.95; text-transform: uppercase; letter-spacing: 1.5px; color: transparent; -webkit-text-stroke: 1.3px #ffffff; text-shadow: 1px 1px 0px rgba(0,0,0,0.9), 2px 2px 0px rgba(255, 255, 255, 0.25), 3px 3px 0px rgba(0,0,0,0.95); margin-bottom: 6px; }
+    [data-theme="light"] .title-stacked-3d { -webkit-text-stroke: 1.3px #0b0c10; text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.12); }
+    .author-name-lead { font-family: var(--font-display); font-size: 2.1rem; font-weight: 800; color: var(--text-pure); line-height: 0.95; text-transform: uppercase; letter-spacing: -0.5px; transform: scaleX(1.08); transform-origin: left center; margin-bottom: 3px; }
+    .author-surname-red { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--accent-red); line-height: 0.95; text-transform: uppercase; letter-spacing: -0.5px; transform: scaleX(1.04); transform-origin: left center; text-shadow: 0 0 18px var(--accent-red-glow); margin-bottom: 12px; white-space: nowrap; }
+
+    .roles-unified-pod { display: inline-flex; align-items: center; gap: 6px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 6px; padding: 4px 10px; margin-bottom: 10px; box-shadow: inset 0 1px 1px rgba(255,255,255,0.05); }
+    .role-pod-item { font-family: var(--font-body); font-size: 0.53rem; font-weight: 700; color: var(--text-pure); text-transform: uppercase; letter-spacing: 0.4px; display: inline-flex; align-items: center; gap: 5px; text-shadow: 0 0 10px var(--accent-red), 0 0 20px var(--accent-red-glow), 0 0 30px rgba(229, 27, 36, 0.3); transition: text-shadow 0.3s ease; }
+    .role-pod-item:not(:last-child):after { content: '•'; color: var(--text-pure); margin-left: 2px; text-shadow: none; }
+    .creator-bio-snippet { font-family: var(--font-body); font-size: 0.72rem; font-weight: 400; color: var(--text-muted); line-height: 1.45; }
+    .punchy-sub-line { display: block; margin-top: 6px; font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; color: var(--text-pure); letter-spacing: 0.5px; text-transform: uppercase; }
+
+    .hero-standee-col { flex: 1; max-width: 48%; height: 320px; position: relative; display: flex; align-items: flex-end; justify-content: center; }
+    .creator-cutout-img { width: 125%; height: 315px; object-fit: contain; object-position: bottom center; filter: drop-shadow(0 14px 28px rgba(0,0,0,0.55)); transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+    .creator-cutout-img:hover { transform: scale(1.03); }
+
+    .stats-triad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
+    .stat-pod { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 10px 6px; text-align: center; transition: border-color 0.2s, transform 0.2s; }
+    .stat-pod:hover { border-color: rgba(229, 27, 36, 0.4); transform: translateY(-2px); }
+    .stat-number { font-family: var(--font-display); font-size: 0.95rem; font-weight: 800; color: var(--text-pure); line-height: 1; margin-bottom: 4px; }
+    .stat-number span.red { color: var(--accent-red); }
+    .stat-label { font-family: var(--font-body); font-size: 0.58rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.4px; }
+
+    .primary-action-btn { width: 100%; background: #ffffff; color: #08090b; font-family: var(--font-display); font-size: 0.9rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 13px 18px; border-radius: 40px; border: none; display: flex; align-items: center; justify-content: space-between; cursor: pointer; text-decoration: none; box-shadow: 0 4px 18px rgba(255, 255, 255, 0.12); transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s; margin-bottom: 26px; }
+    [data-theme="light"] .primary-action-btn { background: #08090b; color: #ffffff; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15); }
+    .primary-action-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2); }
+    .action-icon-circle { width: 28px; height: 28px; background: var(--accent-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.75rem; }
+
+    .section-header-bar { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; position: relative; }
+    .section-headline { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-pure); }
+    .section-spec-tag { font-family: var(--font-body); font-size: 0.66rem; font-weight: 700; color: var(--accent-red); letter-spacing: 0.6px; text-transform: uppercase; }
+
+    .category-duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 26px; }
+    .category-slate-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 16px 14px; position: relative; transition: all 0.22s ease; display: flex; flex-direction: column; min-height: 165px; cursor: pointer; }
+    .category-slate-card:hover { border-color: rgba(229, 27, 36, 0.5); background: var(--card-hover); transform: translateY(-2px); }
+    .card-matrix-index { font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; color: var(--accent-red); margin-bottom: 10px; }
+    .category-slate-card h4 { font-family: var(--font-display); font-size: 0.96rem; font-weight: 700; color: var(--text-pure); letter-spacing: 0.3px; text-transform: uppercase; margin-bottom: 4px; }
+    .category-slate-card p { font-family: var(--font-body); font-size: 0.72rem; font-weight: 400; color: var(--text-muted); line-height: 1.45; margin-top: auto; padding-right: 24px; }
+    html[dir="rtl"] .category-slate-card p { padding-right: 0; padding-left: 24px; }
+    .card-nav-arrow { position: absolute; bottom: 14px; right: 14px; width: 24px; height: 24px; border-radius: 50%; background: rgba(255, 255, 255, 0.04); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.7rem; transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+    html[dir="rtl"] .card-nav-arrow { right: auto; left: 14px; }
+    .category-slate-card:hover .card-nav-arrow { background: var(--accent-red); color: #ffffff; transform: rotate(45deg); box-shadow: 0 4px 12px var(--accent-red-glow); }
+    html[dir="rtl"] .category-slate-card:hover .card-nav-arrow { transform: rotate(-45deg); }
+
+    .filter-pills-sticky-bar { display: flex; gap: 6px; overflow-x: auto; padding: 4px 2px 12px; margin-bottom: 16px; position: sticky; top: 72px; z-index: 900; background: var(--bg-color); scrollbar-width: none; }
+    .filter-pills-sticky-bar::-webkit-scrollbar { display: none; }
+    .filter-pill-tab { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-muted); font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; padding: 7px 14px; border-radius: 20px; white-space: nowrap; cursor: pointer; transition: all 0.22s ease; text-transform: uppercase; letter-spacing: 0.5px; }
+    .filter-pill-tab:hover { border-color: rgba(229, 27, 36, 0.4); color: var(--text-pure); }
+    .filter-pill-tab.active-filter { background: var(--accent-red); border-color: var(--accent-red); color: #ffffff; box-shadow: 0 4px 16px var(--accent-red-glow); }
+
+    .photo-gallery-grid, .design-gallery-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 24px; }
+    .gallery-item-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 18px; overflow: hidden; transition: all 0.25s ease; display: flex; flex-direction: column; }
+    .gallery-image-box { width: 100%; height: 220px; background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(18,20,26,0.8) 100%); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .gallery-image-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .gallery-item-card:hover .gallery-image-box img { transform: scale(1.04); }
+    .gallery-category-tag { position: absolute; top: 12px; right: 12px; background: rgba(10, 12, 16, 0.8); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.12); padding: 3px 9px; border-radius: 6px; font-family: var(--font-display); font-size: 0.6rem; font-weight: 700; color: var(--accent-red); letter-spacing: 0.6px; text-transform: uppercase; }
+    html[dir="rtl"] .gallery-category-tag { right: auto; left: 12px; }
+    .gallery-content-meta { padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; }
+    .gallery-title-group h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: var(--text-pure); margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.3px; }
+    .gallery-title-group p { font-family: var(--font-body); font-size: 0.68rem; color: var(--text-muted); }
+    .gallery-view-btn { width: 34px; height: 34px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; color: var(--text-pure); font-size: 0.8rem; transition: all 0.2s; }
+    .gallery-item-card:hover .gallery-view-btn { background: var(--accent-red); border-color: var(--accent-red); box-shadow: 0 0 12px var(--accent-red-glow); }
+
+    .expertise-editorial-section { margin: 28px 0 32px; user-select: none; }
+    .editorial-header-wrap { margin-bottom: 20px; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+    .editorial-header-wrap .diamond-lead { display: flex; align-items: center; gap: 7px; font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text-pure); }
+    .diamond-lead span.dia { color: var(--accent-red); font-size: 0.95rem; }
+    .hand-squiggle-svg { width: 76px; height: 8px; display: block; stroke: var(--accent-red); stroke-width: 2.2; stroke-linecap: round; fill: none; filter: drop-shadow(0 0 5px var(--accent-red-glow)); }
+
+    .expertise-editorial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; position: relative; }
+    .expertise-editorial-col { display: flex; flex-direction: column; gap: 10px; }
+    .expertise-lead-row { display: flex; align-items: center; gap: 11px; }
+    .expertise-wireframe-icon { width: 40px; height: 40px; flex-shrink: 0; fill: currentColor; stroke: none; opacity: 0.95; color: var(--text-pure); }
+    .expertise-meta { display: flex; flex-direction: column; gap: 2px; }
+    .expertise-num { font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; color: var(--accent-red); letter-spacing: 0.4px; line-height: 1; }
+    .expertise-col-heading { font-family: var(--font-display); font-size: 0.84rem; font-weight: 700; color: var(--text-pure); line-height: 1.25; text-transform: uppercase; letter-spacing: 0.2px; }
+    .expertise-col-body { font-family: var(--font-body); font-size: 0.72rem; font-weight: 400; line-height: 1.5; color: var(--text-muted); text-align: left; }
+    html[dir="rtl"] .expertise-col-body { text-align: right; }
+
+    .tools-flex-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
+    .software-pill { font-family: var(--font-body); display: inline-flex; align-items: center; gap: 6px; background: var(--card-bg); border: 1px solid var(--card-border); padding: 7px 11px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; color: var(--text-pure); transition: all 0.2s ease; cursor: default; }
+    .software-pill .sw-icon { font-family: var(--font-display); font-weight: 700; font-size: 0.72rem; border-radius: 4px; padding: 1px 4px; }
+    .sw-ps { background: #001e36; color: #31a8ff; } .sw-ai { background: #330000; color: #ff9a00; } .sw-lr { background: #001d26; color: #31a8ff; } .sw-pr { background: #00005b; color: #9999ff; } .sw-ae { background: #00005b; color: #9999ff; } .sw-id { background: #49021f; color: #ff3366; } .sw-xd { background: #470137; color: #ff61f6; } .sw-fg { background: #1e1e1e; color: #a259ff; } .sw-port { background: #00361c; color: #00f284; } .sw-ai-tool { background: rgba(229, 27, 36, 0.12); color: var(--accent-red); border: 1px solid var(--accent-red); }
+
+    .dual-story-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+    .story-section-title { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-pure); margin-bottom: 14px; display: flex; align-items: center; gap: 6px; }
+    .story-section-title span.diamond { color: var(--accent-red); font-size: 0.8rem; }
+    .career-timeline-node { position: relative; padding-left: 14px; margin-bottom: 14px; border-left: 1.5px solid rgba(255, 255, 255, 0.1); }
+    html[dir="rtl"] .career-timeline-node { padding-left: 0; padding-right: 14px; border-left: none; border-right: 1.5px solid rgba(255, 255, 255, 0.1); }
+    .career-timeline-node::before { content: ''; position: absolute; left: -4px; top: 4px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-red); box-shadow: 0 0 6px var(--accent-red); }
+    html[dir="rtl"] .career-timeline-node::before { left: auto; right: -4px; }
+    .timeline-date-stamp { font-family: var(--font-display); font-size: 0.68rem; font-weight: 700; color: var(--accent-red); letter-spacing: 0.3px; }
+    .timeline-job-title { font-family: var(--font-body); font-size: 0.74rem; font-weight: 600; color: var(--text-pure); margin: 1px 0; }
+    .timeline-location { font-family: var(--font-body); font-size: 0.66rem; font-weight: 400; color: var(--text-muted); }
+
+    .passion-manifesto-badge { border: 1px dashed rgba(229, 27, 36, 0.4); background: rgba(229, 27, 36, 0.05); border-radius: 10px; padding: 10px; margin-top: 14px; }
+    .manifesto-label { font-family: var(--font-body); font-size: 0.64rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+    .manifesto-label span { color: var(--accent-red); }
+    .manifesto-words { font-family: var(--font-display); font-size: 0.84rem; font-weight: 700; color: var(--accent-red); line-height: 1.35; text-transform: uppercase; letter-spacing: 0.2px; }
+
+    .direct-channels-pod { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 18px 16px; margin-bottom: 14px; }
+    .channels-header-row { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-body); font-size: 0.72rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.8px; margin-bottom: 16px; }
+    .channels-header-row span.direct { color: var(--accent-red); }
+    .social-quad-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .social-anchor-cube { background: rgba(255, 255, 255, 0.025); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px 6px 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-decoration: none; color: var(--text-pure); transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
+    .social-anchor-cube i { font-size: 1.35rem; }
+    .social-anchor-cube span { font-family: var(--font-display); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-muted); transition: color 0.2s; }
+    .social-anchor-cube:hover { border-color: rgba(229, 27, 36, 0.5); background: rgba(229, 27, 36, 0.08); transform: translateY(-3px); }
+
+    .whatsapp-direct-cell { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: var(--text-pure); transition: all 0.22s ease; margin-bottom: 24px; cursor: pointer; }
+    .whatsapp-direct-cell:hover { border-color: rgba(0, 230, 118, 0.45); box-shadow: 0 8px 24px rgba(0, 230, 118, 0.08); }
+    .wa-flex-lead { display: flex; align-items: center; gap: 16px; }
+    .wa-icon-bubble { width: 44px; height: 44px; background: rgba(0, 230, 118, 0.1); border: 1px solid rgba(0, 230, 118, 0.25); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-size: 1.45rem; }
+    .wa-textual-meta h4 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--text-pure); }
+    .wa-textual-meta p { font-family: var(--font-body); font-size: 0.66rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.4px; text-transform: uppercase; }
+    .wa-external-glyph { width: 38px; height: 38px; background: var(--accent-red); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.95rem; box-shadow: 0 4px 14px var(--accent-red-glow); }
+
+    footer { margin-top: auto; padding-top: 36px; display: flex; flex-direction: column; align-items: center; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+    footer .brand-mark-copy { font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; letter-spacing: 1.2px; color: var(--text-pure); text-transform: uppercase; margin-top: 8px; }
+    footer .brand-sub-disclaimer { font-family: var(--font-body); font-size: 0.66rem; font-weight: 400; color: var(--text-muted); margin-top: 5px; }
+
+    /* Drawer System & Overlays */
+    .drawer-modal-backdrop { 
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(6px); 
+      -webkit-backdrop-filter: blur(6px); z-index: 2000; display: none; justify-content: center; align-items: flex-end; 
+    }
+    .drawer-modal-backdrop.open { display: flex; }
+
+    .drawer-bottom-sheet { 
+      width: 100%; max-width: 440px; background: var(--sheet-bg); border: 1px solid var(--card-border); 
+      border-radius: 32px 32px 0 0; padding: 22px 20px 54px; min-height: 520px;
+      animation: sheetBounceUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6); 
+      position: relative; overflow: hidden;
+    }
+    @keyframes sheetBounceUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+    .sheet-handle-pill { width: 38px; height: 4px; background: rgba(255, 255, 255, 0.18); border-radius: 4px; margin: 0 auto 18px; }
+    .sheet-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+    .sheet-top-row h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; letter-spacing: 0.8px; color: var(--text-pure); text-transform: uppercase; }
+    .sheet-close-x-btn { width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; transition: background 0.2s; }
+    .sheet-close-x-btn:hover { background: var(--accent-red); color: #fff; }
+
+    .sheet-links-stack { display: flex; flex-direction: column; gap: 11px; }
+    .sheet-nav-tile { background: rgba(255, 255, 255, 0.035); border: 1px solid var(--card-border); border-radius: 14px; padding: 15px 18px; display: flex; justify-content: space-between; align-items: center; color: var(--text-pure); text-decoration: none; font-family: var(--font-display); font-size: 0.94rem; font-weight: 700; letter-spacing: 0.6px; transition: background 0.2s; }
+    .sheet-nav-tile:hover { background: rgba(255, 255, 255, 0.07); }
+    .sheet-nav-tile i { font-size: 0.72rem; color: var(--text-muted); }
+    .sheet-nav-tile.cta-red { background: var(--accent-red); color: #ffffff; border: none; justify-content: center; margin-top: 10px; box-shadow: 0 4px 20px var(--accent-red-glow); }
+    
+    .sheet-bottom-theme-toggle { display: flex; justify-content: center; margin-top: 26px; }
+    
+    .sheet-bottom-theme-toggle .celestial-toggle-pill { width: 124px; height: 44px; border-radius: 26px; }
+    .sheet-bottom-theme-toggle .celestial-toggle-pill .moon-crescent-shape { width: 28px; height: 28px; right: 10px; }
+    .sheet-bottom-theme-toggle .celestial-toggle-pill .sun-core { width: 24px; height: 24px; }
+    .sheet-bottom-theme-toggle .celestial-toggle-pill .sun-cloud-shape { width: 36px; height: 16px; right: 14px; }
+
+    /* Nubian Overlay Views */
+    #drawerMainView { width: 100%; transition: opacity 0.3s ease, transform 0.3s ease; }
+    #drawerNubianView { 
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+      background: var(--sheet-bg); padding: 22px 20px 54px; 
+      transform: translateX(100%); opacity: 0; pointer-events: none; 
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex; flex-direction: column; overflow-y: auto;
+    }
+    #drawerNubianView.active-overlay { transform: translateX(0); opacity: 1; pointer-events: auto; }
+    html[dir="rtl"] #drawerNubianView { transform: translateX(-100%); }
+    html[dir="rtl"] #drawerNubianView.active-overlay { transform: translateX(0); }
+    
+    .toast-pill { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(14, 16, 21, 0.92); border: 1px solid var(--accent-red); backdrop-filter: blur(14px); padding: 10px 20px; border-radius: 30px; display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; color: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.8); opacity: 0; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); z-index: 3000; pointer-events: none; }
+    .toast-pill.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  </style>
+</link></head>
+<body>
+<div class="ambient-bubbles-wrapper">
+<div class="ambient-bubble bubble-1"></div>
+<div class="ambient-bubble bubble-2"></div>
+<div class="ambient-bubble bubble-3"></div>
+</div>
+<div class="tracing-beam-line" id="tracingBeamLine">
+<div class="tracing-beam-thumb" id="tracingBeamThumb"></div>
+</div>
+<div class="app-screen-frame">
+<header class="top-floating-bar" id="appFloatingNav">
+<a class="as-media-brand-mark" href="javascript:void(0)" onclick="navigateTo('home')" title="AS MEDIA Home">
+<svg class="as-vector-logo-svg" version="1.1" viewbox="0 0 39.6 23.1" xmlns="http://www.w3.org/2000/svg">
+<g>
+<path class="logo-fill-adaptive" d="M15.2,10.1l-2.4-4.4-2.5,4.5h4.9ZM13.6,0c1.3,0,1.5.1,2.5,1.7l2.7,4.8,2.7,4.8c-2.2,0-4.1.9-5.1,2.9H7.9s-2,3.6-2,3.6H0S9.4,2,9.4,2C10.6,0,10.8,0,11.9,0h1.7Z"></path>
+<path class="logo-fill-adaptive" d="M33.2,17.9h-16s0-1.4.1-2.1c.2-1.4,1.4-2.1,2.7-2.1h13.2c.8,0,1.3-.5,1.3-1.2,0-.5-.5-1.2-1.2-1.3h-6.9c-1.2,0-2.4-.4-3.4-1-1.8-1-2.6-2.8-2.6-4.8,0-1.8.9-3.4,2.5-4.3.8-.4,1.8-.9,2.7-.9h13.8c0,2.2-1.7,4.2-4.1,4.2h-8.8c-.7,0-1.2.6-1.2,1.2,0,.5.4,1.2,1.1,1.2h7c3.4,0,6.2,2,6.1,5.6,0,3.6-2.9,5.5-6.4,5.5h0s0,0,0,0Z"></path>
+<rect class="logo-red-accent" height="5.2" width="17" x="17.2" y="17.9"></rect>
+<path class="logo-fill-adaptive" d="M27.8,20.1c0-.4-.4-.5-.7-.6h-4v.5c-.1,0,1.7,0,1.7,0l-.2.9h-1.8v.5c-.1,0,1.9,0,1.9,0l-.2.9h-3.1l.6-2.1-.5.8-.8,1.3h-.9l-.4-2.1-.5,2.1h-1l.4-1.6.6-2.2h1.3l.4,2.4,1.4-2.2c0-.1.2-.2.4-.2h5.1c.3,0,.6,0,.9.2.7.4.8,1.2.6,1.9-.2.8-.7,1.4-1.5,1.6-.2,0-.4,0-.7,0h-1.8s.4-1.6.4-1.6l.2-.8h1l-.3,1.4h.6c.1,0,.3,0,.4,0,.3,0,.5-.3.7-.6.1-.2.2-.5.1-.8,0,0,0,0,0,0Z"></path>
+<polygon class="logo-fill-adaptive" points="32.3 21.5 32 19.8 30.8 22 30.5 22.4 29.5 22.4 30.3 21 31.7 18.6 32.8 18.6 33.3 21.3 33.5 22.4 31.2 22.4 31.7 21.5 32.3 21.5"></polygon>
+<polygon class="logo-fill-adaptive" points="29.8 20.9 29.5 22.4 28.5 22.4 29.4 18.6 30.4 18.6 29.8 20.9"></polygon>
+</g>
+</svg>
+</a>
+<div class="bar-controls-group">
+<div class="lang-toggle-pill hide-on-scroll" onclick="toggleNavbarLanguage()" title="Switch EN/AR">EN</div>
+<button aria-label="Toggle Dark/Light Mode" class="theme-toggle-btn hide-on-scroll" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+<i class="fa-solid fa-moon theme-icon theme-icon-moon"></i>
+<i class="fa-solid fa-sun theme-icon theme-icon-sun"></i>
+</button>
+<button aria-label="Open Navigation" class="menu-burger-btn" onclick="openDrawer()">
+<span class="burger-line burger-line-1"></span>
+<span class="burger-line burger-line-2"></span>
+<span class="burger-line burger-line-3"></span>
+</button>
+</div>
+</header>
+<main>
+<section class="view-page active-view" id="page-home">
+<div class="hero-split-stage">
+<div class="hero-typography-col">
+<div class="title-stacked-3d" data-ar="نبذة" data-en="ABOUT" data-es="ACERCA" data-nu-aswan="ايقا" data-ru="ОБ АВТОРЕ" data-tr="HAKKINDA" data-zh="关于">ABOUT</div>
+<div class="author-name-lead" data-ar="علي" data-en="ALI" data-es="ALI" data-nu-aswan="ALI" data-ru="АЛИ" data-tr="ALİ" data-zh="阿里">ALI</div>
+<div class="author-surname-red" data-ar="السويدي" data-en="ELSEWEDY" data-es="ELSEWEDY" data-nu-aswan="ELSEWEDY" data-ru="ЭЛЬСЕВИДИ" data-tr="ELSEWEDY" data-zh="埃尔苏韦迪">ELSEWEDY</div>
+<div class="roles-unified-pod">
+<span class="role-pod-item" data-ar="مصمم" data-en="Designer" data-es="Diseñador" data-nu-aswan="ديزاينَر" data-ru="Дизайнер" data-tr="Tasarımcı" data-zh="设计师">Designer</span>
+<span class="role-pod-item" data-ar="مصور" data-en="Photographer" data-es="Fotógrafo" data-nu-aswan="سورا كوجين" data-ru="Фотограф" data-tr="Fotoğrafçı" data-zh="摄影师">Photographer</span>
+<span class="role-pod-item" data-ar="مخرج" data-en="Director" data-es="Director" data-nu-aswan="دايرِكتور" data-ru="Режиссер" data-tr="Yönetmen" data-zh="导演">Director</span>
+</div>
+<p class="creator-bio-snippet" data-ar="تحويل مشاهد السيارات الحماسية وأنظمة التصميم الرقمي إلى قصص بصرية ملهمة ومؤثرة." data-en="Turning high-energy automotive scenes &amp; bespoke digital systems into powerful visual stories." data-es="Transformando escenas automotrices de alta energía y sistemas digitales a medida en poderosas historias visuales." data-nu-aswan="أوتوموتيف أند ديجيتال ستوريز" data-ru="Превращаю динамичные автомобильные сцены и индивидуальные цифровые системы в мощные визуальные истории." data-tr="Yüksek enerjili otomotiv sahnelerini ve özel dijital sistemleri güçlü görsel hikayelere dönüştürüyorum." data-zh="将高能量的汽车场景和定制数字系统转化为强有力的视觉故事。">
+              Turning high-energy automotive scenes &amp; bespoke digital systems into powerful visual stories.
+            </p>
+<span class="punchy-sub-line" data-ar="صُممت لتنطلق. أُبدعت لتتميز." data-en="Built to move. Designed to stand out." data-es="Creado para moverse. Diseñado para destacar." data-nu-aswan="بيلت تو موف · ديزايند تو ستاند آوت" data-ru="Создан двигаться. Разработан выделяться." data-tr="Hareket için üretildi. Öne çıkmak için tasarlandı." data-zh="为运动而生。为卓越而设计.">
+              Built to move. Designed to stand out.
+            </span>
+</div>
+<div class="hero-standee-col">
+<img alt="Ali Elsewedy" class="creator-cutout-img dark-photo-mode" src="https://lh3.googleusercontent.com/d/13GRXgFwKlE6F0bjhGDwEyxz-_8eIoofF" style="display: block;"/>
+<img alt="Ali Elsewedy Light" class="creator-cutout-img light-photo-mode" src="https://lh3.googleusercontent.com/d/1Nq0-KeCEBnMofq2nPp7PMowbY_jxB_Lg" style="display: none;"/>
+</div>
+</div>
+<div class="stats-triad">
+<div class="stat-pod spotlight-card">
+<div class="stat-number">2016</div>
+<div class="stat-label" data-ar="البداية" data-en="Since" data-es="Desde" data-nu-aswan="دوق" data-ru="С" data-tr="Kuruluş" data-zh="始于">Since</div>
+</div>
+<div class="stat-pod spotlight-card">
+<div class="stat-number">100<span class="red">+</span></div>
+<div class="stat-label" data-ar="مشروعاً" data-en="Projects" data-es="Proyectos" data-nu-aswan="شغل" data-ru="Проектов" data-tr="Proje" data-zh="项目">Projects</div>
+</div>
+<div class="stat-pod spotlight-card">
+<div class="stat-number">AI <span class="red">∞</span></div>
+<div class="stat-label" data-ar="بالذكاء الاصطناعي" data-en="Workflow" data-es="Flujo IA" data-nu-aswan="نظام" data-ru="Процесс" data-tr="İş Akışı" data-zh="工作流">Workflow</div>
+</div>
+</div>
+<button class="primary-action-btn" onclick="navigateTo('about')">
+<span data-ar="المزيد عن سيرتي" data-en="More About Me" data-es="Más Sobre Mí" data-nu-aswan="ايقا تريس" data-ru="Обо мне" data-tr="Hakkımda Daha Fazla" data-zh="关于我">More About Me</span>
+<div class="action-icon-circle"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+</button>
+<div class="section-header-bar">
+<div class="section-headline" data-ar="التصوير الفوتوغرافي" data-en="Photography" data-es="Fotografía" data-nu-aswan="سورا" data-ru="Фотография" data-tr="Fotoğrafçılık" data-zh="摄影作品">Photography</div>
+<div class="section-spec-tag" data-ar="// 4 أقسام" data-en="// 4 Categories" data-es="// 4 Categorías" data-nu-aswan="٤ كاتيجوريز" data-ru="// 4 Категории" data-tr="// 4 Kategori" data-zh="// 4个分类">// 4 Categories</div>
+</div>
+<div class="category-duo-grid">
+<div class="category-slate-card spotlight-card" onclick="openPhotoCategory('events')">
+<div class="card-matrix-index">01</div>
+<h4 data-ar="الفعاليات" data-en="EVENTS" data-es="EVENTOS" data-nu-aswan="إيفِنتس" data-ru="СОБЫТИЯ" data-tr="ETKİNLİKLER" data-zh="活动赛事">EVENTS</h4>
+<p data-ar="تغطيات بطولات الدريفت والتثبيت والسباقات." data-en="Stance, drift &amp; time attack coverages." data-es="Coberturas de stance, drift y time attack." data-nu-aswan="ستانس، دريفت أند تايم أتاك كَفَريجز" data-ru="Освещение стенс, дрифт и тайм-аттак заездов." data-tr="Stance, drift ve time attack çekimleri." data-zh="姿态、漂移与时间赛报道。">Stance, drift &amp; time attack coverages.</p>
+<div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+</div>
+<div class="category-slate-card spotlight-card" onclick="openPhotoCategory('showroom')">
+<div class="card-matrix-index">02</div>
+<h4 data-ar="المعرض والحماية" data-en="SHOWROOM &amp; PPF" data-es="SHOWROOM Y PPF" data-nu-aswan="شوروم" data-ru="ШОУРУМ И PPF" data-tr="SHOWROOM VE PPF" data-zh="展厅与车衣">SHOWROOM &amp; PPF</h4>
+<p data-ar="تصوير معارض السيارات وعروض حماية الطلاء." data-en="Commercial detailing &amp; automotive staging." data-es="Detallado comercial y puesta en escena automotriz." data-nu-aswan="شوروم فوتوغرافي" data-ru="Коммерческий детелинг и авто-стайлинг." data-tr="Ticari detaylandırma ve otomotiv sergileme." data-zh="商业精修与汽车布景。">Commercial detailing &amp; automotive staging.</p>
+<div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+</div>
+<div class="category-slate-card spotlight-card" onclick="openPhotoCategory('products')">
+<div class="card-matrix-index">03</div>
+<h4 data-ar="لقطات المنتجات" data-en="PRODUCT SHOTS" data-es="FOTOS DE PRODUCTO" data-nu-aswan="برودَكتس" data-ru="ПРЕДМЕТКА" data-tr="ÜRÜN ÇEKİMLERİ" data-zh="产品特写">PRODUCT SHOTS</h4>
+<p data-ar="قطع الغيار، المكابح والجنوط الرياضية." data-en="Spare parts, calipers &amp; forged wheel systems." data-es="Repuestos, pinzas y sistemas de rines forjados." data-nu-aswan="بارتس أند ويلز" data-ru="Запчасти, суппорты и кованые диски." data-tr="Yedek parçalar, kaliperler ve forged jant sistemleri." data-zh="配件、卡钳与锻造轮毂系统。">Spare parts, calipers &amp; forged wheel systems.</p>
+<div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+</div>
+<div class="category-slate-card spotlight-card" onclick="openPhotoCategory('sessions')">
+<div class="card-matrix-index">04</div>
+<h4 data-ar="جلسات تصوير خاصة" data-en="PHOTO SESSIONS" data-es="SESIONES FOTOGRÁFICAS" data-nu-aswan="فوتو سيشنز" data-ru="ФОТОСЕССИИ" data-tr="FOTOĞRAF ÇEKİMLERİ" data-zh="专属拍摄">PHOTO SESSIONS</h4>
+<p data-ar="الرسم بالضوء وتصوير الحركة الليلية." data-en="Light painting &amp; dramatic aesthetic night rolling." data-es="Light painting y rodaje nocturno estético dramático." data-nu-aswan="نايت فوتوغرافي" data-ru="Лайтпейнтинг и ночная динамика." data-tr="Light painting ve dramatik estetik gece çekimleri." data-zh="光绘摄影与震撼的夜间动态拍摄。">Light painting &amp; dramatic aesthetic night rolling.</p>
+<div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+</div>
+</div>
+<div class="section-header-bar">
+<div class="section-headline" data-ar="التصميم الجرافيكي" data-en="Design" data-es="Diseño" data-nu-aswan="ديزاين" data-ru="Дизайн" data-tr="Tasarım" data-zh="平面设计">Design</div>
+<div class="section-spec-tag" data-ar="// 5 أقسام" data-en="// 5 Categories" data-es="// 5 Categorías" data-nu-aswan="// ٥ كاتيجوريز" data-ru="// 5 Категорий" data-tr="// 5 Kategori" data-zh="// 5个分类">// 5 Categories</div>
+</div>
+<div class="category-duo-grid">
+<div class="category-slate-card spotlight-card" onclick="openDesignCategory('social')">
+<div class="card-matrix-index">01</div>
+<h4 data-ar="السوشيال ميديا" data-en="SOCIAL" data-es="REDES SOCIALES" data-nu-aswan="سوشيال" data-ru="СОЦСЕТИ" data-tr="SOSYAL MEDYA" data-zh="社交媒体">SOCIAL</h4>
+<p data-ar="تصاميم إعلانية عالية التأثير والتحويل." data-en="High-converting campaign creatives." data-es="Creatividades de campaña de alta conversión." data-nu-aswan="هاي كَنڤِرتِنج كامبين كرييتِڤز" data-ru="Высоко конверсионные рекламные креативы." data-tr="Yüksek dönüşümlü kampanya görselleri." data-zh="高转化率广告创意设计。">High-converting campaign creatives.</p>
+<div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+</div>
+<div class="category-slate-card spotlight-card" onclick="openDesignCategory('uiux')">
+<div class="card-matrix-index">02</div>
+<h4 data-ar="واجهات المستخدم" data-en="UI / UX" data-es="UI / UX" data-nu-aswan="يو آي / يو إكس" data-ru="UI / UX" data-tr="UI / UX" data-zh="界面交互">UI / UX</h4>
+<p data-ar="تصميم لوحات التحكم والنماذج الأولية للتطبيقات." data-en="App dashboards &amp; wireframe prototypes." data-es="Paneles de aplicaciones y prototipos de estructura." data-nu-aswan="آب داشبوردز أند وايرفريم بروتوتايبس" data-ru="Панели приложений и прототипы." data-tr="Uygulama panelleri ve prototipler." data-zh="应用仪表盘与原型框架。">App dashboards &amp; wireframe prototypes.</p>
+<div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+</div>
+<div class="category-slate-card spotlight-card" onclick="openDesignCategory('branding')">
+<div class="card-matrix-index">03</div>
+<h4 data-ar="الهوية البصرية" data-en="BRANDING" data-es="IDENTIDAD DE MARCA" data-nu-aswan="براندِنج" data-ru="БРЕНДИНГ" data-tr="MARKALAŞMA" data-zh="品牌识别">BRANDING</h4>
+<p data-ar="أنظمة الهوية والعلامات التجارية المتكاملة." data-en="Visual identity systems &amp; lockups." data-es="Sistemas de identidad visual y bloqueos." data-nu-aswan="فيجوال آيدنتِتي سيستمز أند لوك أبس" data-ru="Системы визуальной идентификации." data-tr="Görsel kimlik sistemleri ve logolar." data-zh="视觉识别系统与组合标志。">Visual identity systems &amp; lockups.</p>
+<div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+</div>
+<div class="category-slate-card spotlight-card" onclick="openDesignCategory('logofolio')">
+<div class="card-matrix-index">04</div>
+<h4 data-ar="الشعارات" data-en="LOGOFOLIO" data-es="LOGOFOLIO" data-nu-aswan="لوجوفوليو" data-ru="ЛОГОТИПЫ" data-tr="LOGOFOLIO" data-zh="标志集锦">LOGOFOLIO</h4>
+<p data-ar="تصاميم الشعارات وشارات الفيكتور المخصصة." data-en="Logomarks &amp; bespoke vector badges." data-es="Logotipos y emblemas vectoriales a medida." data-nu-aswan="لوجوماركس أند بيسبوك ڤِكتور بادجز" data-ru="Фирменные знаки и векторные бейджи." data-tr="Logolar ve özel vektörel rozetler." data-zh="标志与定制矢量徽章。">Logomarks &amp; bespoke vector badges.</p>
+<div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+</div>
+<div class="category-slate-card spotlight-card" onclick="openDesignCategory('packaging')" style="grid-column: span 2;">
+<div class="card-matrix-index">05</div>
+<h4 data-ar="التغليف والمنتجات" data-en="PACKAGING &amp; MERCHANDISE" data-es="EMBALAJE Y MERCANCÍA" data-nu-aswan="باكِجِنج أند ميرشَندايز" data-ru="УПАКОВКА И МЕРЧ" data-tr="AMBALAJ VE ÜRÜNLER" data-zh="包装与周边">PACKAGING &amp; MERCHANDISE</h4>
+<p data-ar="تصميم الصناديق الهيكلية والفينيل التقني." data-en="Die-cut structural designs, boxes &amp; technical vinyls." data-es="Diseños estructurales trefilados, cajas y vinilos técnicos." data-nu-aswan="داي-كَت سترَكتشرَل ديزاينز، بوكسِز أند تكنِكَل ڤاينِلز" data-ru="Конструктивная упаковка и технические винилы." data-tr="Özel kesim yapısal tasarımlar, kutular ve teknik viniller." data-zh="压切结构设计、包装盒与特种车膜。">Die-cut structural designs, boxes &amp; technical vinyls.</p>
+<div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+</div>
+</div>
+<div class="section-header-bar">
+<div class="section-headline" data-ar="تواصل معي" data-en="Let's Connect" data-es="Conectemos" data-nu-aswan="لِتس كَنِّكت" data-ru="Связаться" data-tr="İletişime Geçin" data-zh="联系我们">Let's Connect</div>
+<div class="section-spec-tag" data-ar="// روابط مباشرة" data-en="// Direct Links" data-es="// Enlaces directos" data-nu-aswan="// دايرِكت لينكس" data-ru="// Прямые ссылки" data-tr="// Doğrudan Bağlantılar" data-zh="// 快速直达">// Direct Links</div>
+</div>
+<div class="whatsapp-direct-cell spotlight-card" onclick="navigateTo('connect')">
+<div class="wa-flex-lead">
+<div class="wa-icon-bubble"><i class="fa-solid fa-paper-plane"></i></div>
+<div class="wa-textual-meta">
+<h4 data-ar="استفسارات مباشرة" data-en="Direct Inquiries" data-es="Consultas directas" data-nu-aswan="دايرِكت إنكوايريز" data-ru="Прямые запросы" data-tr="Doğrudan Sorular" data-zh="直接咨询">Direct Inquiries</h4>
+<p data-ar="ابدأ مشروعك أو تعاونك القادم" data-en="Start a new project or collaboration" data-es="Inicia un nuevo proyecto o colaboración" data-nu-aswan="ستارت أ نيو بروجِكت أور كولابوريشن" data-ru="Начать новый проект" data-tr="Yeni bir projeye veya iş birliğine başlayın" data-zh="开启新项目或合作">Start a new project or collaboration</p>
+</div>
+</div>
+<div class="wa-external-glyph"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+</div>
+</section>
+<section class="view-page" id="page-photography">
+<div class="title-stacked-3d" data-ar="معرض" data-en="PHOTO" data-es="FOTO" data-nu-aswan="سورا" data-ru="ФОТО" data-tr="FOTOĞRAF" data-zh="摄影" style="font-size: 1.8rem; margin-bottom: 4px;">PHOTO</div>
+<div class="author-surname-red" data-ar="التصوير" data-en="GALLERY" data-es="GALERÍA" data-nu-aswan="شوروم" data-ru="ГАЛЕРЕЯ" data-tr="GALERİ" data-zh="画廊" style="font-size: 2.2rem; margin-bottom: 14px;">GALLERY</div>
+<div class="filter-pills-sticky-bar" id="photoFilterBar">
+<button class="filter-pill-tab active-filter" data-ar="الكل" data-en="All" data-es="Todos" data-nu-aswan="أول" data-ru="Все" data-tr="Tümü" data-zh="全部" onclick="filterPhotos('all', this)">All</button>
+<button class="filter-pill-tab" data-ar="الفعاليات" data-en="Events" data-es="Eventos" data-nu-aswan="إيفِنتس" data-ru="События" data-tr="Etkinlikler" data-zh="活动" onclick="filterPhotos('events', this)">Events</button>
+<button class="filter-pill-tab" data-ar="المعرض والحماية" data-en="Showroom &amp; PPF" data-es="Showroom y PPF" data-nu-aswan="شوروم" data-ru="Шоурум и PPF" data-tr="Showroom &amp; PPF" data-zh="展厅与车衣" onclick="filterPhotos('showroom', this)">Showroom &amp; PPF</button>
+<button class="filter-pill-tab" data-ar="المنتجات" data-en="Product Shots" data-es="Productos" data-nu-aswan="برودَكتس" data-ru="Предметка" data-tr="Ürün Çekimleri" data-zh="产品特写" onclick="filterPhotos('products', this)">Product Shots</button>
+<button class="filter-pill-tab" data-ar="جلسات التصوير" data-en="Photo Sessions" data-es="Sesiones" data-nu-aswan="فوتو سيشنز" data-ru="Сессии" data-tr="Çekim Seansları" data-zh="专属拍摄" onclick="filterPhotos('sessions', this)">Photo Sessions</button>
+</div>
+<div class="photo-gallery-grid" id="photoGalleryContainer">
+<div class="gallery-item-card spotlight-card" data-category="events">
+<div class="gallery-image-box">
+<div class="gallery-category-tag" data-ar="فعاليات" data-en="Events" data-es="Eventos" data-nu-aswan="إيفِنتس" data-ru="События" data-tr="Etkinlikler" data-zh="活动">Events</div>
+<img alt="Events" src="https://placehold.co/600x400/12141a/e51b24?text=Motorsport+Drift+Coverage"/>
+</div>
+<div class="gallery-content-meta">
+<div class="gallery-title-group">
+<h4 data-ar="بطولات السباق والدريفت" data-en="Time Attack &amp; Drift Battle" data-es="Time Attack y Batalla de Drift" data-nu-aswan="تايم أتاك أند دريفت باتِل" data-ru="Тайм-аттак и Дрифт" data-tr="Time Attack &amp; Drift Savaşı" data-zh="时间赛与漂移大战">Time Attack &amp; Drift Battle</h4>
+<p data-ar="ديناميكيات التصوير السريع والحركة" data-en="Stance &amp; high-speed rolling dynamics" data-es="Stance y dinámica de rodaje a alta velocidad" data-nu-aswan="ستانس أند هاي-سبيد رولِنج داينامِكس" data-ru="Стенс и высокая динамика в движении" data-tr="Stance ve yüksek hızda hareket dinamikleri" data-zh="姿态与高速动态抓拍">Stance &amp; high-speed rolling dynamics</p>
+</div>
+<div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
+</div>
+</div>
+<div class="gallery-item-card spotlight-card" data-category="showroom">
+<div class="gallery-image-box">
+<div class="gallery-category-tag" data-ar="المعرض" data-en="Showroom" data-es="Showroom" data-nu-aswan="شوروم" data-ru="Шоурум" data-tr="Showroom" data-zh="展厅">Showroom</div>
+<img alt="Showroom" src="https://placehold.co/600x400/12141a/e51b24?text=PPF+Ceramic+Detailing"/>
+</div>
+<div class="gallery-content-meta">
+<div class="gallery-title-group">
+<h4 data-ar="عروض السيارات الخارقة وحماية الطلاء" data-en="Matte PPF Supercar Staging" data-es="Puesta en escena PPF" data-nu-aswan="مات بي بي إف سوبركار ستيجِنج" data-ru="Стайлинг суперкаров" data-tr="Mat PPF Süper Araba Sergileme" data-zh="哑光车衣超跑布景">Matte PPF Supercar Staging</h4>
+<p data-ar="التفاصيل التجارية وانعكاسات الاستوديو" data-en="Commercial detailing &amp; studio reflections" data-es="Detallado comercial y reflejos de estudio" data-nu-aswan="كوميرشَل ديتيلِنج أند ستوديو رِفلكشنز" data-ru="Коммерческий детелинг" data-tr="Ticari detaylandırma ve stüdyo yansımaları" data-zh="商业精修与影棚反光">Commercial detailing &amp; studio reflections</p>
+</div>
+<div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
+</div>
+</div>
+</div>
+<button class="primary-action-btn" onclick="navigateTo('connect')">
+<span data-ar="حجز جلسة تصوير" data-en="Book Photo Session" data-es="Reservar sesión" data-nu-aswan="بُك فوتو سيشن" data-ru="Забронировать сессию" data-tr="Fotoğraf Seansı Rezerve Et" data-zh="预约拍摄">Book Photo Session</span>
+<div class="action-icon-circle"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+</button>
+</section>
+<section class="view-page" id="page-design">
+<div class="title-stacked-3d" data-ar="معرض" data-en="DESIGN" data-es="DISEÑO" data-nu-aswan="ديزاين" data-ru="ДИЗАЙН" data-tr="TASARIM" data-zh="设计" style="font-size: 1.8rem; margin-bottom: 4px;">DESIGN</div>
+<div class="author-surname-red" data-ar="التصميم" data-en="GALLERY" data-es="GALERÍA" data-nu-aswan="شوروم" data-ru="ГАЛЕРЕЯ" data-tr="GALERİ" data-zh="画廊" style="font-size: 2.2rem; margin-bottom: 14px;">GALLERY</div>
+<div class="filter-pills-sticky-bar" id="designFilterBar">
+<button class="filter-pill-tab active-filter" data-ar="الكل" data-en="All" data-es="Todos" data-nu-aswan="أول" data-ru="Все" data-tr="Tümü" data-zh="全部" onclick="filterDesigns('all', this)">All</button>
+<button class="filter-pill-tab" data-ar="السوشيال" data-en="Social" data-es="Social" data-nu-aswan="سوشيال" data-ru="Соцсети" data-tr="Sosyal" data-zh="社交" onclick="filterDesigns('social', this)">Social</button>
+<button class="filter-pill-tab" data-ar="واجهات" data-en="UI / UX" data-es="UI / UX" data-nu-aswan="يو آي / يو إكس" data-ru="UI / UX" data-tr="UI / UX" data-zh="界面交互" onclick="filterDesigns('uiux', this)">UI / UX</button>
+<button class="filter-pill-tab" data-ar="الهوية" data-en="Branding" data-es="Branding" data-nu-aswan="براندِنج" data-ru="Брендинг" data-tr="Marka" data-zh="品牌识别" onclick="filterDesigns('branding', this)">Branding</button>
+<button class="filter-pill-tab" data-ar="الشعارات" data-en="Logofolio" data-es="Logofolio" data-nu-aswan="لوجوفوليو" data-ru="Логотипы" data-tr="Logofolio" data-zh="标志集锦" onclick="filterDesigns('logofolio', this)">Logofolio</button>
+<button class="filter-pill-tab" data-ar="التغليف" data-en="Packaging" data-es="Embalaje" data-nu-aswan="باكِجِنج" data-ru="Упаковка" data-tr="Ambalaj" data-zh="包装" onclick="filterDesigns('packaging', this)">Packaging</button>
+</div>
+<div class="design-gallery-grid" id="designGalleryContainer">
+<div class="gallery-item-card spotlight-card" data-category="social">
+<div class="gallery-image-box">
+<div class="gallery-category-tag" data-ar="سوشيال" data-en="Social" data-es="Social" data-nu-aswan="سوشيال" data-ru="Соцсети" data-tr="Sosyal" data-zh="社交">Social</div>
+<img alt="Social" src="https://placehold.co/600x400/12141a/e51b24?text=Social+Campaign+Creatives"/>
+</div>
+<div class="gallery-content-meta">
+<div class="gallery-title-group">
+<h4 data-ar="حملات إعلانية للسيارات" data-en="Automotive Ad Campaign" data-es="Campaña publicitaria" data-nu-aswan="أوتوموتيف آد كامبين" data-ru="Автомобильная кампания" data-tr="Otomotiv Reklam Kampanyası" data-zh="汽车广告活动">Automotive Ad Campaign</h4>
+<p data-ar="تصاميم سوشيال ميديا ترويجية جذابة" data-en="High-converting social media creatives" data-es="Creatividades de redes sociales de alta conversión" data-nu-aswan="هاي كَنڤِرتِنج سوشيال ميديا كرييتِڤز" data-ru="Высоко конверсионные креативы" data-tr="Yüksek dönüşümlü sosyal medya görselleri" data-zh="高转化率社交媒体创意">High-converting social media creatives</p>
+</div>
+<div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
+</div>
+</div>
+</div>
+<button class="primary-action-btn" onclick="navigateTo('connect')">
+<span data-ar="بدء مشروع تصميم" data-en="Start Design Project" data-es="Iniciar proyecto" data-nu-aswan="ستارت ديزاين بروجِكت" data-ru="Начать проект" data-tr="Tasarım Projesine Başla" data-zh="开始设计项目">Start Design Project</span>
+<div class="action-icon-circle"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+</button>
+</section>
+<section class="view-page" id="page-about">
+<div class="title-stacked-3d" data-ar="نبذة" data-en="ABOUT" data-es="ACERCA" data-nu-aswan="ايقا" data-ru="ОБ АВТОРЕ" data-tr="HAKKINDA" data-zh="关于" style="font-size: 1.8rem;">ABOUT</div>
+<div class="author-name-lead" data-ar="علي" data-en="ALI" data-es="ALI" data-nu-aswan="ALI" data-ru="АЛИ" data-tr="ALİ" data-zh="阿里">ALI</div>
+<div class="author-surname-red" data-ar="السويدي" data-en="ELSEWEDY" data-es="ELSEWEDY" data-nu-aswan="ELSEWEDY" data-ru="ЭЛЬСЕВИДИ" data-tr="ELSEWEDY" data-zh="埃尔苏韦迪" style="font-size: 1.1rem;">ELSEWEDY</div>
+<div class="roles-unified-pod" style="margin-top: 4px; margin-bottom: 14px;">
+<span class="role-pod-item" data-ar="مصمم" data-en="Designer" data-es="Diseñador" data-nu-aswan="ديزاينَر" data-ru="Дизайнер" data-tr="Tasarımcı" data-zh="设计师">Designer</span>
+<span class="role-pod-item" data-ar="مصور" data-en="Photographer" data-es="Fotógrafo" data-nu-aswan="سورا كوجين" data-ru="Фотограф" data-tr="Fotoğrafçı" data-zh="摄影师">Photographer</span>
+<span class="role-pod-item" data-ar="مدير فني" data-en="Art Director" data-es="Director de arte" data-nu-aswan="دايرِكتور" data-ru="Арт-директор" data-tr="Sanat Yönetmeni" data-zh="艺术总监">Art Director</span>
+</div>
+<div class="section-headline" data-ar="مرحباً!" data-en="HELLO!" data-es="¡HOLA!" data-nu-aswan="مسكاقمي" data-nu-aswan="مسكاجرو" data-ru="ПРИВЕТ!" data-tr="MERHABA!" data-zh="你好！" style="font-size: 1rem; margin-bottom: 6px;">HELLO!</div>
+<p data-ar="لم يكن التصميم يوماً مجرد حرفة بالنسبة لي، بل هو وسيلتي لإحياء الهويات الجريئة. من توثيق تفاصيل السيارات وعالم الحماسة إلى هندسة الأنظمة البصرية الرقمية المتكاملة، أتعاون مع العلامات التجارية المحلية والعالمية لترجمة الأفكار إلى قصص بصرية استثنائية." data-en="Creating has never been just a craft to me—it's how I bring bold identities to life. From capturing high-energy automotive scenes and precision detailing to crafting end-to-end visual systems and digital experiences, I partner with regional and global brands to transform concepts into powerful visual stories." data-es="Crear nunca ha sido solo un oficio para mí; es la forma en que doy vida a identidades audaces. Desde capturar escenas automotrices de alta energía hasta diseñar sistemas visuales integrales, colaboro con marcas regionales y globales para transformar conceptos en historias visuales poderosas." data-nu-aswan="Creating has never been just a craft to me—it&#x27;s how I bring bold identities to life. From capturing high-energy automotive scenes and precision detailing to crafting end-to-end visual systems and digital experiences, I partner with regional and global brands to transform concepts into powerful visual stories." data-ru="Создание для меня никогда не было просто ремеслом — это способ воплотить смелые идентичности в жизнь. От динамичных автомобильных сцен до комплексных визуальных систем — я сотрудничаю с брендами, превращая концепции в мощные истории." data-tr="Yaratmak benim için asla sadece bir zanaat olmadı; cesur kimlikleri hayata geçirme biçimimdir. Yüksek enerjili otomotiv sahnelerini yakalamaktan uçtan uca görsel sistemler tasarlamaya kadar, bölgesel ve küresel markalarla ortaklık kuruyorum." data-zh="对我而言，创作从不仅仅是一门手艺——这是我赋予大胆身份生命力的方式。从捕捉高能量的汽车场景到打造端到端的视觉系统，我与区域及全球品牌携手，将概念转化为强有力的视觉故事。" style="font-family: var(--font-body); font-size: 0.8rem; line-height: 1.65; color: var(--text-muted); margin-bottom: 24px;">
+          Creating has never been just a craft to me—it's how I bring bold identities to life. From capturing high-energy automotive scenes and precision detailing to crafting end-to-end visual systems and digital experiences, I partner with regional and global brands to transform concepts into powerful visual stories.
+        </p>
+<div class="expertise-editorial-section">
+<div class="editorial-header-wrap">
+<div class="diamond-lead">
+<span class="dia">◆</span> <span data-ar="مجالات الخبرة" data-en="EXPERTISE" data-es="EXPERTISE" data-nu-aswan="إكسبِرتيز" data-ru="ЭКСПЕРТИЗА" data-tr="UZMANLIK" data-zh="专业领域">EXPERTISE</span>
+</div>
+<svg class="hand-squiggle-svg" viewbox="0 0 80 8">
+<path d="M2 5 C16 1, 28 8, 42 4 C54 1, 68 7, 78 4"></path>
+</svg>
+</div>
+<div class="expertise-editorial-grid">
+<div class="expertise-editorial-col">
+<div class="expertise-lead-row">
+<svg class="expertise-wireframe-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 38 38">
+<path d="M5 12a3 3 0 0 1 3-3h3l2-3h12l2 3h3a3 3 0 0 1 3 3v16a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V12z"></path>
+<circle cx="19" cy="20" r="6"></circle>
+<circle cx="28" cy="13" fill="currentColor" r="1.2"></circle>
+</svg>
+<div class="expertise-meta">
+<span class="expertise-num">01.</span>
+<h4 class="expertise-col-heading" data-ar="تصوير السيارات والتصوير التجاري" data-en="AUTOMOTIVE &amp; COMMERCIAL PHOTOGRAPHY" data-es="FOTOGRAFÍA AUTOMOTRIZ Y COMERCIAL" data-nu-aswan="أوتوموتيف أند كوميرشَل فوتوغرافي" data-ru="АВТОМОБИЛЬНАЯ ФОТОГРАФИЯ" data-tr="OTOMOTİV VE TİCARİ FOTOĞRAFÇILIK" data-zh="汽车与商业摄影">AUTOMOTIVE &amp; COMMERCIAL PHOTOGRAPHY</h4>
+</div>
+</div>
+<p class="expertise-col-body" data-ar="متخصص في معارض السيارات، حماية الطلاء والتفصيل، الرسم بالضوء، تغطية رياضة المحركات، وتصوير المنتجات التجارية بدقة فائقة." data-en="Specializing in car showrooms, PPF/detailing, light painting, motorsport coverage, and commercial product photography." data-es="Especializado en salas de exposición de automóviles, PPF/detallado, light painting, cobertura de automovilismo y fotografía comercial." data-nu-aswan="سبيشَلايزِنج إن كار شورومز، بي بي إف / ديتيلِنج، لايت بينتِنج، موتورسبورت كَڤَريج، أند كوميرشَل برودَكت فوتوغرافي." data-ru="Специализируюсь на автосалонах, PPF, лайтпейнтинге, автоспорте и коммерческой предметной съемке." data-tr="Otomotiv showroomları, PPF/detaylandırma, light painting, motor sporları çekimleri ve ticari ürün fotoğrafçılığı konularında uzmanlaşmıştır." data-zh="专注于汽车展厅、车衣/精修、光绘、赛车运动报道以及商业产品摄影。">
+                Specializing in car showrooms, PPF/detailing, light painting, motorsport coverage, and commercial product photography.
+              </p>
+</div>
+<div class="expertise-editorial-col">
+<div class="expertise-lead-row">
+<svg class="expertise-wireframe-icon" version="1.1" viewbox="0 0 39.6 23.1" xmlns="http://www.w3.org/2000/svg">
+<path d="M25.5,13.5c-.8,1.6-1.9,3.3-2.5,4.7v4.6c0,0-6.5,0-6.5,0,0-1.7,0-3.2,0-4.8-.5-1.2-1.7-2.9-2.5-4.4l5-10.2-1.1-1.2h-6.3c-.8.9-2.4,2-3.2.5-.4-.7,0-2.1.6-2.3.9-.3,1.7.5,2.4.9,2,.3,6.7,0,6.7,0l1.8-1.1,1.7,1.2s4.7,0,6.7,0c.7-.7,1.4-1.3,2.4-1,.6.2.9,1.5.5,2.3-.8,1.5-2.3.4-3.2-.3l-6.3-.2-1,1.3,4.9,10.1ZM20.4,4.5c-.5,2.2-.4,4.1-.3,5.7,0,.4.7,1.2,1,1.7.4.6,0,1.9-.5,2.3-.5.3-1.6.4-2-.3-.7-2.2.9-2.2.9-3.6,0-2,.2-4-.4-5.8-1.8,3.3-3.2,6.2-4.6,9.1,1.3,2,1.8,2.9,3.1,5.4h4.3c1-2,1.9-3.4,3-5.4-1.4-3.1-2.9-6.1-4.6-9.1ZM17.1,19.4v2.8h5.5v-2.8h-5.5Z"></path>
+</svg>
+<div class="expertise-meta">
+<span class="expertise-num">02.</span>
+<h4 class="expertise-col-heading" data-ar="تصميم الهوية والجرافيك" data-en="GRAPHIC &amp; BRAND DESIGN" data-es="DISEÑO GRÁFICO Y DE MARCA" data-nu-aswan="جرافيك أند براند ديزاين" data-ru="ГРАФИЧЕСКИЙ ДИЗАЙН" data-tr="GRAFİK VE MARKA TASARIMI" data-zh="平面与品牌设计">GRAPHIC &amp; BRAND DESIGN</h4>
+</div>
+</div>
+<p class="expertise-col-body" data-ar="حلول تصميم متكاملة تتضمن واجهات المستخدم، الهوية البصرية، تصميم التغليف، أنظمة السوشيال ميديا، وتطوير الملفات التعريفية." data-en="End-to-end design solutions including UI/UX, visual identity, packaging design, social media visual systems, and company profile development." data-es="Soluciones de diseño integrales que incluyen UI/UX, identidad visual, diseño de packaging y sistemas visuales." data-nu-aswan="إند-تو-إند ديزاين سوليوشنز إنكلودِنج يو آي / يو إكس، فيجوال آيدنتِتي، باكِجِنج ديزاين، سوشيال ميديا فيجوال سيستمز، أند كومبَني بروفايل دِڤِلَپمِنت." data-ru="Комплексные дизайнерские решения, включая UI/UX, визуальную идентичность, упаковку и фирменный стиль." data-tr="UI/UX, görsel kimlik, ambalaj tasarımı, sosyal medya görsel sistemleri ve şirket profili geliştirme dahil uçtan uca tasarım çözümleri." data-zh="端到端设计解决方案，包括 UI/UX、视觉识别、包装设计、社交媒体视觉系统以及公司简介开发。">
+                End-to-end design solutions including UI/UX, visual identity, packaging design, social media visual systems, and company profile development.
+              </p>
+</div>
+</div>
+</div>
+<div class="section-header-bar">
+<div class="section-headline" data-ar="الأدوات التي أستخدمها" data-en="Tools I Use" data-es="Herramientas" data-nu-aswan="تولز آي يوز" data-ru="Инструменты" data-tr="Kullandığım Araçlar" data-zh="使用的工具">Tools I Use</div>
+<div class="section-spec-tag" data-ar="// المنظومة التقنية" data-en="// Ecosystem" data-es="// Ecosistema" data-nu-aswan="نظام" data-ru="// Экосистема" data-tr="// Ekosistem" data-zh="// 生态系统">// Ecosystem</div>
+</div>
+<div class="tools-flex-container">
+<span class="software-pill"><span class="sw-icon sw-ps">Ps</span> Photoshop</span>
+<span class="software-pill"><span class="sw-icon sw-ai">Ai</span> Illustrator</span>
+<span class="software-pill"><span class="sw-icon sw-lr">Lr</span> Lightroom</span>
+<span class="software-pill"><span class="sw-icon sw-pr">Pr</span> Premiere Pro</span>
+<span class="software-pill"><span class="sw-icon sw-ae">Ae</span> After Effects</span>
+<span class="software-pill"><span class="sw-icon sw-id">Id</span> InDesign</span>
+<span class="software-pill"><span class="sw-icon sw-xd">Xd</span> XD</span>
+<span class="software-pill"><span class="sw-icon sw-fg">Fg</span> Figma</span>
+<span class="software-pill"><span class="sw-icon sw-port">Port</span> Behance</span>
+<span class="software-pill"><span class="sw-icon sw-ai-tool">AI</span> Higgsfield</span>
+<span class="software-pill"><span class="sw-icon sw-ai-tool">AI</span> Magnific</span>
+<span class="software-pill"><span class="sw-icon sw-ai-tool">AI</span> Astra 6</span>
+</div>
+<div class="dual-story-columns">
+<div>
+<div class="story-section-title">
+<span class="diamond">◆</span> <span data-ar="الخبرة العملية" data-en="EXPERIENCE" data-es="EXPERIENCIA" data-nu-aswan="إكسبيرينس" data-ru="ОПЫТ" data-tr="DENEYİM" data-zh="工作经验">EXPERIENCE</span>
+</div>
+<div class="career-timeline-node" style="padding-top: 4px;">
+<div class="timeline-date-stamp" data-ar="٢٠٢١ - الآن" data-en="2021 - PRESENT" data-es="2021 - PRESENTE" data-nu-aswan="٢٠٢١ - بريسِنت" data-ru="2021 - НАСТОЯЩЕЕ ВРЕМЯ" data-tr="2021 - BUGÜN" data-zh="2021 -至今">2021 - PRESENT</div>
+<div class="timeline-job-title" data-ar="مصمم جرافيك / مصور فوتوغرافي" data-en="Graphic Designer / Photographer" data-es="Diseñador / Fotógrafo" data-nu-aswan="جرافيك ديزاينَر / فوتوغرافَر" data-ru="Графический дизайнер / Фотограф" data-tr="Grafik Tasarımcı / Fotoğrafçı" data-zh="平面设计师 / 摄影师">Graphic Designer / Photographer</div>
+<div class="timeline-location" data-ar="عمل حر دولي (مشجع النادي الأهلي)" data-en="Freelance Worldwide (Al Ahly Fan)" data-es="Freelance mundial (Fan del Al Ahly)" data-nu-aswan="فريلانس وورلدوايد (الأهلي فان)" data-ru="Фриланс по всему миру" data-tr="Dünya Çapında Serbest Çalışan (Al Ahly)" data-zh="全球自由职业（国民队球迷）">Freelance Worldwide (Al Ahly Fan)</div>
+</div>
+<div class="career-timeline-node">
+<div class="timeline-date-stamp" data-ar="٢٠١٨ - ٢٠٢١" data-en="2018 - 2021" data-es="2018 - 2021" data-nu-aswan="٢٠١٨ - ٢٠٢١" data-ru="2018 - 2021" data-tr="2018 - 2021" data-zh="2018 - 2021">2018 - 2021</div>
+<div class="timeline-job-title" data-ar="مصمم جرافيك" data-en="Graphic Designer" data-es="Diseñador Gráfico" data-nu-aswan="جرافيك ديزاينَر" data-ru="Графический дизайнер" data-tr="Grafik Tasarımcı" data-zh="平面设计师">Graphic Designer</div>
+<div class="timeline-location" data-ar="مشاريع وكالات متعددة" data-en="Various Agency Projects" data-es="Varios proyectos de agencia" data-nu-aswan="ڤاريَس إيجِنسي بروجِكتس" data-ru="Проекты агентств" data-tr="Çeşitli Ajans Projeleri" data-zh="各大机构项目">Various Agency Projects</div>
+</div>
+<div class="career-timeline-node">
+<div class="timeline-date-stamp" data-ar="٢٠١٦ - ٢٠١٨" data-en="2016 - 2018" data-es="2016 - 2018" data-nu-aswan="٢٠١٦ - ٢٠١٨" data-ru="2016 - 2018" data-tr="2016 - 2018" data-zh="2016 - 2018">2016 - 2018</div>
+<div class="timeline-job-title" data-ar="مصور فوتوغرافي" data-en="Photographer" data-es="Fotógrafo" data-nu-aswan="سورا كوجين" data-ru="Фотограф" data-tr="Fotoğrafçı" data-zh="摄影师">Photographer</div>
+<div class="timeline-location" data-ar="سيارات وتصوير تجاري" data-en="Automotive &amp; Commercial" data-es="Automotriz y Comercial" data-nu-aswan="أوتوموتيف أند كوميرشَل" data-ru="Автомобильная и коммерческая" data-tr="Otomotiv ve Ticari" data-zh="汽车与商业">Automotive &amp; Commercial</div>
+</div>
+</div>
+<div>
+<div class="story-section-title">
+<span class="diamond">◆</span> <span data-ar="التعليم" data-en="EDUCATION" data-es="EDUCACIÓN" data-nu-aswan="إديوكيشن" data-ru="ОБРАЗОВАНИЕ" data-tr="EĞİTİM" data-zh="教育背景">EDUCATION</span>
+</div>
+<div class="career-timeline-node">
+<div class="timeline-job-title" data-ar="اقتصاد وعلوم سياسية" data-en="Economics &amp; Political Science" data-es="Economía y Ciencias Políticas" data-nu-aswan="إيكونومِكس أند بولِتِكَل ساينس" data-ru="Экономика и политология" data-tr="İktisat ve Siyaset Bilimi" data-zh="经济学与政治学">Economics &amp; Political Science</div>
+<div class="timeline-location" data-ar="بكالوريوس اقتصاد (٢٠١٨ - ٢٠٢٣)" data-en="B.Sc. in Economics (2018 – 2023)" data-es="Licenciatura en Economía (2018 – 2023)" data-nu-aswan="بِي إس سي. إن إيكونومِكس (٢٠١٨ – ٢٠٢٣)" data-ru="Бакалавр экономики (2018 – 2023)" data-tr="İktisat Lisans Mezunu (2018 – 2023)" data-zh="经济学学士 (2018 – 2023)">B.Sc. in Economics (2018 – 2023)</div>
+</div>
+<div class="passion-manifesto-badge">
+<div class="manifesto-label">
+<span>◆</span> <span data-ar="شغوف بـ" data-en="PASSIONATE ABOUT" data-es="APASIONADO DE" data-nu-aswan="باشِنِت أباوت" data-ru="УВЛЕЧЕН" data-tr="TUTKULU OLDUĞUM" data-zh="热衷于">PASSIONATE ABOUT</span>
+</div>
+<div class="manifesto-words" data-ar="السيارات، التصميم، التفاصيل والقصص." data-en="CARS, DESIGN, DETAILS &amp; STORIES." data-es="AUTOS, DISEÑO, DETALLES E HISTORIAS." data-nu-aswan="كارز، ديزاين، ديتيلز أند ستوريز." data-ru="АВТОМОБИЛИ, ДИЗАЙН, ДЕТАЛИ." data-tr="ARABALAR, TASARIM, DETAYLAR VE HİKAYELER." data-zh="汽车、设计、细节与故事。">
+                CARS, DESIGN, DETAILS &amp; STORIES.
+              </div>
+</div>
+</div>
+</div>
+<button class="primary-action-btn" onclick="navigateTo('connect')">
+<span data-ar="تواصل معي / استعرض أعمالي" data-en="View My Work / Contact" data-es="Ver trabajos / Contacto" data-nu-aswan="ڤيو ماي وورك / كونتاكت" data-ru="Смотреть работы / Контакты" data-tr="Çalışmalarımı Gör / İletişim" data-zh="查看作品 / 联系方式">View My Work / Contact</span>
+<div class="action-icon-circle"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
+</button>
+</section>
+<section class="view-page" id="page-connect">
+<div class="status-capsule-badge">
+<div class="status-live-beacon"></div>
+<span class="status-text" data-ar="متاح لتلقي الاستفسارات المباشرة" data-en="Available For Direct Inquiries" data-es="Disponible para consultas" data-nu-aswan="أڤيلَبُل فور دايرِكت إنكوايريز" data-ru="Доступен для запросов" data-tr="Doğrudan Sorular İçin Müsait" data-zh="可接受直接咨询">Available For Direct Inquiries</span>
+</div>
+<div class="title-stacked-3d" data-ar="تواصل" data-en="LET'S" data-es="VAMOS A" data-nu-aswan="لِتس" data-ru="ДАВАЙ" data-tr="BAĞLANTI" data-zh="联络">LET'S</div>
+<div class="author-surname-red" data-ar="معي" data-en="CONNECT" data-es="CONECTAR" data-nu-aswan="كَنِّكت" data-ru="СВЯЖЕМСЯ" data-tr="KURUN" data-zh="我们" style="font-size: 2.5rem; margin-bottom: 14px;">CONNECT</div>
+<p data-ar="تابع أحدث الإصدارات، استعرض ملفات الأعمال، أو ابدأ محادثة مباشرة وسريعة عبر واتساب." data-en="Follow the latest releases, browse recent work decks, or jump into a quick direct chat via WhatsApp." data-es="Sigue los últimos lanzamientos, explora portafolios o inicia un chat directo por WhatsApp." data-nu-aswan="فولو ذا ليتِست رِليزِز، براوز ريسِنت وورك ديكس، أور جَمب إنتو أ كْوِك دايرِكت تشات ڤيا واتساب." data-ru="Следите за последними релизами или начните чат в WhatsApp." data-tr="En son çalışmaları takip edin veya WhatsApp üzerinden hızlıca sohbet başlatın." data-zh="关注最新发布、浏览近期工作集锦或通过 WhatsApp 快速发起直接对话。" style="font-family: var(--font-body); font-size: 0.82rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 24px;">
+          Follow the latest releases, browse recent work decks, or jump into a quick direct chat via WhatsApp.
+        </p>
+<div class="direct-channels-pod spotlight-card">
+<div class="channels-header-row">
+<span data-ar="المنصات والملفات" data-en="CHANNELS &amp; PROFILES" data-es="CANALES Y PERFILES" data-nu-aswan="شانِلز أند بروفايلز" data-ru="КАНАЛЫ" data-tr="KANALLAR VE PROFİLLER" data-zh="社交频道与主页">CHANNELS &amp; PROFILES</span>
+<span class="direct" data-ar="// مباشرة" data-en="// DIRECT" data-es="// DIRECTO" data-nu-aswan="// دايرِكت" data-ru="// ПРЯМО" data-tr="// DOĞRUDAN" data-zh="// 直接">// DIRECT</span>
+</div>
+<div class="social-quad-row">
+<a class="social-anchor-cube spotlight-card" href="https://www.behance.net" target="_blank" title="Behance">
+<i class="fa-brands fa-behance"></i>
+<span>BEHANCE</span>
+</a>
+<a class="social-anchor-cube spotlight-card" href="https://www.instagram.com/sewedy_media?stkn=MXY4MzY4bTJ3MWZzcw==" target="_blank" title="Instagram">
+<i class="fa-brands fa-instagram"></i>
+<span>INSTAGRAM</span>
+</a>
+<a class="social-anchor-cube spotlight-card" href="https://www.facebook.com/share/19KCe8Mm3H/" target="_blank" title="Facebook">
+<i class="fa-brands fa-facebook-f"></i>
+<span>FACEBOOK</span>
+</a>
+<a class="social-anchor-cube spotlight-card" href="https://wa.me/qr/5JRN6AWP6WZQG1" target="_blank" title="WhatsApp">
+<i class="fa-brands fa-whatsapp"></i>
+<span>WHATSAPP</span>
+</a>
+</div>
+</div>
+<a class="whatsapp-direct-cell spotlight-card" href="https://wa.me/qr/5JRN6AWP6WZQG1" target="_blank">
+<div class="wa-flex-lead">
+<div class="wa-icon-bubble"><i class="fa-brands fa-whatsapp"></i></div>
+<div class="wa-textual-meta">
+<h4 data-ar="محادثة واتساب" data-en="CHAT ON WHATSAPP" data-es="CHAT EN WHATSAPP" data-nu-aswan="تشات أون واتساب" data-ru="ЧАТ В WHATSAPP" data-tr="WHATSAPP'TA SOHBET ET" data-zh="通过 WhatsApp 聊天">CHAT ON WHATSAPP</h4>
+<p data-ar="خط مباشر واستجابة فورية" data-en="DIRECT LINE &amp; INSTANT RESPONSE" data-es="LÍNEA DIRECTA Y RESPUESTA" data-nu-aswan="دايرِكت لاين أند إنستَنت رِسبونس" data-ru="ПРЯМАЯ СВЯЗЬ" data-tr="DOĞRUDAN HAT VE ANINDA YANIT" data-zh="直达专线与即时回复">DIRECT LINE &amp; INSTANT RESPONSE</p>
+</div>
+</div>
+<div class="wa-external-glyph">
+<i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i>
+</div>
+</a>
+</section>
+</main>
+<footer>
+<div class="as-media-brand-mark" style="margin-bottom: 4px;">
+<svg class="as-vector-logo-svg" style="width: 58px; height: 26px;" version="1.1" viewbox="0 0 39.6 23.1" xmlns="http://www.w3.org/2000/svg">
+<g>
+<path class="logo-fill-adaptive" d="M15.2,10.1l-2.4-4.4-2.5,4.5h4.9ZM13.6,0c1.3,0,1.5.1,2.5,1.7l2.7,4.8,2.7,4.8c-2.2,0-4.1.9-5.1,2.9H7.9s-2,3.6-2,3.6H0S9.4,2,9.4,2C10.6,0,10.8,0,11.9,0h1.7Z"></path>
+<path class="logo-fill-adaptive" d="M33.2,17.9h-16s0-1.4.1-2.1c.2-1.4,1.4-2.1,2.7-2.1h13.2c.8,0,1.3-.5,1.3-1.2,0-.5-.5-1.2-1.2-1.3h-6.9c-1.2,0-2.4-.4-3.4-1-1.8-1-2.6-2.8-2.6-4.8,0-1.8.9-3.4,2.5-4.3.8-.4,1.8-.9,2.7-.9h13.8c0,2.2-1.7,4.2-4.1,4.2h-8.8c-.7,0-1.2.6-1.2,1.2,0,.5.4,1.2,1.1,1.2h7c3.4,0,6.2,2,6.1,5.6,0,3.6-2.9,5.5-6.4,5.5h0s0,0,0,0Z"></path>
+<rect class="logo-red-accent" height="5.2" width="17" x="17.2" y="17.9"></rect>
+<path class="logo-fill-adaptive" d="M27.8,20.1c0-.4-.4-.5-.7-.6h-4v.5c-.1,0,1.7,0,1.7,0l-.2.9h-1.8v.5c-.1,0,1.9,0,1.9,0l-.2.9h-3.1l.6-2.1-.5.8-.8,1.3h-.9l-.4-2.1-.5,2.1h-1l.4-1.6.6-2.2h1.3l.4,2.4,1.4-2.2c0-.1.2-.2.4-.2h5.1c.3,0,.6,0,.9.2.7.4.8,1.2.6,1.9-.2.8-.7,1.4-1.5,1.6-.2,0-.4,0-.7,0h-1.8s.4-1.6.4-1.6l.2-.8h1l-.3,1.4h.6c.1,0,.3,0,.4,0,.3,0,.5-.3.7-.6.1-.2.2-.5.1-.8,0,0,0,0,0,0Z"></path>
+<polygon class="logo-fill-adaptive" points="32.3 21.5 32 19.8 30.8 22 30.5 22.4 29.5 22.4 30.3 21 31.7 18.6 32.8 18.6 33.3 21.3 33.5 22.4 31.2 22.4 31.7 21.5 32.3 21.5"></polygon>
+<polygon class="logo-fill-adaptive" points="29.8 20.9 29.5 22.4 28.5 22.4 29.4 18.6 30.4 18.6 29.8 20.9"></polygon>
+</g>
+</svg>
+</div>
+<p class="brand-mark-copy">AS MEDIA © 2026</p>
+<p class="brand-sub-disclaimer" data-ar="جميع الأعمال البصرية والإخراج الفني بواسطة علي السويدي" data-en="All Visuals &amp; Creative Direction by Ali Elsewedy" data-es="Todos los visuales por Ali Elsewedy" data-nu-aswan="أول فيجوالز أند كريييتِڤ دايرِكشن باي علي السويدي" data-ru="Все визуальные эффекты: Али Эльсевиди" data-tr="Tüm Görseller Ali Elsewedy'ye Aittir" data-zh="所有视觉效果由 Ali Elsewedy 呈现">All Visuals &amp; Creative Direction by Ali Elsewedy</p>
+</footer>
+</div>
+<div class="drawer-modal-backdrop" id="appDrawer" onclick="closeDrawer(event)">
+<div class="drawer-bottom-sheet" onclick="event.stopPropagation()">
+<div class="sheet-handle-pill"></div>
+<!-- MAIN DRAWER VIEW -->
+<div id="drawerMainView">
+<div class="sheet-top-row">
+<h3 data-ar="القائمة السريعة" data-en="QUICK MENU" data-es="MENÚ RÁPIDO" data-nu-aswan="كْوِك مينيو" data-ru="БЫСТРОЕ МЕНЮ" data-tr="HIZLI MENÜ" data-zh="快捷菜单" id="drawerTitleText">QUICK MENU</h3>
+<button class="sheet-close-x-btn" onclick="closeDrawer()"><i class="fa-solid fa-xmark"></i></button>
+</div>
+<div style="margin-bottom: 18px;">
+<div style="font-family: var(--font-display); font-size: 0.65rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+<i class="fa-solid fa-globe" style="color: var(--accent-red); transition: transform 0.3s ease;"></i>
+<span data-ar="اختر اللغة" data-en="SELECT LANGUAGE" data-es="SELECCIONAR IDIOMA" data-nu-aswan="سِليكت لانجويج" data-ru="ВЫБРАТЬ ЯЗЫК" data-tr="DİLİ SEÇİN" data-zh="选择语言" id="drawerSelectLangText">SELECT LANGUAGE</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 8px;">
+<button class="lang-select-pill" id="lang-btn-en" onclick="setLanguage('en')" style="background: var(--accent-red); color: #fff; border: none; padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;"><span>🇬🇧</span> English</button>
+<button class="lang-select-pill" id="lang-btn-ar" onclick="setLanguage('ar')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;"><span>🇸🇦</span> العربية</button>
+<button class="lang-select-pill" id="lang-btn-tr" onclick="setLanguage('tr')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;"><span>🇹🇷</span> Türkçe</button>
+<button class="lang-select-pill" id="lang-btn-es" onclick="setLanguage('es')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;"><span>🇪🇸</span> Español</button>
+<button class="lang-select-pill" id="lang-btn-zh" onclick="setLanguage('zh')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;"><span>🇨🇳</span> 中文</button>
+<button class="lang-select-pill" id="lang-btn-ru" onclick="setLanguage('ru')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 7px 4px; border-radius: 8px; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;"><span>🇷🇺</span> Русский</button>
+</div>
+<!-- Nubian Trigger Button (Opens Overlay) -->
+<button id="nubianOverlayTrigger" onclick="openNubianOverlay()" style="width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--card-border); border-radius: 10px; padding: 10px 14px; font-family: var(--font-display); font-size: 0.72rem; font-weight: 800; color: var(--text-pure); cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: background 0.2s;">
+<span style="display: flex; align-items: center; gap: 6px;"><span>🇪🇬</span> اللغة النوبية (النوبة)</span>
+<i class="fa-solid fa-chevron-right" style="font-size: 0.65rem; color: var(--accent-red);"></i>
+</button>
+</div>
+<div class="sheet-links-stack">
+<a class="sheet-nav-tile" href="javascript:void(0)" onclick="navigateTo('home')">
+<span data-ar="الرئيسية" data-en="HOME" data-es="INICIO" data-nu-aswan="هوم" data-ru="ГЛАВНАЯ" data-tr="ANA SAYFA" data-zh="首页">HOME</span>
+<i class="fa-solid fa-chevron-right menu-chevron"></i>
+</a>
+<a class="sheet-nav-tile" href="javascript:void(0)" onclick="navigateTo('about')">
+<span data-ar="نبذة عني" data-en="ABOUT" data-es="ACERCA" data-nu-aswan="ايقا" data-ru="ОБ АВТОРЕ" data-tr="HAKKINDA" data-zh="关于">ABOUT</span>
+<i class="fa-solid fa-chevron-right menu-chevron"></i>
+</a>
+<a class="sheet-nav-tile" href="javascript:void(0)" onclick="openPhotoCategory('all')">
+<span data-ar="التصوير" data-en="PHOTOGRAPHY" data-es="FOTOGRAFÍA" data-nu-aswan="سورا" data-ru="ФОТОГРАФИЯ" data-tr="FOTOĞRAFÇILIK" data-zh="摄影">PHOTOGRAPHY</span>
+<i class="fa-solid fa-chevron-right menu-chevron"></i>
+</a>
+<a class="sheet-nav-tile" href="javascript:void(0)" onclick="openDesignCategory('all')">
+<span data-ar="التصميم" data-en="DESIGN" data-es="DISEÑO" data-nu-aswan="ديزاين" data-ru="ДИЗАЙН" data-tr="TASARIM" data-zh="设计">DESIGN</span>
+<i class="fa-solid fa-chevron-right menu-chevron"></i>
+</a>
+<a class="sheet-nav-tile cta-red" href="javascript:void(0)" onclick="navigateTo('connect')">
+<span data-ar="تواصل معي" data-en="LET'S CONNECT" data-es="CONECTEMOS" data-nu-aswan="لِتس كَنِّكت" data-ru="СВЯЗАТЬСЯ" data-tr="İLETİŞİME GEÇİN" data-zh="联系我们">LET'S CONNECT</span>
+</a>
+</div>
+<div class="sheet-bottom-theme-toggle">
+<button aria-label="Switch Theme" class="theme-toggle-btn drawer-theme-toggle" onclick="toggleTheme()" title="Switch Theme">
+<i class="fa-solid fa-moon theme-icon theme-icon-moon"></i>
+<i class="fa-solid fa-sun theme-icon theme-icon-sun"></i>
+</button>
+</div>
+</div>
+<!-- NUBIAN OVERLAY VIEW -->
+<div id="drawerNubianView">
+<div class="sheet-top-row">
+<button class="sheet-close-x-btn" onclick="closeNubianOverlay()"><i class="fa-solid fa-arrow-left"></i></button>
+<h3 style="font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; color: var(--text-pure); letter-spacing: 0.5px;">اختار فرع اللغة النوبية</h3>
+<div style="width:28px"></div>
+</div>
+<div style="font-size: 0.72rem; color: var(--text-muted); margin-bottom: 16px; padding: 0 4px; line-height: 1.5; font-family: var(--font-body); text-align: center;">
+          اللغة النوبية بلهجتها الأسوانية. يتم عرض الترجمات والنطق الصوتي بحروف عربية لسهولة القراءة. اختر اللغة المناسبة:
+        </div>
+<div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+<!-- Aswan Nubian Card -->
+<button class="lang-select-pill" id="lang-btn-nu-aswan" onclick="setLanguage('nu-aswan')" style="background: rgba(255,255,255,0.03); border: 1px solid var(--card-border); border-radius: 14px; padding: 16px; text-align: right; cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; gap: 6px;">
+<div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+<span style="font-family: var(--font-display); font-size: 0.9rem; font-weight: 800; color: var(--accent-red);">النوبي الأسواني (Aswan Nubian)</span>
+<i class="fa-solid fa-check" id="check-mattokki" style="color: var(--accent-green); display: none;"></i>
+</div>
+<span style="font-family: var(--font-body); font-size: 0.65rem; color: var(--text-muted);">نطاق الاستخدام: أسوان والنوبة المصرية</span>
+<div style="font-size: 0.6rem; color: var(--text-pure); background: rgba(0,0,0,0.2); padding: 6px; border-radius: 6px; margin-top: 4px;">
+              مثال نطقي: "أنا" تنطق <strong style="color: var(--accent-red);">ايون</strong>
+</div>
+</button>
+
+</div>
+</div>
+</div>
+</div>
+<div class="toast-pill" id="appToast">
+<i class="fa-solid fa-circle-check" style="color: var(--accent-green);"></i>
+<span id="toastMsg">Action completed</span>
+</div>
+<script>
+    let currentLang = 'en';
+
+    function toggleNavbarLanguage() {
+      const nextLang = currentLang === 'en' ? 'ar' : 'en';
+      setLanguage(nextLang);
+    }
+
+    function openNubianOverlay() {
+      const mainView = document.getElementById('drawerMainView');
+      const nubView = document.getElementById('drawerNubianView');
+      
+      mainView.style.opacity = '0';
+      mainView.style.pointerEvents = 'none';
+      mainView.style.transform = 'scale(0.95)';
+      
+      nubView.classList.add('active-overlay');
+    }
+
+    function closeNubianOverlay() {
+      const mainView = document.getElementById('drawerMainView');
+      const nubView = document.getElementById('drawerNubianView');
+      
+      nubView.classList.remove('active-overlay');
+      
+      mainView.style.opacity = '1';
+      mainView.style.pointerEvents = 'auto';
+      mainView.style.transform = 'scale(1)';
+    }
+
+    function setLanguage(langCode) {
+      currentLang = langCode;
+      const html = document.documentElement;
+      html.setAttribute('lang', currentLang);
+      
+      const isRtl = (currentLang === 'ar' || currentLang.startsWith('nu'));
+      html.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+      
+      const langBtn = document.querySelector('.lang-toggle-pill');
+      if (langBtn) {
+        if (currentLang === 'nu-aswan') langBtn.textContent = 'نوبي';
+        else langBtn.textContent = currentLang.toUpperCase();
+      }
+
+      document.querySelectorAll('.lang-select-pill').forEach(btn => {
+        btn.style.background = 'rgba(255,255,255,0.05)';
+        btn.style.color = 'var(--text-pure)';
+        btn.style.borderColor = 'var(--card-border)';
+      });
+      document.getElementById('check-mattokki').style.display = 'none';
+      document.getElementById('check-fadidja').style.display = 'none';
+      
+      const activeBtn = document.getElementById(`lang-btn-${currentLang}`);
+      if (activeBtn) {
+        if(currentLang.startsWith('nu')) {
+          activeBtn.style.background = 'rgba(229, 27, 36, 0.08)';
+          activeBtn.style.borderColor = 'var(--accent-red)';
+          const checkIcon = document.getElementById(`check-${currentLang.split('-')[1]}`);
+          if(checkIcon) checkIcon.style.display = 'block';
+          
+          const nubTrigger = document.getElementById('nubianOverlayTrigger');
+          if (nubTrigger) {
+            nubTrigger.style.borderColor = 'var(--accent-red)';
+            nubTrigger.style.background = 'rgba(229, 27, 36, 0.08)';
+          }
+        } else {
+          activeBtn.style.background = 'var(--accent-red)';
+          activeBtn.style.color = '#fff';
+          activeBtn.style.borderColor = 'var(--accent-red)';
+          const nubTrigger = document.getElementById('nubianOverlayTrigger');
+          if (nubTrigger) {
+            nubTrigger.style.borderColor = 'var(--card-border)';
+            nubTrigger.style.background = 'rgba(255,255,255,0.04)';
+          }
+        }
+      }
+
+      const elements = document.querySelectorAll('[data-en]');
+      elements.forEach(el => {
+        let attr = `data-${currentLang}`;
+        if (el.hasAttribute(attr)) {
+          el.textContent = el.getAttribute(attr);
+        } else if (currentLang.startsWith('nu') && el.hasAttribute('data-ar')) {
+          el.textContent = el.getAttribute('data-ar');
+        }
+      });
+
+      const arrows = document.querySelectorAll('.dynamic-arrow');
+      arrows.forEach(arr => {
+        if (isRtl) {
+          arr.classList.remove('fa-arrow-right');
+          arr.classList.add('fa-arrow-left');
+        } else {
+          arr.classList.remove('fa-arrow-left');
+          arr.classList.add('fa-arrow-right');
+        }
+      });
+
+      const chevrons = document.querySelectorAll('.menu-chevron');
+      chevrons.forEach(ch => {
+        if (isRtl) {
+          ch.classList.remove('fa-chevron-right');
+          ch.classList.add('fa-chevron-left');
+        } else {
+          ch.classList.remove('fa-chevron-left');
+          ch.classList.add('fa-chevron-right');
+        }
+      });
+
+      const langNames = { 
+        en: 'English', ar: 'العربية', tr: 'Türkçe', es: 'Español', zh: '中文', ru: 'Русский', 
+        'nu-aswan': 'النوبي الأسواني (Aswan Nubian)' 
+      };
+      
+      showToast((langNames[currentLang] || currentLang) + ' Active');
+
+      if (currentLang.startsWith('nu')) {
+         setTimeout(() => { closeDrawer(); }, 400);
+      }
+    }
+
+    function navigateTo(pageId) {
+      const allPages = document.querySelectorAll('.view-page');
+      allPages.forEach(p => { p.classList.remove('active-view'); });
+
+      const target = document.getElementById(`page-${pageId}`);
+      if (target) {
+        target.classList.add('active-view');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      closeDrawer();
+    }
+
+    function openPhotoCategory(catKey) {
+      navigateTo('photography');
+      const filterButtons = document.querySelectorAll('#photoFilterBar .filter-pill-tab');
+      filterButtons.forEach(btn => {
+        const text = btn.textContent.toLowerCase();
+        if (catKey === 'all') filterPhotos('all', filterButtons[0]);
+        else if (catKey === 'events' && (text.includes('events') || text.includes('فعاليات'))) filterPhotos('events', btn);
+        else if (catKey === 'showroom' && (text.includes('showroom') || text.includes('معرض'))) filterPhotos('showroom', btn);
+        else if (catKey === 'products' && (text.includes('product') || text.includes('منتجات'))) filterPhotos('products', btn);
+        else if (catKey === 'sessions' && (text.includes('session') || text.includes('جلسات'))) filterPhotos('sessions', btn);
+      });
+    }
+
+    function openDesignCategory(catKey) {
+      navigateTo('design');
+      const filterButtons = document.querySelectorAll('#designFilterBar .filter-pill-tab');
+      filterButtons.forEach(btn => {
+        const text = btn.textContent.toLowerCase();
+        if (catKey === 'all') filterDesigns('all', filterButtons[0]);
+        else if (catKey === 'social' && (text.includes('social') || text.includes('سوشيال'))) filterDesigns('social', btn);
+        else if (catKey === 'uiux' && (text.includes('ui') || text.includes('واجهات'))) filterDesigns('uiux', btn);
+        else if (catKey === 'branding' && (text.includes('brand') || text.includes('هوية'))) filterDesigns('branding', btn);
+        else if (catKey === 'logofolio' && (text.includes('logo') || text.includes('شعارات'))) filterDesigns('logofolio', btn);
+        else if (catKey === 'packaging' && (text.includes('pack') || text.includes('تغليف'))) filterDesigns('packaging', btn);
+      });
+    }
+
+    function filterPhotos(category, btnElement) {
+      const allPills = document.querySelectorAll('#photoFilterBar .filter-pill-tab');
+      allPills.forEach(p => p.classList.remove('active-filter'));
+      if(btnElement) btnElement.classList.add('active-filter');
+
+      const items = document.querySelectorAll('#photoGalleryContainer .gallery-item-card');
+      items.forEach(item => {
+        const itemCat = item.getAttribute('data-category');
+        if (category === 'all' || itemCat === category) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function filterDesigns(category, btnElement) {
+      const allPills = document.querySelectorAll('#designFilterBar .filter-pill-tab');
+      allPills.forEach(p => p.classList.remove('active-filter'));
+      if(btnElement) btnElement.classList.add('active-filter');
+
+      const items = document.querySelectorAll('#designGalleryContainer .gallery-item-card');
+      items.forEach(item => {
+        const itemCat = item.getAttribute('data-category');
+        if (category === 'all' || itemCat === category) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+
+    function openDrawer() {
+      const drawer = document.getElementById('appDrawer');
+      if (drawer) {
+        drawer.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeDrawer(e) {
+      const drawer = document.getElementById('appDrawer');
+      if (drawer) {
+        drawer.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(() => { closeNubianOverlay(); }, 300);
+      }
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+
+      const darkPhoto = document.querySelector('.dark-photo-mode');
+      const lightPhoto = document.querySelector('.light-photo-mode');
+      if (darkPhoto && lightPhoto) {
+        if (next === 'light') {
+          darkPhoto.style.display = 'none';
+          lightPhoto.style.display = 'block';
+        } else {
+          darkPhoto.style.display = 'block';
+          lightPhoto.style.display = 'none';
+        }
+      }
+
+      showToast(next === 'light' ? (currentLang === 'ar' || currentLang.startsWith('nu') ? 'الوضع الفاتح مفعل' : 'Day Mode Active') : (currentLang === 'ar' || currentLang.startsWith('nu') ? 'الوضع المظلم مفعل' : 'Night Mode Active'));
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('appToast');
+      const text = document.getElementById('toastMsg');
+      if (toast && text) {
+        text.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => { toast.classList.remove('show'); }, 2000);
+      }
+    }
+
+    const navBar = document.getElementById('appFloatingNav');
+    const tracingBeam = document.getElementById('tracingBeamLine');
+    const tracingThumb = document.getElementById('tracingBeamThumb');
+    let isNavScrolled = false;
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScroll = window.scrollY;
+
+          let triggerPoint = 120;
+          if (navBar) {
+            if (!isNavScrolled && currentScroll > triggerPoint) {
+              isNavScrolled = true;
+              navBar.classList.add('scrolled');
+            } else if (isNavScrolled && currentScroll <= triggerPoint) {
+              isNavScrolled = false;
+              navBar.classList.remove('scrolled');
+            }
+          }
+
+          if (tracingBeam && tracingThumb) {
+            if (currentScroll > triggerPoint) {
+              tracingBeam.classList.add('visible');
+              const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+              const scrollPercent = docHeight > 0 ? currentScroll / docHeight : 0;
+              const maxTranslate = window.innerHeight - tracingThumb.offsetHeight;
+              tracingThumb.style.transform = `translate3d(0, ${scrollPercent * maxTranslate}px, 0)`;
+            } else {
+              tracingBeam.classList.remove('visible');
+            }
+          }
+
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    const spotlightCards = document.querySelectorAll('.spotlight-card');
+    spotlightCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--spotlight-x', `${x}px`);
+        card.style.setProperty('--spotlight-y', `${y}px`);
+        card.style.setProperty('--spotlight-opacity', '1');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--spotlight-opacity', '0');
+      });
+    });
+  </script>
+</body>
+</html>
