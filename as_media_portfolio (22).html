@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>AS MEDIA | Ali Elsewedy</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Michroma&family=Shojumaru&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@600;700;800&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg-color: #060709;
+      --card-bg: rgba(18, 20, 25, 0.82);
+      --card-border: rgba(255, 255, 255, 0.07);
+      --card-border-glow: rgba(229, 27, 36, 0.35);
+      --card-hover: rgba(26, 29, 36, 0.95);
+      --accent-red: #e51b24;
+      --accent-red-glow: rgba(229, 27, 36, 0.45);
+      --accent-green: #00e676;
+      --text-pure: #ffffff;
+      --text-main: #e6e9ee;
+      --text-muted: #848c96;
+      --sheet-bg: #0d0f12;
+      --pill-bg: rgba(255, 255, 255, 0.04);
+      --font-display: 'Syne', 'Cairo', sans-serif;
+      --font-title-tech: 'Michroma', 'Syne', 'Cairo', sans-serif;
+      --font-shojumaru: 'Shojumaru', 'Syne', 'Cairo', cursive, sans-serif;
+      --font-cairo: 'Cairo', sans-serif;
+      --font-body: 'Space Grotesk', 'Cairo', sans-serif;
+      --logo-primary: #ffffff;
+    }
+
+    [data-theme="light"] {
+      --bg-color: #f2f4f8;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --card-border: rgba(0, 0, 0, 0.08);
+      --card-border-glow: rgba(229, 27, 36, 0.4);
+      --card-hover: rgba(245, 247, 250, 1);
+      --text-pure: #0b0c10;
+      --text-main: #1d2129;
+      --text-muted: #626a76;
+      --sheet-bg: #ffffff;
+      --pill-bg: rgba(0, 0, 0, 0.04);
+      --logo-primary: #0b0c10;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden !important;
+      position: relative;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh; display: flex; justify-content: center; position: relative;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(229, 27, 36, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(229, 27, 36, 0.06) 0%, transparent 40%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: auto, auto, 34px 34px, 34px 34px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    [data-theme="light"] body {
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(229, 27, 36, 0.05) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(229, 27, 36, 0.04) 0%, transparent 40%),
+        linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+    }
+
+    .ambient-bubbles-wrapper { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .ambient-bubble {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, rgba(229, 27, 36, 0.28) 0%, rgba(229, 27, 36, 0.02) 70%);
+      filter: blur(35px); animation: floatBubble 14s ease-in-out infinite alternate;
+    }
+    .bubble-1 { width: 220px; height: 220px; top: 10%; left: -5%; animation-duration: 12s; }
+    .bubble-2 { width: 280px; height: 280px; bottom: 15%; right: -8%; animation-duration: 18s; animation-delay: -3s; }
+    .bubble-3 { width: 160px; height: 160px; top: 55%; left: 60%; animation-duration: 15s; animation-delay: -6s; }
+
+    @keyframes floatBubble {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(35px, -45px) scale(1.12); }
+      100% { transform: translate(-25px, 35px) scale(0.92); }
+    }
+
+    .app-screen-frame {
+      width: 100%; max-width: 400px; min-height: 100vh; padding: 85px 14px 40px;
+      display: flex; flex-direction: column; position: relative; z-index: 10;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+
+    .dynamic-header {
+      position: fixed; 
+      top: 10px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      z-index: 1000;
+      width: 340px; 
+      max-width: 340px;
+      background: transparent;
+      display: flex; 
+      justify-content: center;
+      border-radius: 10px;
+      padding: 1px 4px;
+      border: 1px solid transparent;
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    
+    .dynamic-header.scrolled {
+      top: 0; 
+      left: 0; 
+      right: 0; 
+      transform: none; 
+      width: 100%; 
+      max-width: 100%;
+      background: rgba(18, 20, 25, 0.78);
+      backdrop-filter: blur(22px); 
+      -webkit-backdrop-filter: blur(22px);
+      border-bottom: 1px solid var(--card-border);
+      border-radius: 0 0 28px 28px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      padding: 6px 20px;
+    }
+    
+    [data-theme="light"] .dynamic-header.scrolled {
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    }
+
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; max-width: 320px;
+      margin: 0 auto;
+      transition: max-width 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    
+    .dynamic-header.scrolled .header-inner {
+      max-width: 400px;
+    }
+
+    .as-media-brand-mark {
+      position: relative; display: inline-flex; align-items: center; text-decoration: none; cursor: pointer; user-select: none;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .as-vector-logo-svg {
+      width: 75px; height: 27px; display: block;
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.4));
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .as-media-brand-mark:hover .as-vector-logo-svg {
+      transform: scale(1.06); filter: drop-shadow(0 4px 12px var(--accent-red-glow));
+    }
+    .dynamic-header.scrolled .as-vector-logo-svg { width: 70px; height: 25px; }
+    .logo-fill-adaptive { fill: var(--logo-primary); transition: fill 0.3s ease; }
+    .logo-red-accent { fill: var(--accent-red); filter: drop-shadow(0 1px 4px var(--accent-red-glow)); }
+    .logo-text-media { fill: #ffffff !important; }
+
+    .bar-controls-group { 
+      display: flex; align-items: center; gap: 6px; 
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .lang-toggle-pill {
+      height: 23px; width: 35px; background: rgba(20, 23, 31, 0.85); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 6px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 0.7rem; font-weight: 800; color: var(--text-pure); letter-spacing: 0.5px;
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    [data-theme="light"] .lang-toggle-pill { background: #e2e8f0; color: #0b0c10; border-color: rgba(0,0,0,0.1); }
+
+    .theme-toggle-simple-btn {
+      width: 42px; height: 34px; background: transparent; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; position: relative;
+      color: var(--text-pure);
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .theme-icon { position: absolute; width: 32px; height: 28px; transition: transform 0.5s ease, opacity 0.5s ease; }
+    .theme-icon-cyber-dark { opacity: 1; transform: rotate(0deg) scale(1); }
+    .theme-icon-cyber-light { opacity: 0; transform: rotate(-90deg) scale(0.4); }
+    [data-theme="light"] .theme-toggle-simple-btn { color: #0b0c10; }
+    [data-theme="light"] .theme-icon-cyber-dark { opacity: 0; transform: rotate(90deg) scale(0.4); }
+    [data-theme="light"] .theme-icon-cyber-light { opacity: 1; transform: rotate(0deg) scale(1); }
+
+    .menu-burger-btn {
+      background: rgba(255, 255, 255, 0.08); border: 1px solid var(--card-border); border-radius: 7px; width: 29px; height: 23px;
+      cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 0;
+      position: relative; overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    [data-theme="light"] .menu-burger-btn { background: rgba(0, 0, 0, 0.05); }
+    .dynamic-header.scrolled .menu-burger-btn { width: 36px; height: 28px; border-radius: 10px; gap: 3px; }
+    .burger-line { display: block; height: 1.6px; background: var(--text-pure); border-radius: 2px; transition: transform 0.4s ease, width 0.4s ease; }
+    .burger-line-1, .burger-line-3 { width: 12px; }
+    .dynamic-header.scrolled .burger-line-1, .dynamic-header.scrolled .burger-line-3 { width: 16px; }
+    .menu-burger-btn:hover { background: rgba(229, 27, 36, 0.12); border-color: rgba(229, 27, 36, 0.45); box-shadow: 0 0 14px var(--accent-red-glow); }
+
+    .dynamic-header.scrolled .lang-toggle-pill,
+    .dynamic-header.scrolled .theme-toggle-simple-btn {
+      opacity: 0;
+      width: 0;
+      margin: 0;
+      padding: 0;
+      pointer-events: none;
+      transform: scale(0.4);
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .spotlight-card { position: relative; overflow: hidden; --spotlight-x: -999px; --spotlight-y: -999px; --spotlight-opacity: 0; }
+    .spotlight-card::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
+      background: radial-gradient(220px circle at var(--spotlight-x) var(--spotlight-y), rgba(229, 27, 36, 0.22) 0%, rgba(229, 27, 36, 0.06) 40%, transparent 75%);
+      opacity: var(--spotlight-opacity); pointer-events: none; z-index: 1; transition: opacity 0.3s ease;
+    }
+    .spotlight-card::after {
+      content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1px;
+      background: radial-gradient(180px circle at var(--spotlight-x) var(--spotlight-y), rgba(229, 27, 36, 0.8) 0%, rgba(255, 255, 255, 0.4) 25%, transparent 65%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+      opacity: var(--spotlight-opacity); pointer-events: none; z-index: 2; transition: opacity 0.3s ease;
+    }
+    .spotlight-card > * { position: relative; z-index: 3; }
+
+    main { flex: 1; padding-top: 4px; }
+    .view-page { display: none; animation: viewSlideFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .view-page.active-view { display: block; }
+    
+    #page-photography, #page-design, #page-connect, #page-about { padding-top: 32px; }
+
+    @keyframes viewSlideFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .status-capsule-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 230, 118, 0.07); border: 1px solid rgba(0, 230, 118, 0.25); padding: 5px 12px; border-radius: 24px; margin-bottom: 12px; }
+    .status-live-beacon { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); animation: beaconPulse 1.8s infinite; }
+    @keyframes beaconPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }
+    .status-text { font-family: var(--font-display); font-size: 0.68rem; font-weight: 700; color: var(--text-pure); letter-spacing: 0.8px; text-transform: uppercase; }
+
+    .hero-split-stage { display: flex; align-items: flex-start; justify-content: space-between; position: relative; min-height: 330px; margin-top: 4px; margin-bottom: 14px; gap: 0px; }
+    
+    /* 
+      TEXT BLOCK METRICS (INDEPENDENT & FULLY DECOUPLED):
+      - Decoupled from the image layout so changes to the image never affect text placement.
+      - Fixed width: 55% / max-width: 215px, flex-shrink: 0.
+      - Vertical Offset: Lifted slightly to -10px for balanced breathing room.
+    */
+    .hero-typography-col { 
+      position: relative; 
+      z-index: 10; 
+      width: 55%; 
+      max-width: 215px; 
+      flex-shrink: 0; 
+      padding-top: 0px; 
+      transform: translateY(-10px); 
+      pointer-events: auto;
+    }
+    
+    .title-stacked-3d {
+      position: relative;
+      font-family: var(--font-shojumaru);
+      font-size: 3.02rem;
+      font-weight: 900;
+      line-height: 0.88;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: transparent;
+      -webkit-text-stroke: 1.2px #ffffff;
+      text-shadow: 1px 1px 0px rgba(0,0,0,0.9), 2px 2px 0px rgba(229, 27, 36, 0.35);
+      margin-bottom: 6px;
+      transform: scaleX(1.1);
+      transform-origin: left center;
+      white-space: nowrap;
+    }
+    
+    .title-stacked-3d.ar-title {
+      display: none;
+    }
+
+    html[dir="rtl"] .title-stacked-3d.en-title {
+      display: none !important;
+    }
+
+    html[dir="rtl"] .title-stacked-3d.ar-title {
+      display: block !important;
+      font-family: 'Cairo', sans-serif !important;
+      font-size: 3.63rem;
+      transform: scaleX(1.35);
+      transform-origin: right center;
+      text-align: right;
+      letter-spacing: 0;
+      -webkit-text-stroke: 1.5px #ffffff;
+      margin-bottom: 16px;
+    }
+
+    [data-theme="light"] .title-stacked-3d {
+      -webkit-text-stroke: 1.2px #0b0c10;
+      text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.15);
+    }
+
+    .author-name-lead { font-family: var(--font-display), var(--font-body); font-size: 2.18rem; font-weight: 800; color: var(--text-pure); line-height: 0.95; text-transform: uppercase; letter-spacing: -0.5px; margin-bottom: 3px; }
+    .author-surname-red {
+      font-family: var(--font-display), var(--font-body);
+      font-size: 1.52rem;
+      font-weight: 900;
+      color: var(--accent-red);
+      line-height: 0.95;
+      text-transform: uppercase;
+      letter-spacing: -0.3px;
+      text-shadow: 0 0 20px var(--accent-red-glow);
+      margin-bottom: 4px;
+      white-space: nowrap;
+    }
+
+    html[dir="rtl"] .author-name-lead {
+      margin-bottom: 14px;
+    }
+
+    html[dir="rtl"] .author-name-lead,
+    html[dir="rtl"] .author-surname-red {
+      font-family: var(--font-cairo), var(--font-body);
+      letter-spacing: normal;
+    }
+
+    html[dir="rtl"] .hero-typography-col {
+      text-align: right;
+    }
+
+    .roles-unified-pod { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 5px; 
+      background: var(--card-bg); 
+      border: 1px solid var(--card-border); 
+      border-radius: 6px; 
+      padding: 4px 10px; 
+      margin-top: 8px;
+      margin-bottom: 6px; 
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.05); 
+    }
+    .role-pod-item { font-family: var(--font-body); font-size: 0.58rem; font-weight: 700; color: var(--text-pure); text-transform: uppercase; letter-spacing: 0.4px; display: inline-flex; align-items: center; gap: 4px; text-shadow: 0 0 10px var(--accent-red); }
+    .role-pod-item:not(:last-child):after { content: '•'; color: var(--text-pure); margin-left: 2px; text-shadow: none; }
+    
+    .creator-bio-primary { 
+      font-family: var(--font-display); 
+      font-size: 0.72rem; 
+      font-weight: 700; 
+      color: var(--text-pure); 
+      line-height: 1.35; 
+      margin-top: 8px;
+      margin-bottom: 6px; 
+      text-transform: uppercase; 
+      letter-spacing: 0.4px; 
+      white-space: nowrap;
+    }
+    .creator-bio-secondary { 
+      font-family: var(--font-body); 
+      font-size: 0.6rem; 
+      font-weight: 400; 
+      color: var(--text-muted); 
+      line-height: 1.45; 
+      margin-top: 10px; 
+      margin-bottom: 12px; 
+    }
+    .creator-bio-secondary span {
+      display: block;
+    }
+    .creator-bio-secondary span:first-child {
+      margin-bottom: 5px;
+    }
+    
+    .punchy-sub-line-stacked { 
+      display: flex; 
+      flex-direction: column; 
+      align-items: flex-start;
+      width: 100%; 
+      text-align: left; 
+      margin-top: 18px; 
+      margin-bottom: 16px; 
+      gap: 3px;
+      font-family: var(--font-display); 
+      font-size: 0.52rem; 
+      font-weight: 800; 
+      color: var(--text-pure); 
+      letter-spacing: 0.6px; 
+      text-transform: uppercase; 
+      line-height: 1.35;
+      text-shadow: 0 0 12px var(--accent-red-glow);
+    }
+    .punchy-sub-line-stacked span {
+      white-space: nowrap;
+      display: block;
+    }
+    
+    html[dir="rtl"] .punchy-sub-line-stacked {
+      text-align: right;
+      align-items: flex-start;
+      font-family: var(--font-cairo), var(--font-body);
+      letter-spacing: normal;
+    }
+
+    /* Standee column is absolutely positioned so it never pushes or shifts the text block */
+    .hero-standee-col { 
+      position: absolute; 
+      right: 0; 
+      bottom: 0; 
+      width: 55%; 
+      height: 308px; 
+      display: flex; 
+      align-items: flex-end; 
+      justify-content: flex-end; 
+      pointer-events: none;
+      z-index: 1;
+      overflow: visible;
+      transform: none;
+    }
+    .hero-standee-inner {
+      width: 100%;
+      height: 308px;
+      overflow: visible;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+    .creator-cutout-img { 
+      width: 146.14%; height: 307.06px; object-fit: contain; object-position: bottom right; 
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); pointer-events: none; 
+      transform: scale(1.28) translateX(12%) translateY(0); transform-origin: bottom right;
+      clip-path: inset(0 16% 0 16%);
+    }
+    html[dir="rtl"] .hero-standee-col { 
+      right: auto; 
+      left: 0; 
+      direction: ltr;
+      justify-content: flex-start; 
+      transform: none; 
+      overflow: visible;
+    }
+    html[dir="rtl"] .hero-standee-inner {
+      direction: ltr;
+      justify-content: flex-start;
+      overflow: visible;
+    }
+    html[dir="rtl"] .creator-cutout-img { 
+      object-position: bottom left; 
+      transform-origin: bottom left; 
+      transform: scale(1.22) translateX(0) translateY(0); 
+      clip-path: none !important; 
+    }
+
+    .stats-triad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 18px; margin-top: 10px; }
+    .stat-pod { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 10px 6px; text-align: center; pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+    .stat-number { font-family: var(--font-display); font-size: 0.95rem; font-weight: 800; color: var(--text-pure); line-height: 1; margin-bottom: 3px; }
+    .stat-number span.red { color: var(--accent-red); }
+    .stat-label { font-family: var(--font-body); font-size: 0.54rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .primary-action-btn { width: 100%; background: #ffffff; color: #08090b; font-family: var(--font-display); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; padding: 11px 16px; border-radius: 40px; border: none; display: flex; align-items: center; justify-content: space-between; cursor: pointer; text-decoration: none; box-shadow: 0 4px 16px rgba(255, 255, 255, 0.12); transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s; margin-bottom: 22px; }
+    [data-theme="light"] .primary-action-btn { background: #08090b; color: #ffffff; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); }
+    .primary-action-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(255, 255, 255, 0.2); }
+    .action-icon-circle { width: 24px; height: 24px; background: var(--accent-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.65rem; }
+
+    .section-header-bar { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 10px; position: relative; }
+    .section-headline { font-family: var(--font-display); font-size: 1.02rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-pure); }
+    .section-spec-tag { font-family: var(--font-body); font-size: 0.6rem; font-weight: 700; color: var(--accent-red); letter-spacing: 0.6px; text-transform: uppercase; }
+
+    .category-duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 22px; }
+    .category-slate-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px 12px; position: relative; transition: all 0.22s ease; display: flex; flex-direction: column; min-height: 145px; cursor: pointer; }
+    .category-slate-card:hover { border-color: rgba(229, 27, 36, 0.5); background: var(--card-hover); transform: translateY(-2px); }
+    .card-matrix-index { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; color: var(--accent-red); margin-bottom: 8px; }
+    .category-slate-card h4 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--text-pure); letter-spacing: 0.3px; text-transform: uppercase; margin-bottom: 3px; }
+    .category-slate-card p { font-family: var(--font-body); font-size: 0.66rem; font-weight: 400; color: var(--text-muted); line-height: 1.4; margin-top: auto; padding-right: 20px; }
+    html[dir="rtl"] .category-slate-card p { padding-right: 0; padding-left: 20px; }
+    .card-nav-arrow { position: absolute; bottom: 12px; right: 12px; width: 22px; height: 22px; border-radius: 50%; background: rgba(255, 255, 255, 0.04); display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.62rem; transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+    html[dir="rtl"] .card-nav-arrow { right: auto; left: 12px; }
+    .category-slate-card:hover .card-nav-arrow { background: var(--accent-red); color: #ffffff; transform: rotate(45deg); box-shadow: 0 4px 10px var(--accent-red-glow); }
+    html[dir="rtl"] .category-slate-card:hover .card-nav-arrow { transform: rotate(-45deg); }
+
+    .filter-pills-sticky-bar { display: flex; gap: 6px; overflow-x: auto; padding: 4px 2px 10px; margin-bottom: 14px; position: sticky; top: 52px; z-index: 900; background: var(--bg-color); scrollbar-width: none; }
+    .filter-pills-sticky-bar::-webkit-scrollbar { display: none; }
+    .filter-pill-tab { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-muted); font-family: var(--font-display); font-size: 0.64rem; font-weight: 700; padding: 6px 12px; border-radius: 18px; white-space: nowrap; cursor: pointer; transition: all 0.22s ease; text-transform: uppercase; letter-spacing: 0.5px; }
+    .filter-pill-tab:hover { border-color: rgba(229, 27, 36, 0.4); color: var(--text-pure); }
+    .filter-pill-tab.active-filter { background: var(--accent-red); border-color: var(--accent-red); color: #ffffff; box-shadow: 0 4px 14px var(--accent-red-glow); }
+
+    .photo-gallery-grid, .design-gallery-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-bottom: 20px; }
+    .gallery-item-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; overflow: hidden; transition: all 0.25s ease; display: flex; flex-direction: column; }
+    .gallery-image-box { width: 100%; height: 190px; background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(18,20,26,0.8) 100%); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .gallery-image-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .gallery-item-card:hover .gallery-image-box img { transform: scale(1.04); }
+    .gallery-category-tag { position: absolute; top: 10px; right: 10px; background: rgba(10, 12, 16, 0.8); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.12); padding: 3px 8px; border-radius: 6px; font-family: var(--font-display); font-size: 0.52rem; font-weight: 700; color: var(--accent-red); letter-spacing: 0.6px; text-transform: uppercase; }
+    html[dir="rtl"] .gallery-category-tag { right: auto; left: 10px; }
+    .gallery-content-meta { padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; }
+    .gallery-title-group h4 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--text-pure); margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.3px; }
+    .gallery-title-group p { font-family: var(--font-body); font-size: 0.62rem; color: var(--text-muted); }
+    .gallery-view-btn { width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; color: var(--text-pure); font-size: 0.7rem; transition: all 0.2s; }
+    .gallery-item-card:hover .gallery-view-btn { background: var(--accent-red); border-color: var(--accent-red); box-shadow: 0 0 10px var(--accent-red-glow); }
+
+    .expertise-editorial-section { margin: 22px 0 26px; user-select: none; }
+    .editorial-header-wrap { margin-bottom: 14px; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+    .editorial-header-wrap .diamond-lead { display: flex; align-items: center; gap: 6px; font-family: var(--font-display); font-size: 1.02rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text-pure); }
+    .editorial-header-wrap .diamond-lead span.dia { color: var(--accent-red); font-size: 0.8rem; }
+    .hand-squiggle-svg { width: 64px; height: 6px; display: block; stroke: var(--accent-red); stroke-width: 2.2; stroke-linecap: round; fill: none; filter: drop-shadow(0 0 4px var(--accent-red-glow)); }
+
+    .expertise-editorial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: relative; }
+    .expertise-editorial-col { display: flex; flex-direction: column; gap: 8px; }
+    .expertise-lead-row { display: flex; align-items: center; gap: 8px; }
+    .expertise-wireframe-icon { width: 32px; height: 32px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; color: var(--text-pure); opacity: 0.95; }
+    .expertise-meta { display: flex; flex-direction: column; gap: 2px; }
+    .expertise-num { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; color: var(--accent-red); letter-spacing: 0.4px; line-height: 1; }
+    .expertise-col-heading { font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; color: var(--text-pure); line-height: 1.25; text-transform: uppercase; letter-spacing: 0.2px; }
+    .expertise-col-body { font-family: var(--font-body); font-size: 0.65rem; font-weight: 400; line-height: 1.4; color: var(--text-muted); text-align: left; }
+    html[dir="rtl"] .expertise-col-body { text-align: right; }
+
+    .tools-flex-container { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+    .software-pill { font-family: var(--font-body); display: inline-flex; align-items: center; gap: 5px; background: var(--card-bg); border: 1px solid var(--card-border); padding: 5px 9px; border-radius: 8px; font-size: 0.65rem; font-weight: 600; color: var(--text-pure); cursor: default; }
+    .software-pill .sw-icon { font-family: var(--font-display); font-weight: 700; font-size: 0.65rem; border-radius: 4px; padding: 1px 3px; }
+    .sw-ps { background: #001e36; color: #31a8ff; } .sw-ai { background: #330000; color: #ff9a00; } .sw-lr { background: #001d26; color: #31a8ff; } .sw-pr { background: #00005b; color: #9999ff; } .sw-ae { background: #00005b; color: #9999ff; } .sw-id { background: #49021f; color: #ff3366; } .sw-xd { background: #470137; color: #ff61f6; } .sw-fg { background: #1e1e1e; color: #a259ff; } .sw-port { background: #00361c; color: #00f284; } .sw-ai-tool { background: rgba(229, 27, 36, 0.12); color: var(--accent-red); border: 1px solid var(--accent-red); }
+
+    .dual-story-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+    .story-section-title { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-pure); margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
+    .story-section-title span.diamond { color: var(--accent-red); font-size: 0.7rem; }
+    .career-timeline-node { position: relative; padding-left: 12px; margin-bottom: 10px; border-left: 1.5px solid rgba(255, 255, 255, 0.1); }
+    html[dir="rtl"] .career-timeline-node { padding-left: 0; padding-right: 12px; border-left: none; border-right: 1.5px solid rgba(255, 255, 255, 0.1); }
+    .career-timeline-node::before { content: ''; position: absolute; left: -4px; top: 4px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-red); box-shadow: 0 0 5px var(--accent-red); }
+    html[dir="rtl"] .career-timeline-node::before { left: auto; right: -4px; }
+    .timeline-date-stamp { font-family: var(--font-display); font-size: 0.62rem; font-weight: 700; color: var(--accent-red); letter-spacing: 0.3px; }
+    .timeline-job-title { font-family: var(--font-body); font-size: 0.68rem; font-weight: 600; color: var(--text-pure); margin: 1px 0; }
+    .timeline-location { font-family: var(--font-body); font-size: 0.6rem; font-weight: 400; color: var(--text-muted); }
+
+    .passion-manifesto-badge { border: 1px dashed rgba(229, 27, 36, 0.4); background: rgba(229, 27, 36, 0.05); border-radius: 10px; padding: 10px; margin-top: 10px; }
+    .manifesto-label { font-family: var(--font-body); font-size: 0.58rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.6px; text-transform: uppercase; margin-bottom: 3px; display: flex; align-items: center; gap: 4px; }
+    .manifesto-label span { color: var(--accent-red); }
+    .manifesto-words { font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; color: var(--accent-red); line-height: 1.3; text-transform: uppercase; letter-spacing: 0.2px; }
+
+    .direct-channels-pod { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 15px 14px; margin-bottom: 12px; }
+    .channels-header-row { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-body); font-size: 0.65rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.8px; margin-bottom: 12px; }
+    .channels-header-row span.direct { color: var(--accent-red); }
+    .social-quad-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .social-anchor-cube { background: rgba(255, 255, 255, 0.025); border: 1px solid var(--card-border); border-radius: 12px; padding: 12px 4px 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-decoration: none; color: var(--text-pure); transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1); }
+    .social-anchor-cube i { font-size: 1.1rem; }
+    .social-anchor-cube span { font-family: var(--font-display); font-size: 0.58rem; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-muted); }
+    .social-anchor-cube:hover { border-color: rgba(229, 27, 36, 0.5); background: rgba(229, 27, 36, 0.08); transform: translateY(-3px); }
+
+    .whatsapp-direct-cell { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: var(--text-pure); transition: all 0.22s ease; margin-bottom: 20px; cursor: pointer; }
+    .whatsapp-direct-cell:hover { border-color: rgba(0, 230, 118, 0.45); box-shadow: 0 8px 20px rgba(0, 230, 118, 0.08); }
+    .wa-flex-lead { display: flex; align-items: center; gap: 12px; }
+    .wa-icon-bubble { width: 38px; height: 38px; background: rgba(0, 230, 118, 0.1); border: 1px solid rgba(0, 230, 118, 0.25); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--accent-green); font-size: 1.2rem; }
+    .wa-textual-meta h4 { font-family: var(--font-display); font-size: 0.88rem; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--text-pure); }
+    .wa-textual-meta p { font-family: var(--font-body); font-size: 0.6rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.4px; text-transform: uppercase; }
+    .wa-external-glyph { width: 32px; height: 32px; background: var(--accent-red); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #ffffff; font-size: 0.8rem; box-shadow: 0 4px 12px var(--accent-red-glow); }
+
+    footer { margin-top: auto; padding-top: 26px; display: flex; flex-direction: column; align-items: center; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+    footer .brand-mark-copy { font-family: var(--font-display); font-size: 0.72rem; font-weight: 700; letter-spacing: 1.2px; color: var(--text-pure); text-transform: uppercase; margin-top: 6px; }
+    footer .brand-sub-disclaimer { font-family: var(--font-body); font-size: 0.6rem; font-weight: 400; color: var(--text-muted); margin-top: 4px; }
+
+    .drawer-modal-backdrop { 
+      position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(6px); 
+      -webkit-backdrop-filter: blur(6px); z-index: 2000; display: none; justify-content: center; align-items: flex-end; 
+    }
+    .drawer-modal-backdrop.open { display: flex; }
+
+    .drawer-bottom-sheet { 
+      width: 100%; max-width: 400px; background: var(--sheet-bg); border: 1px solid var(--card-border); 
+      border-radius: 28px 28px 0 0; padding: 20px 18px 48px; min-height: 480px;
+      animation: sheetBounceUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 -10px 35px rgba(0, 0, 0, 0.6); 
+    }
+    @keyframes sheetBounceUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+    .sheet-handle-pill { width: 34px; height: 4px; background: rgba(255, 255, 255, 0.18); border-radius: 4px; margin: 0 auto 16px; }
+    .sheet-top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    .sheet-top-row h3 { font-family: var(--font-display); font-size: 0.92rem; font-weight: 700; letter-spacing: 0.8px; color: var(--text-pure); text-transform: uppercase; }
+    .sheet-close-x-btn { width: 26px; height: 26px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+    .sheet-close-x-btn:hover { background: var(--accent-red); color: #fff; }
+
+    .sheet-links-stack { display: flex; flex-direction: column; gap: 10px; }
+    .sheet-nav-tile { background: rgba(255, 255, 255, 0.035); border: 1px solid var(--card-border); border-radius: 12px; padding: 13px 16px; display: flex; justify-content: space-between; align-items: center; color: var(--text-pure); text-decoration: none; font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.6px; }
+    .sheet-nav-tile:hover { background: rgba(255, 255, 255, 0.07); }
+    .sheet-nav-tile i { font-size: 0.65rem; color: var(--text-muted); }
+    .sheet-nav-tile.cta-red { background: var(--accent-red); color: #ffffff; border: none; justify-content: center; margin-top: 8px; box-shadow: 0 4px 18px var(--accent-red-glow); }
+    
+    .sheet-bottom-theme-toggle { display: flex; justify-content: center; margin-top: 22px; }
+
+    .toast-pill { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(14, 16, 21, 0.92); border: 1px solid var(--accent-red); backdrop-filter: blur(14px); padding: 9px 18px; border-radius: 30px; display: flex; align-items: center; gap: 9px; font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; color: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.8); opacity: 0; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); z-index: 3000; pointer-events: none; }
+    .toast-pill.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-bubbles-wrapper">
+    <div class="ambient-bubble bubble-1"></div>
+    <div class="ambient-bubble bubble-2"></div>
+    <div class="ambient-bubble bubble-3"></div>
+  </div>
+
+  <div class="app-screen-frame">
+
+    <main>
+      <header class="dynamic-header" id="mainHeader">
+        <div class="header-inner">
+          <a href="javascript:void(0)" onclick="navigateTo('home')" class="as-media-brand-mark" title="AS MEDIA Home">
+            <svg class="as-vector-logo-svg" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 39.6 23.1">
+              <path class="logo-fill-adaptive" d="M15.2,10.1l-2.4-4.4-2.5,4.5h4.9ZM13.6,0c1.3,0,1.5.1,2.5,1.7l2.7,4.8,2.7,4.8c-2.2,0-4.1.9-5.1,2.9H7.9s-2,3.6-2,3.6H0S9.4,2,9.4,2C10.6,0,10.8,0,11.9,0h1.7Z"/>
+              <path class="logo-fill-adaptive" d="M33.2,17.9h-16s0-1.4.1-2.1c.2-1.4,1.4-2.1,2.7-2.1h13.2c.8,0,1.3-.5,1.3-1.2,0-.5-.5-1.2-1.2-1.3h-6.9c-1.2,0-2.4-.4-3.4-1-1.8-1-2.6-2.8-2.6-4.8,0-1.8.9-3.4,2.5-4.3.8-.4,1.8-.9,2.7-.9h13.8c0,2.2-1.7,4.2-4.1,4.2h-8.8c-.7,0-1.2.6-1.2,1.2,0,.5.4,1.2,1.1,1.2h7c3.4,0,6.2,2,6.1,5.6,0,3.6-2.9,5.5-6.4,5.5h0s0,0,0,0Z"/>
+              <rect class="logo-red-accent" x="17.2" y="17.9" width="17" height="5.2"/>
+              <path class="logo-text-media" d="M27.8,20.1c0-.4-.4-.5-.7-.6h-4v.5c-.1,0,1.7,0,1.7,0l-.2.9h-1.8v.5c-.1,0,1.9,0,1.9,0l-.2.9h-3.1l.6-2.1-.5.8-.8,1.3h-.9l-.4-2.1-.5,2.1h-1l.4-1.6.6-2.2h1.3l.4,2.4,1.4-2.2c0-.1.2-.2.4-.2h5.1c.3,0,.6,0,.9.2.7.4.8,1.2.6,1.9-.2.8-.7,1.4-1.5,1.6-.2,0-.4,0-.7,0 h-1.8s.4-1.6.4-1.6l.2-.8h1l-.3,1.4h.6c.1,0,.3,0,.4,0,.3,0,.5-.3.7-.6.1-.2.2-.5.1-.8,0,0,0,0,0,0Z"/>
+              <polygon class="logo-text-media" points="32.3 21.5 32 19.8 30.8 22 30.5 22.4 29.5 22.4 30.3 21 31.7 18.6 32.8 18.6 33.3 21.3 33.5 22.4 31.2 22.4 31.7 21.5 32.3 21.5"/>
+              <polygon class="logo-text-media" points="29.8 20.9 29.5 22.4 28.5 22.4 29.4 18.6 30.4 18.6 29.8 20.9"/>
+            </svg>
+          </a>
+
+          <div class="bar-controls-group">
+            <div class="lang-toggle-pill" onclick="toggleNavbarLanguage()" title="Switch EN/AR">EN</div>
+            <button aria-label="Toggle Dark/Light Mode" class="theme-toggle-simple-btn" onclick="toggleTheme()" title="Toggle Cyber Udjat Eye Theme">
+              <svg class="theme-icon theme-icon-cyber-dark" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 16 C10 8, 26 8, 32 16 C26 24, 10 24, 4 16 Z" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linejoin="round"/>
+                <circle cx="18" cy="16" r="4.5" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+                <circle cx="18" cy="16" r="1.5" fill="#f43f5e"/>
+                <path d="M14 22 L12 28 M22 22 L24 28" fill="none" stroke="#38bdf8" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+              <svg class="theme-icon theme-icon-cyber-light" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 16 C10 8, 26 8, 32 16 C26 24, 10 24, 4 16 Z" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linejoin="round"/>
+                <circle cx="18" cy="16" r="4.5" fill="none" stroke="#f59e0b" stroke-width="1.8"/>
+                <circle cx="18" cy="16" r="1.5" fill="#f59e0b"/>
+                <line x1="18" y1="5" x2="18" y2="8" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="9" y1="10" x2="11" y2="12" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="27" y1="10" x2="25" y2="12" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+
+            <button aria-label="Open Navigation" class="menu-burger-btn" onclick="openDrawer()">
+              <span class="burger-line burger-line-1"></span>
+              <span class="burger-line burger-line-3"></span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <section class="view-page active-view" id="page-home">
+        
+        <div class="hero-split-stage">
+          <!-- 
+            TEXT BLOCK METRICS & DIMENSIONS:
+            - Max Width: 52% of container (~190px)
+            - Vertical Offset: translateY(-60px)
+            - Padding: 0px
+          -->
+          <div class="hero-typography-col">
+            <div class="title-stacked-3d en-title" 
+                 data-en="ABOUT" 
+                 data-es="ACERCA" 
+                 data-tr="HAKKINDA" 
+                 data-fr="À PROPOS" 
+                 data-it="PROFILO" 
+                 data-zh="关于" 
+                 data-ru="ОБ АВТОРЕ">ABOUT</div>
+                 
+            <div class="title-stacked-3d ar-title" data-ar="نبذة">نبذة</div>
+            
+            <div class="author-name-lead" 
+                 data-en="ALI" 
+                 data-ar="علي" 
+                 data-es="ALI" 
+                 data-tr="ALİ" 
+                 data-fr="ALI" 
+                 data-it="ALI" 
+                 data-zh="阿里" 
+                 data-ru="АЛИ">ALI</div>
+            
+            <div class="author-surname-red" 
+                 data-en="ELSEWEDY" 
+                 data-ar="السويدي" 
+                 data-es="ELSEWEDY" 
+                 data-tr="ELSEWEDY" 
+                 data-fr="ELSEWEDY" 
+                 data-it="ELSEWEDY" 
+                 data-zh="埃尔苏韦迪" 
+                 data-ru="ЭЛЬСЕВИДИ">ELSEWEDY</div>
+
+            <div class="roles-unified-pod">
+              <span class="role-pod-item" data-en="Designer" data-ar="مصمم" data-es="Diseñador" data-tr="Tasarımcı" data-fr="Designer" data-it="Designer" data-zh="设计师" data-ru="Дизайнер">Designer</span>
+              <span class="role-pod-item" data-en="Photographer" data-ar="مصور" data-es="Fotógrafo" data-tr="Fotoğrafçı" data-fr="Photographe" data-it="Fotografo" data-zh="摄影师" data-ru="Фотограф">Photographer</span>
+              <span class="role-pod-item" data-en="Director" data-ar="مخرج" data-es="Director" data-tr="Yönetmen" data-fr="Directeur" data-it="Direttore" data-zh="导演" data-ru="Режиссер">Director</span>
+            </div>
+
+            <div class="creator-bio-primary"
+                 data-en="THE EYE BEHIND THE MACHINE."
+                 data-ar="العين الخفية خلف الآلة."
+                 data-es="EL OJO DETRÁS DE LA MÁQUINA."
+                 data-tr="MAKİNENİN ARKASINDAKİ GÖZ."
+                 data-fr="L'ŒIL DERRIÈRE LA MACHINE."
+                 data-it="L'OCCHIO DIETRO LA MACCHINA."
+                 data-zh="机械背后的 Lens 之眼。"
+                 data-ru="ВЗГЛЯД ИЗУМИТЕЛЬНОЙ МАШИНЫ.">
+              THE EYE BEHIND THE MACHINE.
+            </div>
+
+            <div class="creator-bio-secondary">
+              <span data-en="Turning high-energy automotive scenes and bespoke digital systems into powerful visual stories." 
+                    data-ar="تحويل مشاهد السيارات الحماسية وأنظمة التصميم الرقمي إلى قصص بصرية ملهمة." 
+                    data-es="Transformando la energía automotriz y los sistemas digitales en narrativas visuales." 
+                    data-tr="Yüksek enerjili otomotiv sahnelerini ve dijital sistemleri etkileyici görsel hikayelere dönüştürüyorum." 
+                    data-fr="Transformer l'énergie de l'univers automobile et les systèmes digitaux en récits visuels." 
+                    data-it="Trasformo l'adrenalina automotive e i sistemi digitali in narrazioni visive memorabili." 
+                    data-zh="将高能汽车动感与定制数字系统转化为强大视觉叙事。" 
+                    data-ru="Превращаю динамику автомобильного мира и цифровые системы в мощные визуальные истории.">Turning high-energy automotive scenes and bespoke digital systems into powerful visual stories.</span>
+              <span data-en="From high-speed track coverage to commercial staging, crafting visuals engineered with technical precision." 
+                    data-ar="من تغطية الحلبات فائقة السرعة إلى التنسيق التجاري، نصنع بصريات هندسية دقيقة." 
+                    data-es="Desde la cobertura en pista hasta la puesta en escena comercial, creando visuales con precisión técnica." 
+                    data-tr="Pist çekimlerinden ticari sahnelemeye kadar teknik hassasiyetle tasarlanmış görseller." 
+                    data-fr="De la piste au staging commercial, des visuels façonnés avec précision technique." 
+                    data-it="Dalla pista allo staging commerciale, con precisione tecnica." 
+                    data-zh="从高速赛道抓拍到商业布景，精工缔造每一帧视觉。" 
+                    data-ru="От трековых съемок до коммерческого стайлинга, создавая кадры с инженерной точностью.">From high-speed track coverage to commercial staging, crafting visuals engineered with technical precision.</span>
+            </div>
+
+            <div class="punchy-sub-line-stacked">
+              <span data-en="BUILT TO MOVE." data-ar="صُممت لتنطلق." data-es="CREADO PARA MOVERSE." data-tr="HAREKET İÇİN ÜRETİLDİ." data-fr="CONÇU POUR VIBRER." data-it="CREATIVO PER CORRERE." data-zh="为极致动感而生。" data-ru="СОЗДАНО ДЛЯ ДВИЖЕНИЯ.">BUILT TO MOVE.</span>
+              <span data-en="DESIGNED TO STAND OUT." data-ar="وأُبدعت لتتميز." data-es="DISEÑADO PARA DESTACAR." data-tr="FARK YARATMAK İÇİN TASARLANDI." data-fr="PENSÉ POUR SE DÉMARQUER." data-it="PROGETTATO PER DISTINGUERSI." data-zh="为瞩目焦点而设。" data-ru="РАЗРАБОТАНО ВОСХИЩАТЬ.">DESIGNED TO STAND OUT.</span>
+            </div>
+          </div>
+
+          <div class="hero-standee-col">
+            <!-- 
+              PORTRAIT IMAGE DIMENSIONS & SCALE:
+              - Scaled by 1.28 with ample breathing space away from the text block.
+              - Side edge cropping increased to 16% for deeper clean framing.
+              - Shifted flush to the far right within the frame boundary.
+            -->
+            <div class="hero-standee-inner">
+              <img alt="Ali Elsewedy" class="creator-cutout-img dark-photo-mode" src="https://lh3.googleusercontent.com/d/13GRXgFwKlE6F0bjhGDwEyxz-_8eIoofF" style="display: block;"/>
+              <img alt="Ali Elsewedy Light" class="creator-cutout-img light-photo-mode" src="https://lh3.googleusercontent.com/d/1Nq0-KeCEBnMofq2nPp7PMowbY_jxB_Lg" style="display: none;"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-triad">
+          <div class="stat-pod">
+            <div class="stat-number">2016</div>
+            <div class="stat-label" data-en="Since" data-ar="منذ" data-es="Desde" data-tr="Kuruluş" data-fr="Depuis" data-it="Dal" data-zh="创立于" data-ru="С">Since</div>
+          </div>
+          <div class="stat-pod">
+            <div class="stat-number">100<span class="red">+</span></div>
+            <div class="stat-label" data-en="Projects" data-ar="مشاريع" data-es="Proyectos" data-tr="Proje" data-fr="Projets" data-it="Progetti" data-zh="完成项目" data-ru="Проектов">Projects</div>
+          </div>
+          <div class="stat-pod">
+            <div class="stat-number">AI <span class="red">∞</span></div>
+            <div class="stat-label" data-en="Workflow" data-ar="ذكاء" data-es="IA" data-tr="İş Akışı" data-fr="Processus" data-it="Metodo" data-zh="AI 赋能" data-ru="Процесс">Workflow</div>
+          </div>
+        </div>
+
+        <button class="primary-action-btn" onclick="navigateTo('about')">
+          <span data-en="Discover My Journey" data-ar="اكتشف مسيرتي المهنية" data-es="Descubre mi trayectoria" data-tr="Yolculuğumu Keşfet" data-fr="Découvrir mon parcours" data-it="Scopri il mio percorso" data-zh="探索我的旅程" data-ru="Узнать мой путь">Discover My Journey</span>
+          <div class="action-icon-circle"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+        </button>
+
+        <div class="section-header-bar">
+          <div class="section-headline" data-en="Photography" data-ar="التصوير الفوتوغرافي" data-es="Fotografía" data-tr="Fotoğrafçılık" data-fr="Photographie" data-it="Fotografia" data-zh="摄影艺术" data-ru="Фотоискусство">Photography</div>
+          <div class="section-spec-tag" data-en="// 4 Categories" data-ar="// 4 أقسام" data-es="// 4 Categorías" data-tr="// 4 Kategori" data-fr="// 4 Domaines" data-it="// 4 Categorie" data-zh="// 4大板块" data-ru="// 4 Направления">// 4 Categories</div>
+        </div>
+        
+        <div class="category-duo-grid">
+          <div class="category-slate-card spotlight-card" onclick="openPhotoCategory('events')">
+            <div class="card-matrix-index">01</div>
+            <h4 data-en="EVENTS" data-ar="الفعاليات" data-es="EVENTOS" data-tr="ETKİNLİKLER" data-fr="ÉVÉNEMENTS" data-it="EVENTI" data-zh="赛事活动" data-ru="СОБЫТИЯ">EVENTS</h4>
+            <p data-en="Stance, drift & time attack coverages." data-ar="تغطية سباقات الدريفت والسرعة." data-es="Coberturas de stance, drift y time attack." data-tr="Stance, drift ve zaman karşı yarış çekimleri." data-fr="Couverture d'événements stance et drift." data-it="Reportage di eventi stance e drift." data-zh="漂移与竞速赛事的精彩抓拍。" data-ru="Освещение дрифта и гонок.">Stance, drift & time attack coverages.</p>
+            <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+          </div>
+
+          <div class="category-slate-card spotlight-card" onclick="openPhotoCategory('showroom')">
+            <div class="card-matrix-index">02</div>
+            <h4 data-en="SHOWROOM & PPF" data-ar="المعرض وحماية الطلاء" data-es="SHOWROOM Y PPF" data-tr="SHOWROOM & PPF" data-fr="SHOWROOM & PPF" data-it="SHOWROOM & PPF" data-zh="展厅与车衣" data-ru="ШОУРУМ И PPF">SHOWROOM & PPF</h4>
+            <p data-en="Commercial detailing & automotive staging." data-ar="إبراز تفاصيل السيارات في المعارض." data-es="Detallado comercial y puesta en escena." data-tr="Ticari detaylandırma ve sergileme." data-fr="Mise en valeur commerciale et detailing." data-it="Valorizzazione commerciale e detailing." data-zh="商业精洗与展厅布景。">Commercial detailing & automotive staging.</p>
+            <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+          </div>
+
+          <div class="category-slate-card spotlight-card" onclick="openPhotoCategory('products')">
+            <div class="card-matrix-index">03</div>
+            <h4 data-en="PRODUCT SHOTS" data-ar="المنتجات" data-es="FOTOS DE PRODUCTO" data-tr="ÜRÜN ÇEKİMLERİ" data-fr="PRODUITS" data-it="PRODOTTI" data-zh="产品视觉" data-ru="ПРОДУКТЫ">PRODUCT SHOTS</h4>
+            <p data-en="Spare parts, calipers & forged wheel systems." data-ar="توثيق قطع الأداء والجنوط الرياضية." data-es="Repuestos y sistemas de rines." data-tr="Yedek parçalar ve forged jantlar." data-fr="Pièces de haute performance." data-it="Componenti ad alte prestazioni." data-zh="高性能配件与锻造轮毂。">Spare parts, calipers & forged wheel systems.</p>
+            <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+          </div>
+
+          <div class="category-slate-card spotlight-card" onclick="openPhotoCategory('sessions')">
+            <div class="card-matrix-index">04</div>
+            <h4 data-en="PHOTO SESSIONS" data-ar="جلسات تصوير" data-es="SESIONES" data-tr="ÖZEL ÇEKİMLER" data-fr="SÉANCES PHOTO" data-it="SHOOTING" data-zh="专属大片" data-ru="ФОТОСЕССИИ">PHOTO SESSIONS</h4>
+            <p data-en="Light painting & dramatic aesthetic night rolling." data-ar="الرسم بالضوء وتصوير الحركة الليلية." data-es="Light painting y rodaje nocturno." data-tr="Light painting ve gece sürüş çekimleri." data-fr="Light painting et esthétique nocturne." data-it="Light painting e scatti notturni." data-zh="光绘艺术与夜间动态抓拍。" data-ru="Лайтпейнтинг и ночная динамика.">Light painting & dramatic aesthetic night rolling.</p>
+            <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+          </div>
+        </div>
+
+        <div class="section-header-bar">
+          <div class="section-headline" data-en="Design" data-ar="التصميم الجرافيكي" data-es="Diseño" data-tr="Tasarım" data-fr="Design" data-it="Design" data-zh="设计视觉" data-ru="Дизайн">Design</div>
+          <div class="section-spec-tag" data-en="// 5 Categories" data-ar="// 5 أقسام" data-es="// 5 Categorías" data-tr="// 5 Kategori" data-fr="// 5 Domaines" data-it="// 5 Categorie" data-zh="// 5大专长" data-ru="// 5 Направлений">// 5 Categories</div>
+        </div>
+        
+        <div class="category-duo-grid">
+          <div class="category-slate-card spotlight-card" onclick="openDesignCategory('social')">
+            <div class="card-matrix-index">01</div>
+            <h4 data-en="SOCIAL" data-ar="السوشيال ميديا" data-es="SOCIAL" data-tr="SOSYAL MEDYA" data-fr="RÉSEAUX SOCIAUX" data-it="SOCIAL" data-zh="社交媒体" data-ru="СОЦСЕТИ">SOCIAL</h4>
+            <p data-en="High-converting campaign creatives." data-ar="تصاميم تسويقية لزيادة التفاعل." data-es="Creatividades de alta conversión." data-tr="Yüksek dönüşümlü kampanya görselleri." data-fr="Visuels percutants pour maximiser l'engagement." data-it="Creatività mirate alle conversioni." data-zh="高转化率广告创意设计。" data-ru="Высоко конверсионные креативы.">High-converting campaign creatives.</p>
+            <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+          </div>
+
+          <div class="category-slate-card spotlight-card" onclick="openDesignCategory('uiux')">
+            <div class="card-matrix-index">02</div>
+            <h4 data-en="UI / UX" data-ar="واجهات المستخدم" data-es="UI / UX" data-tr="UI / UX" data-fr="UI / UX" data-it="UI / UX" data-zh="界面交互" data-ru="UI / UX">UI / UX</h4>
+            <p data-en="App dashboards & wireframe prototypes." data-ar="لوحات تحكم ونماذج تفاعلية للتطبيقات." data-es="Paneles de aplicaciones y prototipos." data-tr="Uygulama panelleri ve prototipler." data-fr="Tableaux de bord et maquettes." data-it="Interfacce e prototipi interattivi." data-zh="直观的仪表盘与交互原型。" data-ru="Интерфейсы и прототипы.">App dashboards & wireframe prototypes.</p>
+            <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+          </div>
+
+          <div class="category-slate-card spotlight-card" onclick="openDesignCategory('branding')">
+            <div class="card-matrix-index">03</div>
+            <h4 data-en="BRANDING" data-ar="الهوية البصرية" data-es="BRANDING" data-tr="MARKALAŞMA" data-fr="BRANDING" data-it="BRANDING" data-zh="品牌视觉" data-ru="БРЕНДИНГ">BRANDING</h4>
+            <p data-en="Visual identity systems & lockups." data-ar="هندسة هويات بصرية متكاملة." data-es="Sistemas de identidad visual." data-tr="Görsel kimlik sistemleri." data-fr="Création d'identités visuelles." data-it="Sviluppo di identità visive." data-zh="品牌视觉识别系统。" data-ru="Фирменный стиль.">Visual identity systems & lockups.</p>
+            <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+          </div>
+
+          <div class="category-slate-card spotlight-card" onclick="openDesignCategory('logofolio')">
+            <div class="card-matrix-index">04</div>
+            <h4 data-en="LOGOFOLIO" data-ar="الشعارات" data-es="LOGOFOLIO" data-tr="LOGO TASARIMI" data-fr="LOGOFOLIO" data-it="LOGOFOLIO" data-zh="标志集锦" data-ru="ЛОГОТИПЫ">LOGOFOLIO</h4>
+            <p data-en="Logomarks & bespoke vector badges." data-ar="ابتكار شعارات وشارات مخصصة." data-es="Emblemas vectoriales únicos." data-tr="Özel vektör rozetler." data-fr="Emblèmes sur-mesure." data-it="Emblemi vettoriali su misura." data-zh="定制化矢量徽章。" data-ru="Уникальные логотипы.">Logomarks & bespoke vector badges.</p>
+            <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+          </div>
+
+          <div class="category-slate-card spotlight-card" onclick="openDesignCategory('packaging')" style="grid-column: span 2;">
+            <div class="card-matrix-index">05</div>
+            <h4 data-en="PACKAGING & MERCHANDISE" data-ar="التغليف والمنتجات" data-es="EMBALAJE Y MERCANCÍA" data-tr="AMBALAJ VE ÜRÜNLER" data-fr="PACKAGING & MERCHANDISE" data-it="PACKAGING E MERCHANDISE" data-zh="包装与周边" data-ru="УПАКОВКА И МЕРЧ">PACKAGING & MERCHANDISE</h4>
+            <p data-en="Die-cut structural designs, boxes & technical vinyls." data-ar="تصميم الصناديق والفينيل التقني." data-es="Diseños estructurales y vinilos técnicos." data-tr="Özel kesim kutular ve teknik viniller." data-fr="Conception de packagings et vinyles." data-it="Design strutturale e grafiche." data-zh="压切结构设计与特种车膜。" data-ru="Структурная упаковка и винилы.">Die-cut structural designs, boxes & technical vinyls.</p>
+            <div class="card-nav-arrow"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 30px; margin-bottom: 20px;">
+          <div class="status-capsule-badge">
+            <div class="status-live-beacon"></div>
+            <span class="status-text" data-en="Available For Direct Inquiries" data-ar="متاح لاستقبال المشاريع والاستفسارات" data-es="Disponible para consultas directas" data-tr="Doğrudan Projeler İçin Müsait" data-fr="Disponible pour nouveaux projets" data-it="Disponibile per nuovi progetti" data-zh="随时接受项目咨询与合作" data-ru="Доступен для новых проектов">Available For Direct Inquiries</span>
+          </div>
+
+          <div class="title-stacked-3d" style="font-size: 2.1rem;" data-en="LET'S" data-ar="دعنا" data-es="VAMOS A" data-tr="BAĞLANTI" data-fr="EN" data-it="METTIAMoci" data-zh="联络" data-ru="ДАВАЙ">LET'S</div>
+          <div class="author-surname-red" style="font-size: 2.1rem; margin-bottom: 12px;" data-en="CONNECT" data-ar="نتواصل" data-es="CONECTAR" data-tr="KURUN" data-fr="CONTACT" data-it="IN CONTATTO" data-zh="我们" data-ru="СВЯЖЕМСЯ">CONNECT</div>
+
+          <div class="direct-channels-pod spotlight-card" style="margin-top: 12px;">
+            <div class="channels-header-row">
+              <span data-en="CHANNELS & PROFILES" data-ar="المنصات والملفات الشخصية" data-es="CANALES Y PERFILES" data-tr="KANALLAR VE PROFİLLER" data-fr="CANAUX & PROFILS" data-it="CANALI & PROFILI" data-zh="社交频道与主页" data-ru="КАНАЛЫ И ПРОФИЛИ">CHANNELS & PROFILES</span>
+              <span class="direct" data-en="// DIRECT" data-ar="// روابط مباشرة" data-es="// DIRECTO" data-tr="// DOĞRUDAN" data-fr="// DIRECT" data-it="// DIRETTO" data-zh="// 快速直达" data-ru="// ПРЯМО">// DIRECT</span>
+            </div>
+            <div class="social-quad-row">
+              <a href="https://www.behance.net" target="_blank" class="social-anchor-cube spotlight-card" title="Behance">
+                <i class="fa-brands fa-behance"></i>
+                <span>BEHANCE</span>
+              </a>
+              <a href="https://www.instagram.com/sewedy_media?stkn=MXY4MzY4bTJ3MWZzcw==" target="_blank" class="social-anchor-cube spotlight-card" title="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+                <span>INSTAGRAM</span>
+              </a>
+              <a href="https://www.facebook.com/share/19KCe8Mm3H/" target="_blank" class="social-anchor-cube spotlight-card" title="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+                <span>FACEBOOK</span>
+              </a>
+              <a href="https://wa.me/qr/5JRN6AWP6WZQG1" target="_blank" class="social-anchor-cube spotlight-card" title="WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>WHATSAPP</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view-page" id="page-photography">
+        <div class="title-stacked-3d" style="font-size: 1.5rem; margin-bottom: 4px;" data-en="PHOTO" data-ar="معرض" data-es="FOTO" data-tr="FOTOĞRAF" data-fr="PHOTO" data-it="FOTO" data-zh="摄影" data-ru="ФОТО">PHOTO</div>
+        <div class="author-surname-red" style="font-size: 1.9rem; margin-bottom: 12px;" data-en="GALLERY" data-ar="التصوير" data-es="GALERÍA" data-tr="GALERİ" data-fr="GALERIE" data-it="GALLERIA" data-zh="画廊" data-ru="ГАЛЕРЕЯ">GALLERY</div>
+
+        <div class="filter-pills-sticky-bar" id="photoFilterBar">
+          <button class="filter-pill-tab active-filter" onclick="filterPhotos('all', this)" data-en="All" data-ar="الكل" data-es="Todos" data-tr="Tümü" data-fr="Tous" data-it="Tutti" data-zh="全部" data-ru="Все">All</button>
+          <button class="filter-pill-tab" onclick="filterPhotos('events', this)" data-en="Events" data-ar="الفعاليات" data-es="Eventos" data-tr="Etkinlikler" data-fr="Événements" data-it="Eventi" data-zh="活动" data-ru="События">Events</button>
+          <button class="filter-pill-tab" onclick="filterPhotos('showroom', this)" data-en="Showroom & PPF" data-ar="المعرض والحماية" data-es="Showroom y PPF" data-tr="Showroom & PPF" data-fr="Showroom & PPF" data-it="Showroom & PPF" data-zh="展厅与车衣" data-ru="Шоурум и PPF">Showroom & PPF</button>
+          <button class="filter-pill-tab" onclick="filterPhotos('products', this)" data-en="Product Shots" data-ar="المنتجات" data-es="Productos" data-tr="Ürün Çekimleri" data-fr="Produits" data-it="Prodotti" data-zh="产品特写" data-ru="Предметка">Product Shots</button>
+          <button class="filter-pill-tab" onclick="filterPhotos('sessions', this)" data-en="Photo Sessions" data-ar="جلسات التصوير" data-es="Sesiones" data-tr="Çekim Seansları" data-fr="Séances" data-it="Shooting" data-zh="专属拍摄" data-ru="Сессии">Photo Sessions</button>
+        </div>
+
+        <div class="photo-gallery-grid" id="photoGalleryContainer">
+          <div class="gallery-item-card spotlight-card" data-category="events">
+            <div class="gallery-image-box">
+              <div class="gallery-category-tag" data-en="Events" data-ar="فعاليات" data-es="Eventos" data-tr="Etkinlikler" data-fr="Événements" data-it="Eventi" data-zh="活动" data-ru="События">Events</div>
+              <img src="https://placehold.co/600x400/12141a/e51b24?text=Motorsport+Drift+Coverage" alt="Events" />
+            </div>
+            <div class="gallery-content-meta">
+              <div class="gallery-title-group">
+                <h4 data-en="Time Attack & Drift Battle" data-ar="بطولات الدريفت والسرعة" data-es="Time Attack y Drift" data-tr="Time Attack & Drift" data-fr="Time Attack & Drift" data-it="Time Attack & Drift" data-zh="时间赛与漂移大战" data-ru="Тайм-аттак и Дрифт">Time Attack & Drift Battle</h4>
+                <p data-en="Stance & high-speed rolling dynamics" data-ar="ديناميكيات التصوير السريع" data-es="Dinámica de rodaje a alta velocidad" data-tr="Yüksek hızda hareket dinamikleri" data-fr="Dynamiques haute vitesse" data-it="Dinamiche di movimento" data-zh="姿态与高速动态抓拍" data-ru="Высокая динамика">Stance & high-speed rolling dynamics</p>
+              </div>
+              <div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="primary-action-btn" onclick="navigateTo('connect')">
+          <span data-en="Book Photo Session" data-ar="احجز جلسة تصوير خاصة" data-es="Reservar sesión" data-tr="Fotoğraf Seansı Rezerve Et" data-fr="Réserver une séance" data-it="Prenota un servizio" data-zh="预约专属拍摄" data-ru="Забронировать фотосессию">Book Photo Session</span>
+          <div class="action-icon-circle"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+        </button>
+      </section>
+
+      <section class="view-page" id="page-design">
+        <div class="title-stacked-3d" style="font-size: 1.5rem; margin-bottom: 4px;" data-en="DESIGN" data-ar="معرض" data-es="DISEÑO" data-tr="TASARIM" data-fr="DESIGN" data-it="DESIGN" data-zh="设计" data-ru="ДИЗАЙН">DESIGN</div>
+        <div class="author-surname-red" style="font-size: 1.9rem; margin-bottom: 12px;" data-en="GALLERY" data-ar="التصميم" data-es="GALERÍA" data-tr="GALERİ" data-fr="GALERIE" data-it="GALLERIA" data-zh="画廊" data-ru="ГАЛЕРЕЯ">GALLERY</div>
+
+        <div class="filter-pills-sticky-bar" id="designFilterBar">
+          <button class="filter-pill-tab active-filter" onclick="filterDesigns('all', this)" data-en="All" data-ar="الكل" data-es="Todos" data-tr="Tümü" data-fr="Tous" data-it="Tutti" data-zh="全部" data-ru="Все">All</button>
+          <button class="filter-pill-tab" onclick="filterDesigns('social', this)" data-en="Social" data-ar="السوشيال" data-es="Social" data-tr="Sosyal" data-fr="Social" data-it="Social" data-zh="社交" data-ru="Соцсети">Social</button>
+          <button class="filter-pill-tab" onclick="filterDesigns('uiux', this)" data-en="UI / UX" data-ar="واجهات" data-es="UI / UX" data-tr="UI / UX" data-fr="UI / UX" data-it="UI / UX" data-zh="界面交互" data-ru="UI / UX">UI / UX</button>
+          <button class="filter-pill-tab" onclick="filterDesigns('branding', this)" data-en="Branding" data-ar="الهوية" data-es="Branding" data-tr="Marka" data-fr="Branding" data-it="Branding" data-zh="品牌识别" data-ru="Брендинг">Branding</button>
+          <button class="filter-pill-tab" onclick="filterDesigns('logofolio', this)" data-en="Logofolio" data-ar="الشعارات" data-es="Logofolio" data-tr="Logofolio" data-fr="Logofolio" data-it="Logofolio" data-zh="标志集锦" data-ru="Логотипы">Logofolio</button>
+          <button class="filter-pill-tab" onclick="filterDesigns('packaging', this)" data-en="Packaging" data-ar="التغليف" data-es="Embalaje" data-tr="Ambalaj" data-fr="Packaging" data-it="Packaging" data-zh="包装" data-ru="Упаковка">Packaging</button>
+        </div>
+
+        <div class="design-gallery-grid" id="designGalleryContainer">
+          <div class="gallery-item-card spotlight-card" data-category="social">
+            <div class="gallery-image-box">
+              <div class="gallery-category-tag" data-en="Social" data-ar="سوشيال" data-es="Social" data-tr="Sosyal" data-fr="Social" data-it="Social" data-zh="社交" data-ru="Соцсети">Social</div>
+              <img src="https://placehold.co/600x400/12141a/e51b24?text=Social+Campaign+Creatives" alt="Social" />
+            </div>
+            <div class="gallery-content-meta">
+              <div class="gallery-title-group">
+                <h4 data-en="Automotive Ad Campaign" data-ar="حملات إعلانية للسيارات" data-es="Campaña publicitaria" data-tr="Otomotiv Reklam" data-fr="Campagne publicitaire" data-it="Campagna pubblicitaria" data-zh="汽车广告创意推广" data-ru="Рекламная кампания">Automotive Ad Campaign</h4>
+                <p data-en="High-converting social media creatives" data-ar="تصاميم تسويقية لزيادة التفاعل" data-es="Creatividades de alta conversión" data-tr="Yüksek dönüşümlü görseller" data-fr="Visuels de conversion" data-it="Creatività ad alta conversione" data-zh="高转化率社交媒体素材" data-ru="Конверсионные креативы">High-converting social media creatives</p>
+              </div>
+              <div class="gallery-view-btn"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
+            </div>
+          </div>
+        </div>
+
+        <button class="primary-action-btn" onclick="navigateTo('connect')">
+          <span data-en="Start Design Project" data-ar="بدء مشروع تصميم ابتكاري" data-es="Iniciar proyecto" data-tr="Projeye Başla" data-fr="Démarrer un projet" data-it="Avvia un progetto" data-zh="开启设计项目" data-ru="Начать проект">Start Design Project</span>
+          <div class="action-icon-circle"><i class="fa-solid fa-arrow-right dynamic-arrow"></i></div>
+        </button>
+      </section>
+
+      <section class="view-page" id="page-about">
+        <div class="title-stacked-3d" style="font-size: 1.5rem;" data-en="ABOUT" data-ar="نبذة" data-es="SOBRE MÍ" data-tr="HAKKINDA" data-fr="À PROPOS" data-it="PROFILO" data-zh="关于我" data-ru="ОБ АВТОРЕ">ABOUT</div>
+        <div class="author-name-lead" data-en="ALI" data-ar="علي" data-es="ALI" data-tr="ALİ" data-fr="ALI" data-it="ALI" data-zh="阿里" data-ru="АЛИ">ALI</div>
+        <div class="author-surname-red" data-en="ELSEWEDY" data-ar="السويدي" data-es="ELSEWEDY" data-tr="ELSEWEDY" data-fr="ELSEWEDY" data-it="ELSEWEDY" data-zh="埃尔苏韦迪" data-ru="ЭЛЬСЕВИДИ" style="font-size: 1.2rem;">ELSEWEDY</div>
+
+        <div class="roles-unified-pod" style="margin-top: 4px; margin-bottom: 12px;">
+          <span class="role-pod-item" data-en="Designer" data-ar="مصمم" data-es="Diseñador" data-tr="Tasarımcı" data-fr="Designer" data-it="Designer" data-zh="设计师" data-ru="Дизайнер">Designer</span>
+          <span class="role-pod-item" data-en="Photographer" data-ar="مصور" data-es="Fotógrafo" data-tr="Fotoğrafçı" data-fr="Photographe" data-it="Fotografo" data-zh="摄影师" data-ru="Фотограф">Photographer</span>
+          <span class="role-pod-item" data-en="Art Director" data-ar="مدير فني" data-es="Director de arte" data-tr="Sanat Yönetmeni" data-fr="Directeur Artistique" data-it="Art Director" data-zh="艺术总监" data-ru="Арт-директор">Art Director</span>
+        </div>
+
+        <div class="section-headline" style="font-size: 0.92rem; margin-bottom: 6px;" data-en="HELLO!" data-ar="مرحباً بك!" data-es="¡HOLA!" data-tr="MERHABA!" data-fr="BONJOUR !" data-it="CIAO!" data-zh="你好！" data-ru="ПРИВЕТ!">HELLO!</div>
+        <p style="font-family: var(--font-body); font-size: 0.72rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 18px;" 
+           data-en="Creating has never been just a craft to me—it's how I bring bold identities to life. From capturing high-energy automotive scenes and precision detailing to crafting end-to-end visual systems and digital experiences, I partner with regional and global brands to transform concepts into powerful visual stories." 
+           data-ar="لم يكن الإبداع يوماً مجرد حرفة، بل هو طريقتي لبث الروح في الهويات الجريئة. بدءاً من توثيق تفاصيل السيارات وصولاً إلى هندسة الأنظمة البصرية الرقمية المتكاملة، أتعاون مع العلامات التجارية لتحويل الأفكار إلى سرد بصري يأسر الأنظار."
+           data-es="Crear nunca ha sido solo un oficio; es la forma en que doy vida a identidades audaces. Desde capturar la intensidad automotriz hasta diseñar sistemas visuales, colaboro con marcas globales para transformar conceptos en narrativas inolvidables."
+           data-tr="Yaratmak benim için asla sadece bir zanaat olmadı; cesur kimlikleri hayata geçirme biçimimdir. Yüksek enerjili otomotiv sahnelerini yakalamaktan görsel sistemler tasarlamaya kadar markalarla ortaklık kuruyorum."
+           data-fr="Créer n'a jamais été un simple métier ; c'est ma façon de donner vie à des identités audacieuses. De la capture de scènes automobiles à la conception de systèmes visuels, je collabore avec des marques mondiales."
+           data-it="Creare non è mai stato solo un mestiere; è il modo in cui do vita a identità audaci. Dalla cattura di scene automotive all'ideazione di sistemi visivi, collaboro con brand globali."
+           data-zh="创作对于我而言绝不仅是一门手艺——这是我赋予大胆身份生命力的方式。从捕捉高能汽车动感到构建视觉系统，我致力于与全球品牌携手，将创意转化为引人入胜的视觉叙事。"
+           data-ru="Создание для меня никогда не было просто ремеслом — это способ воплотить смелые идентичности в жизнь. От динамичных автомобильных сцен до комплексных визуальных систем — я сотрудничаю с брендами по всему миру.">
+          Creating has never been just a craft to me—it's how I bring bold identities to life. From capturing high-energy automotive scenes and precision detailing to crafting end-to-end visual systems and digital experiences, I partner with regional and global brands to transform concepts into powerful visual stories.
+        </p>
+
+        <div class="expertise-editorial-section">
+          <div class="editorial-header-wrap">
+            <div class="diamond-lead">
+              <span class="dia">◆</span> <span data-en="EXPERTISE" data-ar="مجالات الخبرة" data-es="EXPERTISE" data-tr="UZMANLIK" data-fr="EXPERTISE" data-it="ESPERIENZA" data-zh="专业领域" data-ru="ЭКСПЕРТИЗА">EXPERTISE</span>
+            </div>
+            <svg class="hand-squiggle-svg" viewBox="0 0 80 8">
+              <path d="M2 5 C16 1, 28 8, 42 4 C54 1, 68 7, 78 4" />
+            </svg>
+          </div>
+
+          <div class="expertise-editorial-grid">
+            <div class="expertise-editorial-col">
+              <div class="expertise-lead-row">
+                <svg class="expertise-wireframe-icon" viewBox="0 0 36 36">
+                  <path d="M4 13 h6 l2 -3 h12 l2 3 h6 a2 2 0 0 1 2 2 v15 a2 2 0 0 1 -2 2 H4 a2 2 0 0 1 -2 -2 V15 a2 2 0 0 1 2 -2 z"/>
+                  <circle cx="18" cy="22.5" r="5.5"/>
+                </svg>
+                <div class="expertise-meta">
+                  <span class="expertise-num">01.</span>
+                  <h4 class="expertise-col-heading" data-en="AUTOMOTIVE & COMMERCIAL PHOTOGRAPHY" data-ar="تصوير السيارات والتصوير التجاري" data-es="FOTOGRAFÍA AUTOMOTRIZ" data-tr="OTOMOTİV FOTOĞRAFÇILIĞI" data-fr="PHOTOGRAPHIE AUTOMOBILE" data-it="FOTOGRAFIA AUTOMOTIVE" data-zh="汽车与商业摄影" data-ru="АВТОМОБИЛЬНАЯ ФОТОГРАФИЯ">AUTOMOTIVE & COMMERCIAL PHOTOGRAPHY</h4>
+                </div>
+              </div>
+              <p class="expertise-col-body" 
+                 data-en="Specializing in car showrooms, PPF/detailing, light painting, motorsport coverage, and commercial product photography." 
+                 data-ar="نخبة في تصوير المعارض، حماية الطلاء والتفصيل الدقيق، الرسم بالضوء، وتغطية سباقات السيارات."
+                 data-es="Especializado en salas de exposición, PPF, light painting y automovilismo."
+                 data-tr="Showroom, PPF/detaylandırma, light painting ve motor sporları çekimlerinde uzman."
+                 data-fr="Spécialisé dans les showrooms, le PPF, le light painting et la photo de sport auto."
+                 data-it="Specializzato in showroom auto, PPF, light painting e fotografia."
+                 data-zh="专注于汽车展厅、车衣精修、光绘艺术与商业产品摄影。"
+                 data-ru="Специализируюсь на автосалонах, PPF, лайтпейнтинге и автоспорте.">
+                Specializing in car showrooms, PPF/detailing, light painting, motorsport coverage, and commercial product photography.
+              </p>
+            </div>
+
+            <div class="expertise-editorial-col">
+              <div class="expertise-lead-row">
+                <svg class="expertise-wireframe-icon" viewBox="0 0 36 36">
+                  <rect x="5" y="5" width="11" height="11" rx="2"/>
+                  <rect x="20" y="20" width="11" height="11" rx="2"/>
+                  <path d="M16 10.5 h8 a2 2 0 0 1 2 2 v8"/>
+                </svg>
+                <div class="expertise-meta">
+                  <span class="expertise-num">02.</span>
+                  <h4 class="expertise-col-heading" data-en="GRAPHIC & BRAND DESIGN" data-ar="تصميم الهوية والجرافيك" data-es="DISEÑO GRÁFICO" data-tr="GRAFİK TASARIM" data-fr="DESIGN GRAPHIQUE" data-it="GRAFICA & BRAND" data-zh="平面与品牌设计" data-ru="ГРАФИЧЕСКИЙ ДИЗАЙН">GRAPHIC & BRAND DESIGN</h4>
+                </div>
+              </div>
+              <p class="expertise-col-body" 
+                 data-en="End-to-end design solutions including UI/UX, visual identity, packaging design, social media visual systems, and company profile development." 
+                 data-ar="حلول تصميم متكاملة تشمل واجهات المستخدم، الهوية البصرية، تصميم التغليف، وأنظمة السوشيال ميديا."
+                 data-es="Soluciones integrales de diseño que incluyen UI/UX, identidad visual y packaging."
+                 data-tr="UI/UX, görsel kimlik, ambalaj tasarımı ve sosyal medya sistemleri dahil uçtan uca çözümler."
+                 data-fr="Solutions de design globales incluant UI/UX, identité visuelle et packaging."
+                 data-it="Soluzioni di design complete tra cui UI/UX, identità visiva e packaging."
+                 data-zh="端到端设计解决方案，涵盖 UI/UX、视觉识别、包装设计与社交媒体系统。"
+                 data-ru="Комплексные дизайнерские решения, включая UI/UX, фирменный стиль и упаковку.">
+                End-to-end design solutions including UI/UX, visual identity, packaging design, social media visual systems, and company profile development.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-header-bar">
+          <div class="section-headline" data-en="Tools I Use" data-ar="الأدوات والمنظومة التقنية" data-es="Herramientas" data-tr="Kullandığım Araçlar" data-fr="Outils" data-it="Strumenti" data-zh="使用的工具" data-ru="Инструменты">Tools I Use</div>
+          <div class="section-spec-tag" data-en="// Ecosystem" data-ar="// البرمجيات" data-es="// Ecosistema" data-tr="// Ekosistem" data-fr="// Écosystème" data-it="// Ecosistema" data-zh="// 生态系统" data-ru="// Экосистема">// Ecosystem</div>
+        </div>
+
+        <div class="tools-flex-container">
+          <span class="software-pill"><span class="sw-icon sw-ps">Ps</span> Photoshop</span>
+          <span class="software-pill"><span class="sw-icon sw-ai">Ai</span> Illustrator</span>
+          <span class="software-pill"><span class="sw-icon sw-lr">Lr</span> Lightroom</span>
+          <span class="software-pill"><span class="sw-icon sw-pr">Pr</span> Premiere Pro</span>
+          <span class="software-pill"><span class="sw-icon sw-ae">Ae</span> After Effects</span>
+          <span class="software-pill"><span class="sw-icon sw-id">Id</span> InDesign</span>
+          <span class="software-pill"><span class="sw-icon sw-xd">Xd</span> XD</span>
+          <span class="software-pill"><span class="sw-icon sw-fg">Fg</span> Figma</span>
+          <span class="software-pill"><span class="sw-icon sw-port">Port</span> Behance</span>
+          <span class="software-pill"><span class="sw-icon sw-ai-tool">AI</span> Higgsfield</span>
+          <span class="software-pill"><span class="sw-icon sw-ai-tool">AI</span> Magnific</span>
+          <span class="software-pill"><span class="sw-icon sw-ai-tool">AI</span> Astra 6</span>
+        </div>
+
+        <div class="dual-story-columns">
+          <div>
+            <div class="story-section-title">
+              <span class="diamond">◆</span> <span data-en="EXPERIENCE" data-ar="الخبرة المهنية" data-es="EXPERIENCIA" data-tr="DENEYİM" data-fr="EXPÉRIENCE" data-it="ESPERIENZA" data-zh="工作经验" data-ru="ОПЫТ">EXPERIENCE</span>
+            </div>
+            
+            <div class="career-timeline-node" style="padding-top: 4px;">
+              <div class="timeline-date-stamp" data-en="2021 - PRESENT" data-ar="2021 - الحاضر" data-es="2021 - PRESENTE" data-tr="2021 - BUGÜN" data-fr="2021 - PRÉSENT" data-it="2021 - OGGI" data-zh="2021 -至今" data-ru="2021 - НАСТОЯЩЕЕ ВРЕМЯ">2021 - PRESENT</div>
+              <div class="timeline-job-title" data-en="Graphic Designer / Photographer" data-ar="مصمم جرافيك / مصور محترف" data-es="Diseñador / Fotógrafo" data-tr="Grafik Tasarımcı / Fotoğrafçı" data-fr="Graphiste / Photographe" data-it="Graphic Designer / Fotografo" data-zh="平面设计师 / 摄影师" data-ru="Графический дизайнер / Фотограф">Graphic Designer / Photographer</div>
+              <div class="timeline-location" data-en="Freelance Worldwide (Al Ahly Fan)" data-ar="عمل حر عالمي (مشجع ومساند للنادي الأهلي)" data-es="Freelance Mundial (Fan del Al Ahly)" data-tr="Dünya Çapında Serbest (Al Ahly Taraftarı)" data-fr="Freelance Mondial (Fan d'Al Ahly)" data-it="Freelance Mondiale (Tifoso Al Ahly)" data-zh="全球自由职业（国民队球迷）" data-ru="Фриланс по всему миру">Freelance Worldwide (Al Ahly Fan)</div>
+            </div>
+
+            <div class="career-timeline-node">
+              <div class="timeline-date-stamp" data-en="2018 - 2021" data-ar="2018 - 2021" data-es="2018 - 2021" data-tr="2018 - 2021" data-fr="2018 - 2021" data-it="2018 - 2021" data-zh="2018 - 2021" data-ru="2018 - 2021">2018 - 2021</div>
+              <div class="timeline-job-title" data-en="Graphic Designer" data-ar="مصمم جرافيك إبداعي" data-es="Diseñador Gráfico" data-tr="Grafik Tasarımcı" data-fr="Graphiste" data-it="Graphic Designer" data-zh="平面设计师" data-ru="Графический дизайнер">Graphic Designer</div>
+              <div class="timeline-location" data-en="Various Agency Projects" data-ar="مشاريع وكالات إعلانية متعددة" data-es="Varios proyectos de agencia" data-tr="Çeşitli Ajans Projeleri" data-fr="Projets d'agences variés" data-it="Vari progetti di agenzia" data-zh="各大广告机构项目" data-ru="Проекты агентств">Various Agency Projects</div>
+            </div>
+
+            <div class="career-timeline-node">
+              <div class="timeline-date-stamp" data-en="2016 - 2018" data-ar="2016 - 2018" data-es="2016 - 2018" data-tr="2016 - 2018" data-fr="2016 - 2018" data-it="2016 - 2018" data-zh="2016 - 2018" data-ru="2016 - 2018">2016 - 2018</div>
+              <div class="timeline-job-title" data-en="Photographer" data-ar="مصور فوتوغرافي" data-es="Fotógrafo" data-tr="Fotoğrafçı" data-fr="Photographe" data-it="Fotografo" data-zh="摄影师" data-ru="Фотограф">Photographer</div>
+              <div class="timeline-location" data-en="Automotive & Commercial" data-ar="السيارات والتصوير التجاري" data-es="Automotriz y Comercial" data-tr="Otomotiv ve Ticari" data-fr="Automobile & Commercial" data-it="Automotive & Commerciale" data-zh="汽车与商业摄影" data-ru="Автомобильная и коммерческая съемка">Automotive & Commercial</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="story-section-title">
+              <span class="diamond">◆</span> <span data-en="EDUCATION" data-ar="التعليم الأكاديمي" data-es="EDUCACIÓN" data-tr="EĞİTİM" data-fr="FORMATION" data-it="ISTRUZIONE" data-zh="教育背景" data-ru="ОБРАЗОВАНИЕ">EDUCATION</span>
+            </div>
+
+            <div class="career-timeline-node">
+              <div class="timeline-job-title" data-en="Economics & Political Science" data-ar="اقتصاد وعلوم سياسية" data-es="Economía y Ciencias Políticas" data-tr="İktisat ve Siyaset Bilimi" data-fr="Économie & Sciences Politiques" data-it="Economia e Scienze Politiche" data-zh="经济学与政治学" data-ru="Экономика и политология">Economics & Political Science</div>
+              <div class="timeline-location" data-en="B.Sc. in Economics (2018 – 2023)" data-ar="بكالوريوس اقتصاد (2018 – 2023)" data-es="Licenciatura en Economía (2018 – 2023)" data-tr="İktisat Lisans Mezunu (2018 – 2023)" data-fr="Licence en Économie (2018 – 2023)" data-it="Laurea in Economia (2018 – 2023)" data-zh="经济学学士 (2018 – 2023)" data-ru="Бакалавр экономики (2018 – 2023)">B.Sc. in Economics (2018 – 2023)</div>
+            </div>
+
+            <div class="passion-manifesto-badge">
+              <div class="manifesto-label">
+                <span>◆</span> <span data-en="PASSIONATE ABOUT" data-ar="شغوف بالكامل بـ" data-es="APASIONADO DE" data-tr="TUTKULU OLDUĞUM" data-fr="PASSIONNÉ PAR" data-it="appassionato di" data-zh="热衷于" data-ru="УВЛЕЧЕН">PASSIONATE ABOUT</span>
+              </div>
+              <div class="manifesto-words" data-en="CARS, DESIGN, DETAILS & STORIES." data-ar="السيارات، التصميم، التفاصيل والقصص العميقة." data-es="AUTOS, DISEÑO, DETALLES E HISTORIAS." data-tr="ARABALAR, TASARIM, DETAYLAR VE HİKAYELER." data-fr="VOITURES, DESIGN, DÉTAILS & HISTOIRES." data-it="AUTO, DESIGN, DETTAGLI E STORIE." data-zh="汽车、设计、细节与故事。">
+                CARS, DESIGN, DETAILS & STORIES.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="primary-action-btn" onclick="navigateTo('connect')">
+          <span data-en="View My Work / Contact" data-ar="تواصل معي / تصفح الأعمال" data-es="Ver trabajos / Contacto" data-tr="Çalışmalarımı Gör / İletişim" data-fr="Voir mes travaux / Contact" data-it="Vedi i miei lavori / Contatti" data-zh="查看作品 / 联系方式" data-ru="Смотреть работы / Контакты">View My Work / Contact</span>
+          <div class="action-icon-circle"><i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i></div>
+        </button>
+      </section>
+
+      <section class="view-page" id="page-connect">
+        <div class="status-capsule-badge">
+          <div class="status-live-beacon"></div>
+          <span class="status-text" data-en="Available For Direct Inquiries" data-ar="متاح لاستقبال المشاريع والاستفسارات" data-es="Disponible para consultas directas" data-tr="Doğrudan Projeler İçin Müsait" data-fr="Disponible pour nouveaux projets" data-it="Disponibile per nuovi progetti" data-zh="随时接受项目咨询与合作" data-ru="Доступен для новых проектов">Available For Direct Inquiries</span>
+        </div>
+
+        <div class="title-stacked-3d" data-en="LET'S" data-ar="دعنا" data-es="VAMOS A" data-tr="BAĞLANTI" data-fr="EN" data-it="METTIAMoci" data-zh="联络" data-ru="ДАВАЙ">LET'S</div>
+        <div class="author-surname-red" style="font-size: 2.1rem; margin-bottom: 12px;" data-en="CONNECT" data-ar="نتواصل" data-es="CONECTAR" data-tr="KURUN" data-fr="CONTACT" data-it="IN CONTATTO" data-zh="我们" data-ru="СВЯЖЕМСЯ">CONNECT</div>
+
+        <p style="font-family: var(--font-body); font-size: 0.75rem; line-height: 1.55; color: var(--text-muted); margin-bottom: 18px;" 
+           data-en="Follow the latest releases, browse recent work decks, or jump into a quick direct chat via WhatsApp." 
+           data-ar="تابع أحدث الأعمال والإصدارات، تصفح ملفات المشاريع الأخيرة، أو ابدأ محادثة فورية ومباشرة عبر واتساب."
+           data-es="Sigue los últimos lanzamientos, explora portafolios o inicia un chat directo por WhatsApp."
+           data-tr="En son projeleri takip edin veya WhatsApp üzerinden hızlıca sohbet başlatın."
+           data-fr="Suivez les dernières sorties ou lancez une discussion directe sur WhatsApp."
+           data-it="Segui gli ultimi progetti o avvia una chat diretta su WhatsApp."
+           data-zh="关注最新发布作品、浏览项目集锦或通过 WhatsApp 发起快捷对话。"
+           data-ru="Следите за релизами или начните чат в WhatsApp.">
+          Follow the latest releases, browse recent work decks, or jump into a quick direct chat via WhatsApp.
+        </p>
+
+        <div class="direct-channels-pod spotlight-card">
+          <div class="channels-header-row">
+            <span data-en="CHANNELS & PROFILES" data-ar="المنصات والملفات الشخصية" data-es="CANALES Y PERFILES" data-tr="KANALLAR VE PROFİLLER" data-fr="CANAUX & PROFILS" data-it="CANALI & PROFILI" data-zh="社交频道与主页" data-ru="КАНАЛЫ И ПРОФИЛИ">CHANNELS & PROFILES</span>
+            <span class="direct" data-en="// DIRECT" data-ar="// روابط مباشرة" data-es="// DIRECTO" data-tr="// DOĞRUDAN" data-fr="// DIRECT" data-it="// DIRETTO" data-zh="// 快速直达" data-ru="// ПРЯМО">// DIRECT</span>
+          </div>
+          <div class="social-quad-row">
+            <a href="https://www.behance.net" target="_blank" class="social-anchor-cube spotlight-card" title="Behance">
+              <i class="fa-brands fa-behance"></i>
+              <span>BEHANCE</span>
+            </a>
+            <a href="https://www.instagram.com/sewedy_media?stkn=MXY4MzY4bTJ3MWZzcw==" target="_blank" class="social-anchor-cube spotlight-card" title="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+              <span>INSTAGRAM</span>
+            </a>
+            <a href="https://www.facebook.com/share/19KCe8Mm3H/" target="_blank" class="social-anchor-cube spotlight-card" title="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+              <span>FACEBOOK</span>
+            </a>
+            <a href="https://wa.me/qr/5JRN6AWP6WZQG1" target="_blank" class="social-anchor-cube spotlight-card" title="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>WHATSAPP</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="https://wa.me/qr/5JRN6AWP6WZQG1" target="_blank" class="whatsapp-direct-cell spotlight-card">
+          <div class="wa-flex-lead">
+            <div class="wa-icon-bubble"><i class="fa-brands fa-whatsapp"></i></div>
+            <div class="wa-textual-meta">
+              <h4 data-en="CHAT ON WHATSAPP" data-ar="محادثة واتساب مباشرة" data-es="CHAT EN WHATSAPP" data-tr="WHATSAPP'TA SOHBET ET" data-fr="CHAT SUR WHATSAPP" data-it="CHAT SU WHATSAPP" data-zh="通过 WhatsApp 聊天" data-ru="ЧАТ В WHATSAPP">CHAT ON WHATSAPP</h4>
+              <p data-en="DIRECT LINE & INSTANT RESPONSE" data-ar="خط مباشر واستجابة سريعة لطلباتك" data-es="LÍNEA DIRECTA Y RESPUESTA RÁPIDA" data-tr="DOĞRUDAN HAT VE ANINDA YANIT" data-fr="LIGNE DIRECTE & RÉPONSE RAPIDE" data-it="LINEA DIRETTA E RISPOSTA RAPIDA" data-zh="直达专线与即时回复" data-ru="ПРЯМАЯ СВЯЗЬ И ОТВЕТ">DIRECT LINE & INSTANT RESPONSE</p>
+            </div>
+          </div>
+          <div class="wa-external-glyph">
+            <i class="fa-solid fa-arrow-up-right-from-square dynamic-arrow"></i>
+          </div>
+        </a>
+
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="as-media-brand-mark" style="margin-bottom: 4px;">
+        <svg class="as-vector-logo-svg" style="width: 48px; height: 18px;" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 39.6 23.1">
+          <g>
+            <path class="logo-fill-adaptive" d="M15.2,10.1l-2.4-4.4-2.5,4.5h4.9ZM13.6,0c1.3,0,1.5.1,2.5,1.7l2.7,4.8,2.7,4.8c-2.2,0-4.1.9-5.1,2.9H7.9s-2,3.6-2,3.6H0S9.4,2,9.4,2C10.6,0,10.8,0,11.9,0h1.7Z"/>
+            <path class="logo-fill-adaptive" d="M33.2,17.9h-16s0-1.4.1-2.1c.2-1.4,1.4-2.1,2.7-2.1h13.2c.8,0,1.3-.5,1.3-1.2,0-.5-.5-1.2-1.2-1.3h-6.9c-1.2,0-2.4-.4-3.4-1-1.8-1-2.6-2.8-2.6-4.8,0-1.8.9-3.4,2.5-4.3.8-.4,1.8-.9,2.7-.9h13.8c0,2.2-1.7,4.2-4.1,4.2h-8.8c-.7,0-1.2.6-1.2,1.2,0,.5.4,1.2,1.1,1.2h7c3.4,0,6.2,2,6.1,5.6,0,3.6-2.9,5.5-6.4,5.5h0s0,0,0,0Z"/>
+            <rect class="logo-red-accent" x="17.2" y="17.9" width="17" height="5.2"/>
+            <path class="logo-text-media" d="M27.8,20.1c0-.4-.4-.5-.7-.6h-4v.5c-.1,0,1.7,0,1.7,0l-.2.9h-1.8v.5c-.1,0,1.9,0,1.9,0l-.2.9h-3.1l.6-2.1-.5.8-.8,1.3h-.9l-.4-2.1-.5,2.1h-1l.4-1.6.6-2.2h1.3l.4,2.4,1.4-2.2c0-.1.2-.2.4-.2h5.1c.3,0,.6,0,.9.2.7.4.8,1.2.6,1.9-.2.8-.7,1.4-1.5,1.6-.2,0-.4,0-.7,0 h-1.8s.4-1.6.4-1.6l.2-.8h1l-.3,1.4h.6c.1,0,.3,0,.4,0,.3,0,.5-.3.7-.6.1-.2.2-.5.1-.8,0,0,0,0,0,0Z"/>
+            <polygon class="logo-text-media" points="32.3 21.5 32 19.8 30.8 22 30.5 22.4 29.5 22.4 30.3 21 31.7 18.6 32.8 18.6 33.3 21.3 33.5 22.4 31.2 22.4 31.7 21.5 32.3 21.5"/>
+            <polygon class="logo-text-media" points="29.8 20.9 29.5 22.4 28.5 22.4 29.4 18.6 30.4 18.6 29.8 20.9"/>
+          </g>
+        </svg>
+      </div>
+      <p class="brand-mark-copy">AS MEDIA © 2026</p>
+      <p class="brand-sub-disclaimer" data-en="All Visuals & Creative Direction by Ali Elsewedy" data-ar="جميع الأعمال البصرية والإخراج الفني بواسطة علي السويدي" data-es="Todos los visuales por Ali Elsewedy" data-tr="Tüm Görseller Ali Elsewedy'ye Aittir" data-fr="Tous les visuels par Ali Elsewedy" data-it="Tutti i visual di Ali Elsewedy" data-zh="所有视觉效果由 Ali Elsewedy 呈现" data-ru="Все визуальные эффекты: Али Эльсевиди">All Visuals & Creative Direction by Ali Elsewedy</p>
+    </footer>
+  </div>
+
+  <div class="drawer-modal-backdrop" id="appDrawer" onclick="closeDrawer(event)">
+    <div class="drawer-bottom-sheet" onclick="event.stopPropagation()">
+      <div class="sheet-handle-pill"></div>
+      
+      <div id="drawerMainView">
+        <div class="sheet-top-row">
+          <h3 data-en="QUICK MENU" data-ar="القائمة السريعة" data-es="MENÚ RÁPIDO" data-tr="HIZLI MENÜ" data-fr="MENU RAPIDE" data-it="MENU RAPIDO" data-zh="快捷菜单" data-ru="БЫСТРОЕ МЕНЮ">QUICK MENU</h3>
+          <button class="sheet-close-x-btn" onclick="closeDrawer()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <div style="font-family: var(--font-display); font-size: 0.6rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-globe" style="color: var(--accent-red);"></i>
+            <span data-en="SELECT LANGUAGE" data-ar="اختر لغتك المفضلة" data-es="SELECCIONAR IDIOMA" data-tr="DİLİ SEÇİN" data-fr="CHOISIR LA LANGUE" data-it="SELEZIONA LINGUA" data-zh="选择语言" data-ru="ВЫБРАТЬ ЯЗЫК">SELECT LANGUAGE</span>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 6px;">
+            <button class="lang-select-pill" id="lang-btn-en" onclick="setLanguage('en')" style="background: var(--accent-red); color: #fff; border: none; padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇬🇧</span> EN</button>
+            <button class="lang-select-pill" id="lang-btn-ar" onclick="setLanguage('ar')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇪🇬</span> AR</button>
+            <button class="lang-select-pill" id="lang-btn-fr" onclick="setLanguage('fr')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇫🇷</span> FR</button>
+            <button class="lang-select-pill" id="lang-btn-it" onclick="setLanguage('it')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇮🇹</span> IT</button>
+            <button class="lang-select-pill" id="lang-btn-es" onclick="setLanguage('es')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇪🇸</span> ES</button>
+            <button class="lang-select-pill" id="lang-btn-tr" onclick="setLanguage('tr')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇹🇷</span> TR</button>
+            <button class="lang-select-pill" id="lang-btn-zh" onclick="setLanguage('zh')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇨🇳</span> ZH</button>
+            <button class="lang-select-pill" id="lang-btn-ru" onclick="setLanguage('ru')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇷🇺</span> RU</button>
+          </div>
+        </div>
+
+        <div class="sheet-links-stack">
+          <a class="sheet-nav-tile" href="javascript:void(0)" onclick="navigateTo('home')">
+            <span data-en="HOME" data-ar="الرئيسية" data-es="INICIO" data-tr="ANA SAYFA" data-fr="ACCUEIL" data-it="HOME" data-zh="首页" data-ru="ГЛАВНАЯ">HOME</span>
+            <i class="fa-solid fa-chevron-right menu-chevron"></i>
+          </a>
+          <a class="sheet-nav-tile" href="javascript:void(0)" onclick="navigateTo('about')">
+            <span data-en="ABOUT" data-ar="نبذة عني" data-es="ACERCA" data-tr="HAKKINDA" data-fr="À PROPOS" data-it="PROFILO" data-zh="关于" data-ru="ОБ АВТОРЕ">ABOUT</span>
+            <i class="fa-solid fa-chevron-right menu-chevron"></i>
+          </a>
+          <a class="sheet-nav-tile" href="javascript:void(0)" onclick="openPhotoCategory('all')">
+            <span data-en="PHOTOGRAPHY" data-ar="معرض التصوير" data-es="FOTOGRAFÍA" data-tr="FOTOĞRAFÇILIK" data-fr="PHOTOGRAPHIE" data-it="FOTOGRAFIA" data-zh="摄影" data-ru="ФОТОГРАФИЯ">PHOTOGRAPHY</span>
+            <i class="fa-solid fa-chevron-right menu-chevron"></i>
+          </a>
+          <a class="sheet-nav-tile" href="javascript:void(0)" onclick="openDesignCategory('all')">
+            <span data-en="DESIGN" data-ar="معرض التصميم" data-es="DISEÑO" data-tr="TASARIM" data-fr="DESIGN" data-it="DESIGN" data-zh="设计" data-ru="ДИЗАЙН">DESIGN</span>
+            <i class="fa-solid fa-chevron-right menu-chevron"></i>
+          </a>
+          <a class="sheet-nav-tile cta-red" href="javascript:void(0)" onclick="navigateTo('connect')">
+            <span data-en="LET'S CONNECT" data-ar="تواصل معي الآن" data-es="CONECTEMOS" data-tr="İLETİŞİME GEÇİN" data-fr="CONTACTEZ-MOI" data-it="CONTATTAMI" data-zh="联系我们" data-ru="СВЯЗАТЬСЯ">LET'S CONNECT</span>
+          </a>
+        </div>
+
+        <div class="sheet-bottom-theme-toggle">
+          <button aria-label="Toggle Dark/Light Mode" class="theme-toggle-simple-btn" onclick="toggleTheme()" title="Toggle Cyber Udjat Eye Theme" style="width: 36px; height: 30px;">
+            <svg class="theme-icon theme-icon-cyber-dark" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 22px;">
+              <path d="M4 16 C10 8, 26 8, 32 16 C26 24, 10 24, 4 16 Z" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linejoin="round"/>
+              <circle cx="18" cy="16" r="4.5" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+              <circle cx="18" cy="16" r="1.5" fill="#f43f5e"/>
+              <path d="M14 22 L12 28 M22 22 L24 28" fill="none" stroke="#38bdf8" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <svg class="theme-icon theme-icon-cyber-light" viewBox="0 0 36 32" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 22px;">
+              <path d="M4 16 C10 8, 26 8, 32 16 C26 24, 10 24, 4 16 Z" fill="none" stroke="#f59e0b" stroke-width="1.8" stroke-linejoin="round"/>
+              <circle cx="18" cy="16" r="4.5" fill="none" stroke="#f59e0b" stroke-width="1.8"/>
+              <circle cx="18" cy="16" r="1.5" fill="#f59e0b"/>
+              <line x1="18" y1="5" x2="18" y2="8" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="9" y1="10" x2="11" y2="12" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+              <line x1="27" y1="10" x2="25" y2="12" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-pill" id="appToast">
+    <i class="fa-solid fa-circle-check" style="color: var(--accent-green);"></i>
+    <span id="toastMsg">Action completed</span>
+  </div>
+
+  <script>
+    let currentLang = 'en';
+
+    function toggleNavbarLanguage() {
+      const nextLang = currentLang === 'en' ? 'ar' : 'en';
+      setLanguage(nextLang);
+    }
+
+    function setLanguage(langCode) {
+      currentLang = langCode;
+      const html = document.documentElement;
+      html.setAttribute('lang', currentLang);
+      
+      const isRtl = (currentLang === 'ar');
+      html.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+      
+      const langBtn = document.querySelector('.lang-toggle-pill');
+      if (langBtn) {
+        langBtn.textContent = currentLang.toUpperCase();
+      }
+
+      document.querySelectorAll('.lang-select-pill').forEach(btn => {
+        btn.style.background = 'rgba(255,255,255,0.05)';
+        btn.style.color = 'var(--text-pure)';
+        btn.style.borderColor = 'var(--card-border)';
+      });
+      
+      const activeBtn = document.getElementById(`lang-btn-${currentLang}`);
+      if (activeBtn) {
+        activeBtn.style.background = 'var(--accent-red)';
+        activeBtn.style.color = '#fff';
+        activeBtn.style.borderColor = 'var(--accent-red)';
+      }
+
+      const elements = document.querySelectorAll('[data-en]');
+      elements.forEach(el => {
+        if (el.hasAttribute(`data-${currentLang}`)) {
+          el.textContent = el.getAttribute(`data-${currentLang}`);
+        }
+      });
+
+      const arrows = document.querySelectorAll('.dynamic-arrow');
+      arrows.forEach(arr => {
+        if (isRtl) {
+          arr.classList.remove('fa-arrow-right');
+          arr.classList.add('fa-arrow-left');
+        } else {
+          arr.classList.remove('fa-arrow-left');
+          arr.classList.add('fa-arrow-right');
+        }
+      });
+
+      const chevrons = document.querySelectorAll('.menu-chevron');
+      chevrons.forEach(ch => {
+        if (isRtl) {
+          ch.classList.remove('fa-chevron-right');
+          ch.classList.add('fa-chevron-left');
+        } else {
+          ch.classList.remove('fa-chevron-left');
+          ch.classList.add('fa-chevron-right');
+        }
+      });
+
+      const langNames = { 
+        en: 'English', ar: 'العربية', fr: 'Français', it: 'Italiano', 
+        es: 'Español', tr: 'Türkçe', zh: '中文', ru: 'Русский' 
+      };
+      
+      showToast((langNames[currentLang] || currentLang) + ' Active');
+      setTimeout(() => { closeDrawer(); }, 300);
+    }
+
+    function openDrawer() {
+      const drawer = document.getElementById('appDrawer');
+      if (drawer) {
+        drawer.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeDrawer(e) {
+      const drawer = document.getElementById('appDrawer');
+      if (drawer) {
+        drawer.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function navigateTo(pageId) {
+      const allPages = document.querySelectorAll('.view-page');
+      allPages.forEach(p => { p.classList.remove('active-view'); });
+      const target = document.getElementById(`page-${pageId}`);
+      if (target) {
+        target.classList.add('active-view');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      closeDrawer();
+    }
+
+    function openPhotoCategory(catKey) {
+      navigateTo('photography');
+    }
+
+    function openDesignCategory(catKey) {
+      navigateTo('design');
+    }
+
+    function filterPhotos(category, btnElement) {
+      const allPills = document.querySelectorAll('#photoFilterBar .filter-pill-tab');
+      allPills.forEach(p => p.classList.remove('active-filter'));
+      if(btnElement) btnElement.classList.add('active-filter');
+    }
+
+    function filterDesigns(category, btnElement) {
+      const allPills = document.querySelectorAll('#designFilterBar .filter-pill-tab');
+      allPills.forEach(p => p.classList.remove('active-filter'));
+      if(btnElement) btnElement.classList.add('active-filter');
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+
+      const darkPhoto = document.querySelector('.dark-photo-mode');
+      const lightPhoto = document.querySelector('.light-photo-mode');
+      if (darkPhoto && lightPhoto) {
+        if (next === 'light') {
+          darkPhoto.style.display = 'none';
+          lightPhoto.style.display = 'block';
+        } else {
+          darkPhoto.style.display = 'block';
+          lightPhoto.style.display = 'none';
+        }
+      }
+
+      showToast(next === 'light' ? (currentLang === 'ar' ? 'الوضع الفاتح مفعل' : 'Day Mode Active') : (currentLang === 'ar' ? 'الوضع المظلم مفعل' : 'Night Mode Active'));
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('appToast');
+      const text = document.getElementById('toastMsg');
+      if (toast && text) {
+        text.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => { toast.classList.remove('show'); }, 2000);
+      }
+    }
+
+    const spotlightCards = document.querySelectorAll('.spotlight-code-card, .spotlight-card');
+    spotlightCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--spotlight-x', `${x}px`);
+        card.style.setProperty('--spotlight-y', `${y}px`);
+        card.style.setProperty('--spotlight-opacity', '1');
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.setProperty('--spotlight-opacity', '0');
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const headerEl = document.getElementById('mainHeader');
+      if (window.scrollY > 12) {
+        headerEl.classList.add('scrolled');
+      } else {
+        headerEl.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>
