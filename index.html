@@ -7,7 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Michroma&family=Shojumaru&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@600;700;800&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Michroma&family=Noto+Sans+Egyptian+Hieroglyphs&family=Shojumaru&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@600;700;800&family=Syncopate:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
@@ -64,20 +64,18 @@
       -moz-osx-font-smoothing: grayscale;
       min-height: 100vh; display: flex; justify-content: center; position: relative;
       background-image: 
-        radial-gradient(circle at 15% 20%, rgba(229, 27, 36, 0.08) 0%, transparent 45%),
-        radial-gradient(circle at 85% 75%, rgba(229, 27, 36, 0.06) 0%, transparent 40%),
-        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: auto, auto, 34px 34px, 34px 34px;
+        radial-gradient(circle at 15% 18%, rgba(229, 27, 36, 0.11) 0%, transparent 50%),
+        radial-gradient(circle at 85% 72%, rgba(229, 27, 36, 0.09) 0%, transparent 48%),
+        radial-gradient(circle at 50% 45%, rgba(229, 27, 36, 0.04) 0%, transparent 55%);
+      background-attachment: fixed;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     [data-theme="light"] body {
       background-image: 
         radial-gradient(circle at 15% 20%, rgba(229, 27, 36, 0.05) 0%, transparent 45%),
-        radial-gradient(circle at 85% 75%, rgba(229, 27, 36, 0.04) 0%, transparent 40%),
-        linear-gradient(to right, rgba(0, 0, 0, 0.035) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+        radial-gradient(circle at 85% 75%, rgba(229, 27, 36, 0.04) 0%, transparent 40%);
+      background-attachment: fixed;
     }
 
     /* Blur & Dim backdrop wrapper for initial splash */
@@ -100,15 +98,145 @@
       color: #0b5e28;
     }
 
+    /* HIEROGLYPHIC GEOMETRIC GRID MATRIX LAYER */
+    .hieroglyphs-grid-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .hiero-matrix-col-track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -204px;
+      bottom: -204px;
+      will-change: transform;
+    }
+
+    .hiero-col-up {
+      animation: matrixScrollUp 30s linear infinite;
+    }
+
+    .hiero-col-down {
+      animation: matrixScrollDown 30s linear infinite;
+    }
+
+    @keyframes matrixScrollUp {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-204px);
+      }
+    }
+
+    @keyframes matrixScrollDown {
+      0% {
+        transform: translateY(-204px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .hiero-glyph {
+      font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', 'Apple Symbols', serif, sans-serif;
+      font-size: 15px;
+      fill: rgba(255, 255, 255, 0.06);
+      dominant-baseline: central;
+      text-anchor: middle;
+      transition: fill 0.3s ease;
+      user-select: none;
+    }
+    [data-theme="light"] .hiero-glyph {
+      fill: rgba(15, 23, 42, 0.16);
+    }
+
+    /* MOVING GRID MATRIX LINES: MATCHING THE 34px GEOMETRY */
+    .hiero-grid-stroke {
+      stroke: rgba(255, 255, 255, 0.03);
+      stroke-width: 1px;
+      transition: stroke 0.3s ease;
+    }
+    [data-theme="light"] .hiero-grid-stroke {
+      stroke: rgba(0, 0, 0, 0.065);
+    }
+
+    .hiero-torch-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      overflow: hidden;
+      opacity: var(--torch-opacity, 0);
+      /* Slightly reduced mask radius for a balanced, glowing torch beam */
+      -webkit-mask-image: radial-gradient(110px circle at var(--torch-x, -999px) var(--torch-y, -999px), rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, transparent 88%);
+      mask-image: radial-gradient(110px circle at var(--torch-x, -999px) var(--torch-y, -999px), rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, transparent 88%);
+      transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: mask-image, -webkit-mask-image, opacity;
+    }
+
+    .hiero-glyph-ignited {
+      font-family: 'Noto Sans Egyptian Hieroglyphs', 'Segoe UI Historic', 'Apple Symbols', serif, sans-serif;
+      font-size: 15px;
+      dominant-baseline: central;
+      text-anchor: middle;
+      user-select: none;
+      /* Softened core fill opacity with reduced golden saturation */
+      fill: rgba(215, 175, 95, 0.42);
+      stroke: rgba(230, 195, 110, 0.35);
+      stroke-width: 0.4px;
+      paint-order: stroke fill;
+      filter: drop-shadow(0 0 2.5px rgba(210, 130, 15, 0.45)) drop-shadow(0 0 6px rgba(225, 160, 40, 0.15));
+    }
+
+    .hiero-grid-stroke-ignited {
+      stroke: rgba(215, 175, 95, 0.16);
+      stroke-width: 1px;
+      filter: drop-shadow(0 0 2px rgba(210, 130, 15, 0.1));
+    }
+
+    [data-theme="light"] .hiero-glyph-ignited {
+      fill: rgba(155, 80, 16, 0.42);
+      stroke: rgba(175, 95, 22, 0.35);
+      stroke-width: 0.4px;
+      paint-order: stroke fill;
+      filter: drop-shadow(0 0 2.5px rgba(170, 85, 5, 0.16)) drop-shadow(0 0 5px rgba(200, 120, 10, 0.1));
+    }
+
+    [data-theme="light"] .hiero-grid-stroke-ignited {
+      stroke: rgba(175, 95, 22, 0.18);
+      stroke-width: 1px;
+    }
+
+    .temple-torch-halo {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: var(--torch-opacity, 0);
+      /* Slightly reduced diffused ambient halo radius with softer amber/gold tint */
+      background: radial-gradient(175px circle at var(--torch-x, -999px) var(--torch-y, -999px), rgba(235, 145, 10, 0.08) 0%, rgba(229, 27, 36, 0.03) 50%, transparent 88%);
+      transition: opacity 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: background, opacity;
+    }
+
+    [data-theme="light"] .temple-torch-halo {
+      background: radial-gradient(175px circle at var(--torch-x, -999px) var(--torch-y, -999px), rgba(200, 100, 5, 0.06) 0%, rgba(229, 27, 36, 0.02) 55%, transparent 90%);
+    }
+
     .ambient-bubbles-wrapper { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
     .ambient-bubble {
       position: absolute; border-radius: 50%;
-      background: radial-gradient(circle, rgba(229, 27, 36, 0.28) 0%, rgba(229, 27, 36, 0.02) 70%);
-      filter: blur(35px); animation: floatBubble 14s ease-in-out infinite alternate;
+      background: radial-gradient(circle, rgba(229, 27, 36, 0.18) 0%, rgba(229, 27, 36, 0.03) 55%, transparent 70%);
+      filter: blur(45px); animation: floatBubble 14s ease-in-out infinite alternate;
     }
-    .bubble-1 { width: 220px; height: 220px; top: 10%; left: -5%; animation-duration: 12s; }
-    .bubble-2 { width: 280px; height: 280px; bottom: 15%; right: -8%; animation-duration: 18s; animation-delay: -3s; }
-    .bubble-3 { width: 160px; height: 160px; top: 55%; left: 60%; animation-duration: 15s; animation-delay: -6s; }
+    .bubble-1 { width: 250px; height: 250px; top: 8%; left: -8%; animation-duration: 12s; }
+    .bubble-2 { width: 300px; height: 300px; bottom: 12%; right: -10%; animation-duration: 18s; animation-delay: -3s; }
+    .bubble-3 { width: 190px; height: 190px; top: 48%; left: 55%; animation-duration: 15s; animation-delay: -6s; }
 
     @keyframes floatBubble {
       0% { transform: translate(0, 0) scale(1); }
@@ -1090,10 +1218,100 @@
     <span id="gizaTempText">--°C</span>
   </div>
 
+  <!-- AMBIENT RED GLOW BUBBLES LAYER -->
   <div class="ambient-bubbles-wrapper">
     <div class="ambient-bubble bubble-1"></div>
     <div class="ambient-bubble bubble-2"></div>
     <div class="ambient-bubble bubble-3"></div>
+  </div>
+
+  <!-- HIEROGLYPHIC MATRIX 34px GRID: ALTERNATING UP & DOWN COLUMNS WITH CELLS INCLUDED -->
+  <div class="hieroglyphs-grid-layer">
+    <!-- Odd Columns: Moving UP with squares & iconic glyphs -->
+    <div class="hiero-matrix-col-track hiero-col-up">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="hieroMatrixUp" width="68" height="204" patternUnits="userSpaceOnUse">
+            <!-- Grid Lines for Column 1 (0 to 34px) -->
+            <path d="M 0 0 L 34 0 M 0 34 L 34 34 M 0 68 L 34 68 M 0 102 L 34 102 M 0 136 L 34 136 M 0 170 L 34 170 M 0 204 L 34 204 M 0 0 L 0 204 M 34 0 L 34 204" class="hiero-grid-stroke" />
+            
+            <!-- Iconic Glyphs for Column 1 (centered at x: 17px) -->
+            <!-- 𓋹 Ankh, 𓂀 Eye of Horus, 𓆣 Scarab, 𓌀 Was Scepter, 𓇳 Ra Sun Disc, 𓍲 Shen Ring of Eternity -->
+            <text x="17" y="17" class="hiero-glyph">𓋹</text>
+            <text x="17" y="51" class="hiero-glyph">𓂀</text>
+            <text x="17" y="85" class="hiero-glyph">𓆣</text>
+            <text x="17" y="119" class="hiero-glyph">𓌀</text>
+            <text x="17" y="153" class="hiero-glyph">𓇳</text>
+            <text x="17" y="187" class="hiero-glyph">𓍲</text>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#hieroMatrixUp)" />
+      </svg>
+    </div>
+
+    <!-- Even Columns: Moving DOWN with squares & iconic glyphs -->
+    <div class="hiero-matrix-col-track hiero-col-down">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="hieroMatrixDown" width="68" height="204" patternUnits="userSpaceOnUse">
+            <!-- Grid Lines for Column 2 (34px to 68px) -->
+            <path d="M 34 0 L 68 0 M 34 34 L 68 34 M 34 68 L 68 68 M 34 102 L 68 102 M 34 136 L 68 136 M 34 170 L 68 170 M 34 204 L 68 204 M 68 0 L 68 204" class="hiero-grid-stroke" />
+            
+            <!-- Iconic Glyphs for Column 2 (centered at x: 51px) -->
+            <!-- 𓆗 Royal Uraeus Cobra, 𓊽 Djed Pillar, 𓅃 Horus Falcon, 𓃭 Sphinx/Lion, 𓋗 Double Crown, 𓈍 Akhet Horizon -->
+            <text x="51" y="17" class="hiero-glyph">𓆗</text>
+            <text x="51" y="51" class="hiero-glyph">𓊽</text>
+            <text x="51" y="85" class="hiero-glyph">𓅃</text>
+            <text x="51" y="119" class="hiero-glyph">𓃭</text>
+            <text x="51" y="153" class="hiero-glyph">𓋗</text>
+            <text x="51" y="187" class="hiero-glyph">𓈍</text>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#hieroMatrixDown)" />
+      </svg>
+    </div>
+  </div>
+
+  <div class="temple-torch-halo" id="templeTorchHalo"></div>
+
+  <div class="hiero-torch-layer" id="hieroTorchLayer">
+    <!-- Glowing Columns moving synchronously UP -->
+    <div class="hiero-matrix-col-track hiero-col-up">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="hieroMatrixUpIgnited" width="68" height="204" patternUnits="userSpaceOnUse">
+            <path d="M 0 0 L 34 0 M 0 34 L 34 34 M 0 68 L 34 68 M 0 102 L 34 102 M 0 136 L 34 136 M 0 170 L 34 170 M 0 204 L 34 204 M 0 0 L 0 204 M 34 0 L 34 204" class="hiero-grid-stroke-ignited" />
+            
+            <text x="17" y="17" class="hiero-glyph-ignited">𓋹</text>
+            <text x="17" y="51" class="hiero-glyph-ignited">𓂀</text>
+            <text x="17" y="85" class="hiero-glyph-ignited">𓆣</text>
+            <text x="17" y="119" class="hiero-glyph-ignited">𓌀</text>
+            <text x="17" y="153" class="hiero-glyph-ignited">𓇳</text>
+            <text x="17" y="187" class="hiero-glyph-ignited">𓍲</text>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#hieroMatrixUpIgnited)" />
+      </svg>
+    </div>
+
+    <!-- Glowing Columns moving synchronously DOWN -->
+    <div class="hiero-matrix-col-track hiero-col-down">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="hieroMatrixDownIgnited" width="68" height="204" patternUnits="userSpaceOnUse">
+            <path d="M 34 0 L 68 0 M 34 34 L 68 34 M 34 68 L 68 68 M 34 102 L 68 102 M 34 136 L 68 136 M 34 170 L 68 170 M 34 204 L 68 204 M 68 0 L 68 204" class="hiero-grid-stroke-ignited" />
+            
+            <text x="51" y="17" class="hiero-glyph-ignited">𓆗</text>
+            <text x="51" y="51" class="hiero-glyph-ignited">𓊽</text>
+            <text x="51" y="85" class="hiero-glyph-ignited">𓅃</text>
+            <text x="51" y="119" class="hiero-glyph-ignited">𓃭</text>
+            <text x="51" y="153" class="hiero-glyph-ignited">𓋗</text>
+            <text x="51" y="187" class="hiero-glyph-ignited">𓈍</text>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#hieroMatrixDownIgnited)" />
+      </svg>
+    </div>
   </div>
 
   <div class="app-screen-frame">
@@ -1963,88 +2181,10 @@
     <span id="toastMsg">Action completed</span>
   </div>
 
-  <div class="drawer-modal-backdrop" id="weatherOverlayModal" onclick="closeWeatherOverlay(event)">
-    <div class="drawer-bottom-sheet" onclick="event.stopPropagation()" style="min-height: 560px;">
-      <div class="sheet-handle-pill"></div>
-      <div class="sheet-top-row">
-        <h3 style="display: flex; align-items: center; gap: 8px;">
-          <i class="fa-solid fa-cloud-sun" style="color: #facc15;"></i>
-          <span id="ovModalTitle">WEATHERKIT FORECAST</span>
-        </h3>
-        <button class="sheet-close-x-btn" onclick="closeWeatherOverlay()"><i class="fa-solid fa-xmark"></i></button>
-      </div>
-
-      <div style="font-family: var(--font-body); font-size: 0.65rem; color: var(--text-muted); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
-        <span id="ovLocationLabel">📍 Giza, Egypt (Apple WeatherKit Live)</span>
-        <span style="color: var(--accent-red); font-weight: 700;">HOURLY & DAILY SYNC</span>
-      </div>
-
-      <div style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between;">
-        <div>
-          <div style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: var(--text-pure);" id="ovCurrentTemp">--°C</div>
-          <div style="font-family: var(--font-body); font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;" id="ovConditionText">Loading conditions...</div>
-        </div>
-        <div style="text-align: right; display: flex; flex-direction: column; gap: 4px;">
-          <div style="font-family: var(--font-body); font-size: 0.64rem; color: var(--text-muted);">
-            <i class="fa-solid fa-wind" style="color: #38bdf8; margin-right: 4px;"></i> Wind: <strong id="ovWindSpeed" style="color: var(--text-pure);">-- km/h</strong>
-          </div>
-          <div style="font-family: var(--font-body); font-size: 0.64rem; color: var(--text-muted);">
-            <i class="fa-solid fa-droplet" style="color: #3b82f6; margin-right: 4px;"></i> Humidity: <strong id="ovHumidity" style="color: var(--text-pure);">--%</strong>
-          </div>
-        </div>
-      </div>
-
-      <div style="font-family: var(--font-display); font-size: 0.68rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">3-DAY WEATHERKIT MATRIX</div>
-
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <div style="background: rgba(255,255,255,0.025); border: 1px solid var(--card-border); border-radius: 12px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between;">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <i class="fa-solid fa-smog" style="color: #94a3b8; font-size: 1rem;"></i>
-            <div>
-              <div style="font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; color: var(--text-pure);">Yesterday (Recorded)</div>
-              <div style="font-family: var(--font-body); font-size: 0.6rem; color: var(--text-muted);" id="ovYesterdayDust">Wind: -- | Hum: -- | Dust: Moderate</div>
-            </div>
-          </div>
-          <div style="text-align: right;">
-            <div style="font-family: var(--font-display); font-size: 0.82rem; font-weight: 800; color: var(--text-pure);" id="ovYesterdayTemp">--°C</div>
-            <div style="font-family: var(--font-body); font-size: 0.56rem; color: var(--text-muted);">Historical Archive</div>
-          </div>
-        </div>
-
-        <div style="background: rgba(229, 27, 36, 0.06); border: 1px solid rgba(229, 27, 36, 0.3); border-radius: 12px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between;">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <i class="fa-solid fa-sun" id="ovTodayIcon" style="color: #facc15; font-size: 1rem;"></i>
-            <div>
-              <div style="font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; color: var(--accent-red);">Today (Live Hourly)</div>
-              <div style="font-family: var(--font-body); font-size: 0.6rem; color: var(--text-muted);" id="ovTodayCond">Active Hourly Stream</div>
-            </div>
-          </div>
-          <div style="text-align: right;">
-            <div style="font-family: var(--font-display); font-size: 0.88rem; font-weight: 800; color: var(--accent-red);" id="ovTodayTemp">--°C</div>
-            <div style="font-family: var(--font-body); font-size: 0.56rem; color: var(--text-muted);" id="ovTodayWindHum">Wind: -- | Hum: -- | Dust: Low</div>
-          </div>
-        </div>
-
-        <div style="background: rgba(255,255,255,0.025); border: 1px solid var(--card-border); border-radius: 12px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between;">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <i class="fa-solid fa-cloud" id="ovTomIcon" style="color: #94a3b8; font-size: 1rem;"></i>
-            <div>
-              <div style="font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; color: var(--text-pure);">Tomorrow (Forecast)</div>
-              <div style="font-family: var(--font-body); font-size: 0.6rem; color: var(--text-muted);" id="ovTomCond">Advanced WeatherKit Forecast</div>
-            </div>
-          </div>
-          <div style="text-align: right;">
-            <div style="font-family: var(--font-display); font-size: 0.82rem; font-weight: 800; color: var(--text-pure);" id="ovTomTemp">--°C</div>
-            <div style="font-family: var(--font-body); font-size: 0.56rem; color: var(--text-muted);" id="ovTomWindHum">Wind: -- | Hum: -- | Dust: Low</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script>
     let currentLang = 'en';
 
+    // Global capitals & countries data arrays for the weather grid
     const arabCountries = [
       { country: 'Palestine', capital: 'Jerusalem', flag: '🇵🇸', lat: 31.7683, lon: 35.2137 },
       { country: 'Egypt', capital: 'Cairo', flag: '🇪🇬', lat: 30.0444, lon: 31.2357 },
@@ -2399,21 +2539,47 @@
       populateCapitalsGrids();
     });
 
+    let torchTimeout = null;
+    function updateTempleTorch(x, y) {
+      document.documentElement.style.setProperty('--torch-x', `${x}px`);
+      document.documentElement.style.setProperty('--torch-y', `${y}px`);
+      document.documentElement.style.setProperty('--torch-opacity', '1');
+
+      if (torchTimeout) clearTimeout(torchTimeout);
+      torchTimeout = setTimeout(() => {
+        document.documentElement.style.setProperty('--torch-opacity', '0');
+      }, 350);
+    }
+
+    window.addEventListener('pointermove', (e) => {
+      updateTempleTorch(e.clientX, e.clientY);
+    }, { passive: true });
+
+    window.addEventListener('pointerdown', (e) => {
+      updateTempleTorch(e.clientX, e.clientY);
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches[0]) {
+        updateTempleTorch(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      if (torchTimeout) clearTimeout(torchTimeout);
+      document.documentElement.style.setProperty('--torch-opacity', '0');
+    }, { passive: true });
+
+    window.addEventListener('pointerleave', () => {
+      document.documentElement.style.setProperty('--torch-opacity', '0');
+    });
+
     window.addEventListener('scroll', () => {
       const headerEl = document.getElementById('mainHeader');
-      const progressFill = document.getElementById('scrollProgressFill');
-      const scrollY = window.scrollY;
-      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-
-      if (scrollY > 12) {
+      if (window.scrollY > 12) {
         headerEl.classList.add('scrolled');
       } else {
         headerEl.classList.remove('scrolled');
-      }
-
-      if (progressFill && scrollableHeight > 0) {
-        const percentage = Math.min(Math.max((scrollY / scrollableHeight) * 100, 0), 100);
-        progressFill.style.width = `${percentage}%`;
       }
     });
   </script>
