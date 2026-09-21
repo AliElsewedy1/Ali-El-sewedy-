@@ -815,18 +815,19 @@
       /* Desktop Navbar Adjustments */
       .dynamic-header.scrolled {
         width: 100% !important;
-        max-width: 1200px !important;
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-        padding: 10px 30px !important;
+        max-width: 100% !important; /* Make navbar wide width */
+        border-radius: 0; /* Remove pill shape, make it full width bar */
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 15px 40px !important;
       }
       [data-theme="light"] .dynamic-header.scrolled {
         border-color: rgba(0, 0, 0, 0.06);
-        border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+        border-top: none !important;
       }
-      .dynamic-header.scrolled .header-inner { max-width: 1140px; justify-content: space-between; }
-      .dynamic-header.scrolled .as-vector-logo-svg { width: 100px; height: 36px; }
+      .dynamic-header.scrolled .header-inner { max-width: 1200px; justify-content: space-between; }
+      .dynamic-header.scrolled .as-vector-logo-svg { width: 120px; height: 43px; }
 
       .dynamic-header.scrolled .lang-toggle-pill,
       .dynamic-header.scrolled .sky-theme-switch-pill,
@@ -840,34 +841,35 @@
         opacity: 0 !important; pointer-events: none !important; transform: scale(0.4) !important; overflow: hidden !important;
       }
 
-      /* Hero Desktop Sizing Increases */
-      /* Image gets roughly 2.7x scale */
-      .hero-standee-col, .hero-standee-inner, .creator-cutout-img { height: 750px !important; }
+      /* Hero Desktop Sizing Increases - Medium Size */
+      .hero-standee-col, .hero-standee-inner { height: 600px !important; overflow: visible !important; }
+      /* Ensure image is not cut off by setting object-fit/clip-path if necessary, and setting height/width */
+      .creator-cutout-img { height: 600px !important; max-width: 100%; object-fit: contain; }
 
-      /* Typography gets roughly 2.4x scale */
-      .hero-typography-col .title-stacked-3d.en-title { font-size: 8.4rem !important; margin-bottom: 14px !important; }
-      html[lang="es"] .hero-typography-col .title-stacked-3d.en-title { font-size: 5.5rem !important; }
-      html[lang="tr"] .hero-typography-col .title-stacked-3d.en-title { font-size: 5.8rem !important; }
-      html[lang="fr"] .hero-typography-col .title-stacked-3d.en-title { font-size: 5.6rem !important; }
-      html[lang="it"] .hero-typography-col .title-stacked-3d.en-title { font-size: 5.6rem !important; }
-      html[lang="ru"] .hero-typography-col .title-stacked-3d.en-title { font-size: 5.8rem !important; }
-      html[lang="zh"] .hero-typography-col .title-stacked-3d.en-title { font-size: 9.1rem !important; }
+      /* Typography gets Medium scale */
+      .hero-typography-col .title-stacked-3d.en-title { font-size: 5.6rem !important; margin-bottom: 8px !important; }
+      html[lang="es"] .hero-typography-col .title-stacked-3d.en-title { font-size: 3.6rem !important; }
+      html[lang="tr"] .hero-typography-col .title-stacked-3d.en-title { font-size: 3.9rem !important; }
+      html[lang="fr"] .hero-typography-col .title-stacked-3d.en-title { font-size: 3.7rem !important; }
+      html[lang="it"] .hero-typography-col .title-stacked-3d.en-title { font-size: 3.7rem !important; }
+      html[lang="ru"] .hero-typography-col .title-stacked-3d.en-title { font-size: 3.9rem !important; }
+      html[lang="zh"] .hero-typography-col .title-stacked-3d.en-title { font-size: 6rem !important; }
 
-      html[dir="rtl"] .title-stacked-3d.ar-title { font-size: 8.1rem !important; margin-bottom: 38px !important; }
+      html[dir="rtl"] .title-stacked-3d.ar-title { font-size: 5.4rem !important; margin-bottom: 24px !important; }
 
-      .author-name-lead { font-size: 5.2rem !important; margin-bottom: 7px !important; }
-      .author-surname-red { font-size: 3.6rem !important; margin-bottom: 10px !important; }
+      .author-name-lead { font-size: 3.4rem !important; margin-bottom: 4px !important; }
+      .author-surname-red { font-size: 2.4rem !important; margin-bottom: 6px !important; }
 
-      .roles-unified-pod { padding: 14px 24px !important; margin-top: 19px !important; margin-bottom: 14px !important; }
-      .role-pod-item { font-size: 1.4rem !important; }
+      .roles-unified-pod { padding: 10px 18px !important; margin-top: 12px !important; margin-bottom: 10px !important; }
+      .role-pod-item { font-size: 1rem !important; }
 
-      .creator-bio-primary { font-size: 1.7rem !important; margin-top: 19px !important; margin-bottom: 14px !important; }
-      .creator-bio-secondary { font-size: 1.4rem !important; margin-top: 24px !important; margin-bottom: 28px !important; line-height: 1.5; }
+      .creator-bio-primary { font-size: 1.1rem !important; margin-top: 12px !important; margin-bottom: 10px !important; }
+      .creator-bio-secondary { font-size: 0.95rem !important; margin-top: 16px !important; margin-bottom: 18px !important; line-height: 1.5; }
 
-      .punchy-sub-line-stacked { font-size: 1.5rem !important; margin-top: 43px !important; margin-bottom: 38px !important; }
+      .punchy-sub-line-stacked { font-size: 1rem !important; margin-top: 28px !important; margin-bottom: 24px !important; }
 
-      .hero-split-stage { min-height: 800px !important; margin-bottom: 40px !important; }
-      .hero-typography-col { max-width: 600px !important; width: 65% !important; }
+      .hero-split-stage { min-height: 600px !important; margin-bottom: 30px !important; }
+      .hero-typography-col { max-width: 450px !important; width: 60% !important; }
 
 
       .hero-block {
