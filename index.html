@@ -808,9 +808,9 @@
        DESKTOP RESPONSIVE OVERRIDES
        ===================================================================== */
     @media (min-width: 768px) {
-      .app-screen-frame { max-width: 1200px; padding: 100px 40px 60px; }
-      .dynamic-header { max-width: 1200px; padding: 15px 40px; }
-      .main-nav { max-width: 1200px; }
+      .app-screen-frame { max-width: 100% !important; width: 100% !important; padding: 100px 5% 60px !important; }
+      .dynamic-header { max-width: 100% !important; width: 100% !important; padding: 15px 5% !important; }
+      .main-nav { max-width: 100% !important; }
 
       /* Desktop Navbar Adjustments */
       .dynamic-header.scrolled {
@@ -868,8 +868,13 @@
 
       .punchy-sub-line-stacked { font-size: 1rem !important; margin-top: 28px !important; margin-bottom: 24px !important; }
 
-      .hero-split-stage { min-height: 600px !important; margin-bottom: 30px !important; }
-      .hero-typography-col { max-width: 450px !important; width: 60% !important; }
+      .hero-split-stage { min-height: 600px !important; margin-bottom: 30px !important; width: 100% !important; margin-right: -4% !important; padding-right: 0 !important; }
+      html[dir="rtl"] .hero-split-stage { margin-left: -4% !important; margin-right: 0 !important; padding-left: 0 !important; }
+
+      .hero-typography-col { max-width: 600px !important; width: 50% !important; }
+      .hero-standee-col { width: 50% !important; text-align: right; display: flex; justify-content: flex-end; }
+
+      html[dir="rtl"] .hero-standee-col { text-align: left; justify-content: flex-start; }
 
 
       .hero-block {
