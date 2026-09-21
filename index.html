@@ -812,6 +812,44 @@
       .dynamic-header { max-width: 1200px; padding: 15px 40px; }
       .main-nav { max-width: 1200px; }
 
+      /* Desktop Navbar Adjustments */
+      .dynamic-header.scrolled {
+        width: 100% !important;
+        max-width: 1200px !important;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+        padding: 10px 30px !important;
+      }
+      [data-theme="light"] .dynamic-header.scrolled {
+        border-color: rgba(0, 0, 0, 0.06);
+        border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+      }
+      .dynamic-header.scrolled .header-inner { max-width: 1140px; justify-content: space-between; }
+      .dynamic-header.scrolled .as-vector-logo-svg { width: 100px; height: 36px; }
+
+      .dynamic-header.scrolled .lang-toggle-pill,
+      .dynamic-header.scrolled .sky-theme-switch-pill,
+      .dynamic-header.scrolled .menu-burger-btn {
+        opacity: 1 !important; width: auto !important; margin: 0 4px !important; padding: 6px 12px !important; pointer-events: auto !important; transform: scale(1) !important; overflow: visible !important; display: flex !important;
+      }
+
+      .dynamic-header.scrolled.lifted .lang-toggle-pill,
+      .dynamic-header.scrolled.lifted .sky-theme-switch-pill,
+      .dynamic-header.scrolled.lifted .menu-burger-btn {
+        opacity: 0 !important; pointer-events: none !important; transform: scale(0.4) !important; overflow: hidden !important;
+      }
+
+      /* Hero Desktop Sizing Increases */
+      /* Image gets roughly 2.7x scale */
+      .hero-cutout-container { min-height: 1350px !important; aspect-ratio: 4/5; }
+
+      /* Typography gets roughly 2.4x scale */
+      .hero-title-en { font-size: clamp(9.1rem, 12vw, 14.4rem) !important; }
+      .hero-title-ar { font-size: clamp(11.5rem, 14.4vw, 18rem) !important; }
+      .hero-bio { font-size: clamp(2.28rem, 2.88vw, 2.88rem) !important; }
+
+
       .hero-block {
         display: flex;
         flex-direction: row;
