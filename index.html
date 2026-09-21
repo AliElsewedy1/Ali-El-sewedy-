@@ -842,12 +842,32 @@
 
       /* Hero Desktop Sizing Increases */
       /* Image gets roughly 2.7x scale */
-      .hero-cutout-container { min-height: 1350px !important; aspect-ratio: 4/5; }
+      .hero-standee-col, .hero-standee-inner, .creator-cutout-img { height: 750px !important; }
 
       /* Typography gets roughly 2.4x scale */
-      .hero-title-en { font-size: clamp(9.1rem, 12vw, 14.4rem) !important; }
-      .hero-title-ar { font-size: clamp(11.5rem, 14.4vw, 18rem) !important; }
-      .hero-bio { font-size: clamp(2.28rem, 2.88vw, 2.88rem) !important; }
+      .hero-typography-col .title-stacked-3d.en-title { font-size: 8.4rem !important; margin-bottom: 14px !important; }
+      html[lang="es"] .hero-typography-col .title-stacked-3d.en-title { font-size: 5.5rem !important; }
+      html[lang="tr"] .hero-typography-col .title-stacked-3d.en-title { font-size: 5.8rem !important; }
+      html[lang="fr"] .hero-typography-col .title-stacked-3d.en-title { font-size: 5.6rem !important; }
+      html[lang="it"] .hero-typography-col .title-stacked-3d.en-title { font-size: 5.6rem !important; }
+      html[lang="ru"] .hero-typography-col .title-stacked-3d.en-title { font-size: 5.8rem !important; }
+      html[lang="zh"] .hero-typography-col .title-stacked-3d.en-title { font-size: 9.1rem !important; }
+
+      html[dir="rtl"] .title-stacked-3d.ar-title { font-size: 8.1rem !important; margin-bottom: 38px !important; }
+
+      .author-name-lead { font-size: 5.2rem !important; margin-bottom: 7px !important; }
+      .author-surname-red { font-size: 3.6rem !important; margin-bottom: 10px !important; }
+
+      .roles-unified-pod { padding: 14px 24px !important; margin-top: 19px !important; margin-bottom: 14px !important; }
+      .role-pod-item { font-size: 1.4rem !important; }
+
+      .creator-bio-primary { font-size: 1.7rem !important; margin-top: 19px !important; margin-bottom: 14px !important; }
+      .creator-bio-secondary { font-size: 1.4rem !important; margin-top: 24px !important; margin-bottom: 28px !important; line-height: 1.5; }
+
+      .punchy-sub-line-stacked { font-size: 1.5rem !important; margin-top: 43px !important; margin-bottom: 38px !important; }
+
+      .hero-split-stage { min-height: 800px !important; margin-bottom: 40px !important; }
+      .hero-typography-col { max-width: 600px !important; width: 65% !important; }
 
 
       .hero-block {
