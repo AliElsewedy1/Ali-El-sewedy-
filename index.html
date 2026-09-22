@@ -620,7 +620,7 @@
     .section-spec-tag { font-family: var(--font-body); font-size: 0.6rem; font-weight: 700; color: var(--accent-red); letter-spacing: 0.6px; text-transform: uppercase; }
 
     .category-duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 22px; }
-    .category-slate-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px 12px; position: relative; transition: all 0.22s ease; display: flex; flex-direction: column; min-height: 145px; cursor: pointer; }
+    .category-slate-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px 12px; position: relative; transition: all 0.22s ease; display: flex; flex-direction: column; min-height: 200px; cursor: pointer; }
     .category-slate-card:hover { border-color: rgba(229, 27, 36, 0.5); background: var(--card-hover); transform: translateY(-2px); }
     .card-matrix-index { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; color: var(--accent-red); margin-bottom: 8px; }
     .category-slate-card h4 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--text-pure); letter-spacing: 0.3px; text-transform: uppercase; margin-bottom: 3px; }
@@ -675,7 +675,7 @@
     [data-theme="light"] .about-intro-quote-icon { color: rgba(0,0,0,0.03); }
     
     .expertise-bento-grid { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
-    .expertise-bento-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 22px; position: relative; overflow: hidden; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; display: flex; flex-direction: column; gap: 14px; z-index: 1; }
+    .expertise-bento-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 22px; position: relative; overflow: hidden; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; display: flex; flex-direction: column; gap: 14px; z-index: 1; min-height: 250px; }
     .expertise-bento-card:hover { border-color: rgba(229, 27, 36, 0.4); background: var(--card-hover); transform: translateY(-4px); box-shadow: 0 12px 24px rgba(229, 27, 36, 0.12); }
     .bento-bg-number { position: absolute; right: -5px; bottom: -18px; font-family: var(--font-shojumaru); font-size: 6.5rem; color: rgba(255,255,255,0.015); line-height: 1; user-select: none; pointer-events: none; transition: color 0.4s ease, transform 0.4s ease; z-index: -1; }
     html[dir="rtl"] .bento-bg-number { right: auto; left: -5px; }
@@ -815,14 +815,15 @@
        DESKTOP RESPONSIVE OVERRIDES
        ===================================================================== */
     @media (min-width: 768px) {
-      .app-screen-frame { max-width: 1440px !important; margin: 0 auto !important; width: 100% !important; padding: 90px 2% 60px !important; }
-      .dynamic-header { max-width: 1440px !important; width: 100% !important; padding: 10px 2% !important; }
+      .app-screen-frame { max-width: 1920px !important; margin: 0 auto !important; width: 100% !important; padding: 90px 2% 60px !important; }
+      .dynamic-header { max-width: 85% !important; width: 100% !important; padding: 10px 2% !important; top: 15px; border-radius: 20px; left: 50%; transform: translateX(-50%); margin: 0 auto; }
+      .dynamic-header .header-inner { max-width: 100% !important; }
       .main-nav { max-width: 100% !important; }
 
       /* Desktop Navbar Adjustments */
       .dynamic-header.scrolled {
         width: 100% !important;
-        max-width: 1440px !important; /* Limit max width for ultrawide */
+        max-width: 1920px !important; /* Limit max width for ultrawide */
         margin: 0 auto !important;
         border-radius: 0; /* Remove pill shape, make it full width bar */
         border: none;
@@ -834,7 +835,7 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
         border-top: none !important;
       }
-      .dynamic-header.scrolled .header-inner { max-width: 1200px; justify-content: space-between; }
+      .dynamic-header.scrolled .header-inner { max-width: 1200px !important; justify-content: space-between; }
       .dynamic-header.scrolled .as-vector-logo-svg { width: 120px; height: 43px; }
 
       .dynamic-header.scrolled .lang-toggle-pill,
@@ -871,15 +872,15 @@
       .roles-unified-pod { padding: 10px 18px !important; margin-top: 12px !important; margin-bottom: 10px !important; }
       .role-pod-item { font-size: 1rem !important; }
 
-      .creator-bio-primary { font-size: 1.1rem !important; margin-top: 12px !important; margin-bottom: 10px !important; }
-      .creator-bio-secondary { font-size: 0.95rem !important; margin-top: 16px !important; margin-bottom: 18px !important; line-height: 1.5; }
+      .creator-bio-primary { font-size: clamp(1.2rem, 1.5vw, 1.8rem) !important; margin-top: 20px !important; margin-bottom: 12px !important; }
+      .creator-bio-secondary { font-size: clamp(1rem, 1.2vw, 1.4rem) !important; margin-top: 16px !important; margin-bottom: 24px !important; line-height: 1.6; }
 
-      .punchy-sub-line-stacked { font-size: 1rem !important; margin-top: 28px !important; margin-bottom: 24px !important; }
+      .punchy-sub-line-stacked { font-size: clamp(1.1rem, 1.3vw, 1.6rem) !important; margin-top: 4vh !important; margin-bottom: 24px !important; }
 
       .hero-split-stage { min-height: 70vh !important; margin-bottom: 30px !important; width: 100% !important; margin-right: -4% !important; padding-right: 0 !important; }
       html[dir="rtl"] .hero-split-stage { margin-left: -4% !important; margin-right: 0 !important; padding-left: 0 !important; }
 
-      .hero-typography-col { max-width: 600px !important; width: 50% !important; }
+      .hero-typography-col { max-width: 800px !important; width: 50% !important; padding-top: 15vh !important; }
       .hero-standee-col { width: 50% !important; text-align: right; display: flex; justify-content: flex-end; }
 
       html[dir="rtl"] .hero-standee-col { text-align: left; justify-content: flex-start; }
