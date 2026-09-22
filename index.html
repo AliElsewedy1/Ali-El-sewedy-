@@ -1907,13 +1907,13 @@
         btn.className = 'lang-select-pill';
         btn.id = `lang-btn-${lang.code}`;
         btn.onclick = () => setLanguage(lang.code);
-
+        
         if (lang.code === currentLang) {
           btn.style.cssText = 'background: var(--accent-red); color: #fff; border: none; padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;';
         } else {
           btn.style.cssText = 'background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;';
         }
-
+        
         btn.innerHTML = `<span>${lang.icon}</span> ${lang.label}`;
         container.appendChild(btn);
       });
