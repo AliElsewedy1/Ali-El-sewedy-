@@ -923,6 +923,7 @@
     .delay-1 { transition-delay: 0.1s; }
     .delay-2 { transition-delay: 0.2s; }
     .delay-3 { transition-delay: 0.3s; }
+
   </style>
 </head>
 <body class="splash-active">
@@ -1678,7 +1679,9 @@
             <span data-en="SELECT LANGUAGE" data-ar="اختر لغتك المفضلة" data-es="SELECCIONAR IDIOMA" data-tr="DİLİ SEÇİN" data-fr="CHOISIR LA LANGUE" data-it="SELEZIONA LINGUA" data-zh="选择语言" data-ru="ВЫБРАТЬ ЯЗЫК">SELECT LANGUAGE</span>
           </div>
           
-          <div id="dynamicLanguageButtonsContainer" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 6px;"></div>
+          <div id="dynamicLanguageButtonsContainer" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 6px;">
+            <!-- Language buttons will be generated dynamically via JS -->
+          </div>
         </div>
 
         <div class="sheet-links-stack">
@@ -1871,26 +1874,25 @@
   </div>
 
   <script>
-    // --- SPA History & Navigation State ---
-    let isManuallyClosing = false;
-    window.addEventListener('popstate', (e) => {
-      if (isManuallyClosing) return;
 
+    // --- History API & Navigation State ---
+    window.addEventListener('popstate', (e) => {
+      // Check if any overlay is open
       const sheet = document.getElementById('mobileNavSheet');
       const lb = document.getElementById('imageLightbox');
       const wSheet = document.getElementById('weatherSheetOverlay');
 
       let overlayClosed = false;
-      const drawer = document.getElementById('appDrawer');
-      if (drawer && drawer.classList.contains('open')) {
-        drawer.classList.remove('open');
-        document.body.style.overflow = '';
+      if (sheet && sheet.style.display === 'flex') {
+        closeDrawer();
         overlayClosed = true;
       }
-      const wOverlay = document.getElementById('weatherOverlayModal');
-      if (wOverlay && wOverlay.classList.contains('open')) {
-        wOverlay.classList.remove('open');
-        document.body.style.overflow = '';
+      if (lb && lb.style.display === 'flex') {
+        closeLightbox();
+        overlayClosed = true;
+      }
+      if (wSheet && wSheet.style.display === 'flex') {
+        closeWeatherSheet();
         overlayClosed = true;
       }
 
@@ -1898,32 +1900,14 @@
         return;
       }
 
+      // If no overlay was open, switch to the page defined in state
       if (e.state && e.state.page) {
-        const allPages = document.querySelectorAll('.view-page');
-        allPages.forEach(p => { p.classList.remove('active-view'); });
-        const target = document.getElementById(`page-${e.state.page}`);
-        if (target) {
-          target.classList.add('active-view');
-          window.scrollTo({ top: 0, behavior: 'instant' });
-        }
+        navigateTo(e.state.page, false);
       } else {
-        const allPages = document.querySelectorAll('.view-page');
-        allPages.forEach(p => { p.classList.remove('active-view'); });
-        const target = document.getElementById('page-home');
-        if (target) {
-          target.classList.add('active-view');
-          window.scrollTo({ top: 0, behavior: 'instant' });
-        }
+        navigateTo('home', false);
       }
     });
 
-    function safePopModalState(modalId) {
-      if (history.state && history.state.modal === modalId) {
-        isManuallyClosing = true;
-        history.back();
-        setTimeout(() => { isManuallyClosing = false; }, 50);
-      }
-    }
     let currentLang = 'en';
 
     const arabCountries = [
@@ -1954,7 +1938,6 @@
       { country: 'China', capital: 'Beijing', flag: '🇨🇳', lat: 39.9042, lon: 116.4074 },
       { country: 'Italy', capital: 'Rome', flag: '🇮🇹', lat: 41.9028, lon: 12.4964 }
     ];
-
 
     const availableLanguages = [
       { code: 'en', icon: '🇬🇧', label: 'EN' },
@@ -2073,7 +2056,7 @@
         target.classList.add('active-view');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-      closeDrawer(null, true);
+      closeDrawer();
 
       if (pushToHistory) {
         history.pushState({ page: pageId }, '', `#${pageId}`);
@@ -2493,6 +2476,29 @@
       card.addEventListener('mouseleave', () => {
         card.style.setProperty('--spotlight-opacity', '0');
       });
+    });
+
+    // --- Scroll Animations Observer ---
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, observerOptions);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.fade-in-up').forEach((el) => {
+          scrollObserver.observe(el);
+        });
     });
 
   </script>
