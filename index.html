@@ -41,7 +41,7 @@
       --card-hover: rgba(245, 247, 250, 1);
       --text-pure: #0b0c10;
       --text-main: #1d2129;
-      --text-muted: #626a76;
+      --text-muted: #4a5568; /* Increased contrast from #626a76 */
       --sheet-bg: #ffffff;
       --pill-bg: rgba(0, 0, 0, 0.04);
       --logo-primary: #0b0c10;
@@ -501,11 +501,18 @@
       background: radial-gradient(220px circle at var(--spotlight-x) var(--spotlight-y), rgba(229, 27, 36, 0.22) 0%, rgba(229, 27, 36, 0.06) 40%, transparent 75%);
       opacity: var(--spotlight-opacity); pointer-events: none; z-index: 1; transition: opacity 0.3s ease;
     }
+    [data-theme="light"] .spotlight-card::before {
+      background: radial-gradient(280px circle at var(--spotlight-x) var(--spotlight-y), rgba(255, 215, 0, 0.2) 0%, rgba(192, 192, 192, 0.1) 40%, transparent 75%);
+    }
     .spotlight-card::after {
       content: ''; position: absolute; inset: -1px; border-radius: inherit; padding: 1px;
       background: radial-gradient(180px circle at var(--spotlight-x) var(--spotlight-y), rgba(229, 27, 36, 0.8) 0%, rgba(255, 255, 255, 0.4) 25%, transparent 65%);
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
       opacity: var(--spotlight-opacity); pointer-events: none; z-index: 2; transition: opacity 0.3s ease;
+    }
+    [data-theme="light"] .spotlight-card::after {
+      background: radial-gradient(200px circle at var(--spotlight-x) var(--spotlight-y), rgba(255, 223, 0, 0.9) 0%, rgba(230, 232, 250, 0.7) 20%, rgba(192, 192, 192, 0.3) 50%, transparent 70%);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5) inset;
     }
     .spotlight-card > * { position: relative; z-index: 3; }
 
@@ -613,7 +620,7 @@
     .section-spec-tag { font-family: var(--font-body); font-size: 0.6rem; font-weight: 700; color: var(--accent-red); letter-spacing: 0.6px; text-transform: uppercase; }
 
     .category-duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 22px; }
-    .category-slate-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px 12px; position: relative; transition: all 0.22s ease; display: flex; flex-direction: column; min-height: 145px; cursor: pointer; }
+    .category-slate-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px 12px; position: relative; transition: all 0.22s ease; display: flex; flex-direction: column; min-height: 200px; cursor: pointer; }
     .category-slate-card:hover { border-color: rgba(229, 27, 36, 0.5); background: var(--card-hover); transform: translateY(-2px); }
     .card-matrix-index { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; color: var(--accent-red); margin-bottom: 8px; }
     .category-slate-card h4 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; color: var(--text-pure); letter-spacing: 0.3px; text-transform: uppercase; margin-bottom: 3px; }
@@ -668,7 +675,7 @@
     [data-theme="light"] .about-intro-quote-icon { color: rgba(0,0,0,0.03); }
     
     .expertise-bento-grid { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
-    .expertise-bento-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 22px; position: relative; overflow: hidden; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; display: flex; flex-direction: column; gap: 14px; z-index: 1; }
+    .expertise-bento-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 22px; position: relative; overflow: hidden; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; display: flex; flex-direction: column; gap: 14px; z-index: 1; min-height: 250px; }
     .expertise-bento-card:hover { border-color: rgba(229, 27, 36, 0.4); background: var(--card-hover); transform: translateY(-4px); box-shadow: 0 12px 24px rgba(229, 27, 36, 0.12); }
     .bento-bg-number { position: absolute; right: -5px; bottom: -18px; font-family: var(--font-shojumaru); font-size: 6.5rem; color: rgba(255,255,255,0.015); line-height: 1; user-select: none; pointer-events: none; transition: color 0.4s ease, transform 0.4s ease; z-index: -1; }
     html[dir="rtl"] .bento-bg-number { right: auto; left: -5px; }
@@ -808,25 +815,27 @@
        DESKTOP RESPONSIVE OVERRIDES
        ===================================================================== */
     @media (min-width: 768px) {
-      .app-screen-frame { max-width: 100% !important; width: 100% !important; padding: 100px 5% 60px !important; }
-      .dynamic-header { max-width: 100% !important; width: 100% !important; padding: 15px 5% !important; }
+      .app-screen-frame { max-width: 1920px !important; margin: 0 auto !important; width: 100% !important; padding: 90px 2% 60px !important; }
+      .dynamic-header { max-width: 85% !important; width: 100% !important; padding: 10px 2% !important; top: 15px; border-radius: 20px; left: 50%; transform: translateX(-50%); margin: 0 auto; }
+      .dynamic-header .header-inner { max-width: 100% !important; }
       .main-nav { max-width: 100% !important; }
 
       /* Desktop Navbar Adjustments */
       .dynamic-header.scrolled {
         width: 100% !important;
-        max-width: 100% !important; /* Make navbar wide width */
+        max-width: 1920px !important; /* Limit max width for ultrawide */
+        margin: 0 auto !important;
         border-radius: 0; /* Remove pill shape, make it full width bar */
         border: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 15px 40px !important;
+        padding: 15px 2% !important;
       }
       [data-theme="light"] .dynamic-header.scrolled {
         border-color: rgba(0, 0, 0, 0.06);
         border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
         border-top: none !important;
       }
-      .dynamic-header.scrolled .header-inner { max-width: 1200px; justify-content: space-between; }
+      .dynamic-header.scrolled .header-inner { max-width: 1200px !important; justify-content: space-between; }
       .dynamic-header.scrolled .as-vector-logo-svg { width: 120px; height: 43px; }
 
       .dynamic-header.scrolled .lang-toggle-pill,
@@ -842,55 +851,40 @@
       }
 
       /* Hero Desktop Sizing Increases - Medium Size */
-      .hero-standee-col, .hero-standee-inner { height: 600px !important; overflow: visible !important; }
+      .hero-standee-col, .hero-standee-inner { height: 70vh !important; min-height: 500px !important; overflow: visible !important; }
       /* Ensure image is not cut off by setting object-fit/clip-path if necessary, and setting height/width */
-      .creator-cutout-img { height: 600px !important; max-width: 100%; object-fit: contain; }
+      .creator-cutout-img { height: 70vh !important; min-height: 500px !important; max-width: 100%; object-fit: contain; }
 
       /* Typography gets Medium scale */
-      .hero-typography-col .title-stacked-3d.en-title { font-size: 5.6rem !important; margin-bottom: 8px !important; }
-      html[lang="es"] .hero-typography-col .title-stacked-3d.en-title { font-size: 3.6rem !important; }
-      html[lang="tr"] .hero-typography-col .title-stacked-3d.en-title { font-size: 3.9rem !important; }
-      html[lang="fr"] .hero-typography-col .title-stacked-3d.en-title { font-size: 3.7rem !important; }
-      html[lang="it"] .hero-typography-col .title-stacked-3d.en-title { font-size: 3.7rem !important; }
-      html[lang="ru"] .hero-typography-col .title-stacked-3d.en-title { font-size: 3.9rem !important; }
-      html[lang="zh"] .hero-typography-col .title-stacked-3d.en-title { font-size: 6rem !important; }
+      .hero-typography-col .title-stacked-3d.en-title { font-size: clamp(3.5rem, 6vw, 5.6rem) !important; margin-bottom: 8px !important; }
+      html[lang="es"] .hero-typography-col .title-stacked-3d.en-title { font-size: clamp(2.3rem, 4vw, 3.6rem) !important; }
+      html[lang="tr"] .hero-typography-col .title-stacked-3d.en-title { font-size: clamp(2.45rem, 4.2vw, 3.9rem) !important; }
+      html[lang="fr"] .hero-typography-col .title-stacked-3d.en-title { font-size: clamp(2.35rem, 4vw, 3.7rem) !important; }
+      html[lang="it"] .hero-typography-col .title-stacked-3d.en-title { font-size: clamp(2.35rem, 4vw, 3.7rem) !important; }
+      html[lang="ru"] .hero-typography-col .title-stacked-3d.en-title { font-size: clamp(2.45rem, 4.2vw, 3.9rem) !important; }
+      html[lang="zh"] .hero-typography-col .title-stacked-3d.en-title { font-size: clamp(3.8rem, 6.5vw, 6rem) !important; }
 
-      html[dir="rtl"] .title-stacked-3d.ar-title { font-size: 5.4rem !important; margin-bottom: 24px !important; }
+      html[dir="rtl"] .title-stacked-3d.ar-title { font-size: clamp(3.4rem, 6vw, 5.4rem) !important; margin-bottom: 24px !important; }
 
-      .author-name-lead { font-size: 3.4rem !important; margin-bottom: 4px !important; }
-      .author-surname-red { font-size: 2.4rem !important; margin-bottom: 6px !important; }
+      .author-name-lead { font-size: clamp(2.18rem, 4vw, 3.4rem) !important; margin-bottom: 4px !important; }
+      .author-surname-red { font-size: clamp(1.52rem, 3vw, 2.4rem) !important; margin-bottom: 6px !important; }
 
       .roles-unified-pod { padding: 10px 18px !important; margin-top: 12px !important; margin-bottom: 10px !important; }
       .role-pod-item { font-size: 1rem !important; }
 
-      .creator-bio-primary { font-size: 1.1rem !important; margin-top: 12px !important; margin-bottom: 10px !important; }
-      .creator-bio-secondary { font-size: 0.95rem !important; margin-top: 16px !important; margin-bottom: 18px !important; line-height: 1.5; }
+      .creator-bio-primary { font-size: clamp(1.2rem, 1.5vw, 1.8rem) !important; margin-top: 20px !important; margin-bottom: 12px !important; }
+      .creator-bio-secondary { font-size: clamp(1rem, 1.2vw, 1.4rem) !important; margin-top: 16px !important; margin-bottom: 24px !important; line-height: 1.6; }
 
-      .punchy-sub-line-stacked { font-size: 1rem !important; margin-top: 28px !important; margin-bottom: 24px !important; }
+      .punchy-sub-line-stacked { font-size: clamp(1.1rem, 1.3vw, 1.6rem) !important; margin-top: 4vh !important; margin-bottom: 24px !important; }
 
-      .hero-split-stage { min-height: 600px !important; margin-bottom: 30px !important; width: 100% !important; margin-right: -4% !important; padding-right: 0 !important; }
+      .hero-split-stage { min-height: 70vh !important; margin-bottom: 30px !important; width: 100% !important; margin-right: -4% !important; padding-right: 0 !important; }
       html[dir="rtl"] .hero-split-stage { margin-left: -4% !important; margin-right: 0 !important; padding-left: 0 !important; }
 
-      .hero-typography-col { max-width: 600px !important; width: 50% !important; }
+      .hero-typography-col { max-width: 800px !important; width: 50% !important; padding-top: 15vh !important; }
       .hero-standee-col { width: 50% !important; text-align: right; display: flex; justify-content: flex-end; }
 
       html[dir="rtl"] .hero-standee-col { text-align: left; justify-content: flex-start; }
 
-
-      .hero-block {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: 40px;
-        text-align: left;
-      }
-      .hero-text { flex: 1; align-items: flex-start; }
-      .name-row { justify-content: flex-start; }
-      .hero-title-en { font-size: clamp(3.8rem, 5vw, 6rem); }
-      .hero-title-ar { font-size: clamp(4.8rem, 6vw, 7.5rem); }
-      .hero-bio { font-size: clamp(0.95rem, 1.2vw, 1.2rem); text-align: left; max-width: 80%; }
-      .hero-cutout-container { flex: 1; width: 100%; height: auto; aspect-ratio: 4/5; min-height: 500px; margin-top: 0; }
 
       .stats-triad { grid-template-columns: repeat(3, 1fr); gap: 20px; }
 
@@ -912,6 +906,22 @@
         gap: 40px;
       }
     }
+
+
+    /* --- Scroll Animations --- */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fade-in-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Staggered delays */
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
 
   </style>
 </head>
@@ -1117,7 +1127,7 @@
       <section class="view-page active-view" id="page-home">
         
         <div class="hero-split-stage">
-          <div class="hero-typography-col">
+          <div class="hero-typography-col fade-in-up">
             <div class="title-stacked-3d en-title" 
                  data-en="ABOUT" 
                  data-es="ACERCA" 
@@ -1201,15 +1211,15 @@
         </div>
 
         <div class="stats-triad">
-          <div class="stat-pod">
+          <div class="stat-pod fade-in-up delay-1">
             <div class="stat-number">2016</div>
             <div class="stat-label" data-en="Since" data-ar="منذ" data-es="Desde" data-tr="Kuruluş" data-fr="Depuis" data-it="Dal" data-zh="创立于" data-ru="С">Since</div>
           </div>
-          <div class="stat-pod">
+          <div class="stat-pod fade-in-up delay-2">
             <div class="stat-number">100<span style="color: var(--text-pure);">+</span></div>
             <div class="stat-label" data-en="Projects" data-ar="مشاريع" data-es="Proyectos" data-tr="Proje" data-fr="Projets" data-it="Progetti" data-zh="完成项目" data-ru="Проектов">Projects</div>
           </div>
-          <div class="stat-pod">
+          <div class="stat-pod fade-in-up delay-3">
             <div class="stat-number">AI <span style="color: var(--text-pure);">∞</span></div>
             <div class="stat-label" data-en="Workflow" data-ar="ذكاء" data-es="IA" data-tr="İş Akışı" data-fr="Processus" data-it="Metodo" data-zh="AI 赋能" data-ru="Процесс">Workflow</div>
           </div>
@@ -1415,7 +1425,7 @@
           </h2>
         </div>
 
-        <div class="about-intro-glass spotlight-card">
+        <div class="about-intro-glass spotlight-card fade-in-up">
           <i class="fa-solid fa-quote-right about-intro-quote-icon"></i>
           
           <div class="section-headline" style="font-size: 0.95rem; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
@@ -1592,7 +1602,7 @@
           Follow the latest releases, browse recent work decks, or jump into a quick direct chat via WhatsApp.
         </p>
 
-        <div class="direct-channels-pod spotlight-card">
+        <div class="direct-channels-pod spotlight-card fade-in-up delay-1">
           <div class="channels-header-row">
             <span data-en="CHANNELS & PROFILES" data-ar="المنصات والملفات الشخصية" data-es="CANALES Y PERFILES" data-tr="KANALLAR VE PROFİLLER" data-fr="CANAUX & PROFILS" data-it="CANALI & PROFILI" data-zh="社交频道与主页" data-ru="КАНАЛЫ И ПРОФИЛИ">CHANNELS & PROFILES</span>
             <span class="direct" data-en="// DIRECT" data-ar="// روابط مباشرة" data-es="// DIRECTO" data-tr="// DOĞRUDAN" data-fr="// DIRECT" data-it="// DIRETTO" data-zh="// 快速直达" data-ru="// ПРЯМО">// DIRECT</span>
@@ -1617,7 +1627,7 @@
           </div>
         </div>
 
-        <a href="https://wa.me/qr/5JRN6AWP6WZQG1" target="_blank" class="whatsapp-direct-cell spotlight-card">
+        <a href="https://wa.me/qr/5JRN6AWP6WZQG1" target="_blank" class="whatsapp-direct-cell spotlight-card fade-in-up delay-2">
           <div class="wa-flex-lead">
             <div class="wa-icon-bubble"><i class="fa-brands fa-whatsapp"></i></div>
             <div class="wa-textual-meta">
@@ -1668,15 +1678,8 @@
             <span data-en="SELECT LANGUAGE" data-ar="اختر لغتك المفضلة" data-es="SELECCIONAR IDIOMA" data-tr="DİLİ SEÇİN" data-fr="CHOISIR LA LANGUE" data-it="SELEZIONA LINGUA" data-zh="选择语言" data-ru="ВЫБРАТЬ ЯЗЫК">SELECT LANGUAGE</span>
           </div>
           
-          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 6px;">
-            <button class="lang-select-pill" id="lang-btn-en" onclick="setLanguage('en')" style="background: var(--accent-red); color: #fff; border: none; padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇬🇧</span> EN</button>
-            <button class="lang-select-pill" id="lang-btn-ar" onclick="setLanguage('ar')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇪🇬</span> AR</button>
-            <button class="lang-select-pill" id="lang-btn-fr" onclick="setLanguage('fr')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇫🇷</span> FR</button>
-            <button class="lang-select-pill" id="lang-btn-it" onclick="setLanguage('it')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇮🇹</span> IT</button>
-            <button class="lang-select-pill" id="lang-btn-es" onclick="setLanguage('es')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇪🇸</span> ES</button>
-            <button class="lang-select-pill" id="lang-btn-tr" onclick="setLanguage('tr')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇹🇷</span> TR</button>
-            <button class="lang-select-pill" id="lang-btn-zh" onclick="setLanguage('zh')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇨🇳</span> ZH</button>
-            <button class="lang-select-pill" id="lang-btn-ru" onclick="setLanguage('ru')" style="background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;"><span>🇷🇺</span> RU</button>
+          <div id="dynamicLanguageButtonsContainer" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 6px;">
+            <!-- Language buttons will be generated dynamically via JS -->
           </div>
         </div>
 
@@ -1901,6 +1904,38 @@
       { country: 'Italy', capital: 'Rome', flag: '🇮🇹', lat: 41.9028, lon: 12.4964 }
     ];
 
+    const availableLanguages = [
+      { code: 'en', icon: '🇬🇧', label: 'EN' },
+      { code: 'ar', icon: '🇪🇬', label: 'AR' },
+      { code: 'fr', icon: '🇫🇷', label: 'FR' },
+      { code: 'it', icon: '🇮🇹', label: 'IT' },
+      { code: 'es', icon: '🇪🇸', label: 'ES' },
+      { code: 'tr', icon: '🇹🇷', label: 'TR' },
+      { code: 'zh', icon: '🇨🇳', label: 'ZH' },
+      { code: 'ru', icon: '🇷🇺', label: 'RU' }
+    ];
+
+    function renderLanguageButtons() {
+      const container = document.getElementById('dynamicLanguageButtonsContainer');
+      if (!container) return;
+      container.innerHTML = '';
+      availableLanguages.forEach(lang => {
+        const btn = document.createElement('button');
+        btn.className = 'lang-select-pill';
+        btn.id = `lang-btn-${lang.code}`;
+        btn.onclick = () => setLanguage(lang.code);
+
+        if (lang.code === currentLang) {
+          btn.style.cssText = 'background: var(--accent-red); color: #fff; border: none; padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;';
+        } else {
+          btn.style.cssText = 'background: rgba(255,255,255,0.05); color: var(--text-pure); border: 1px solid var(--card-border); padding: 6px 2px; border-radius: 8px; font-family: var(--font-display); font-size: 0.55rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px;';
+        }
+
+        btn.innerHTML = `<span>${lang.icon}</span> ${lang.label}`;
+        container.appendChild(btn);
+      });
+    }
+
     function toggleNavbarLanguage() {
       const nextLang = currentLang === 'en' ? 'ar' : 'en';
       setLanguage(nextLang);
@@ -1919,18 +1954,7 @@
         langBtn.textContent = currentLang.toUpperCase();
       }
 
-      document.querySelectorAll('.lang-select-pill').forEach(btn => {
-        btn.style.background = 'rgba(255,255,255,0.05)';
-        btn.style.color = 'var(--text-pure)';
-        btn.style.borderColor = 'var(--card-border)';
-      });
-      
-      const activeBtn = document.getElementById(`lang-btn-${currentLang}`);
-      if (activeBtn) {
-        activeBtn.style.background = 'var(--accent-red)';
-        activeBtn.style.color = '#fff';
-        activeBtn.style.borderColor = 'var(--accent-red)';
-      }
+      renderLanguageButtons();
 
       const elements = document.querySelectorAll('[data-en]');
       elements.forEach(el => {
@@ -2318,6 +2342,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      renderLanguageButtons();
       filterPhotos('all');
       filterDesigns('all');
       fetchGizaWeatherAndHide();
@@ -2385,6 +2410,30 @@
         card.style.setProperty('--spotlight-opacity', '0');
       });
     });
+
+    // --- Scroll Animations Observer ---
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, observerOptions);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.fade-in-up').forEach((el) => {
+          scrollObserver.observe(el);
+        });
+    });
+
   </script>
 </body>
 </html>
