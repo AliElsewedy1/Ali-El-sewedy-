@@ -1873,6 +1873,40 @@
   </div>
 
   <script>
+
+    // --- History API & Navigation State ---
+    window.addEventListener('popstate', (e) => {
+      // Check if any overlay is open
+      const sheet = document.getElementById('mobileNavSheet');
+      const lb = document.getElementById('imageLightbox');
+      const wSheet = document.getElementById('weatherSheetOverlay');
+
+      let overlayClosed = false;
+      if (sheet && sheet.style.display === 'flex') {
+        closeDrawer();
+        overlayClosed = true;
+      }
+      if (lb && lb.style.display === 'flex') {
+        closeLightbox();
+        overlayClosed = true;
+      }
+      if (wSheet && wSheet.style.display === 'flex') {
+        closeWeatherSheet();
+        overlayClosed = true;
+      }
+
+      if (overlayClosed) {
+        return;
+      }
+
+      // If no overlay was open, switch to the page defined in state
+      if (e.state && e.state.page) {
+        navigateTo(e.state.page, false);
+      } else {
+        navigateTo('home', false);
+      }
+    });
+
     let currentLang = 'en';
 
     const arabCountries = [
@@ -2010,7 +2044,7 @@
       }
     }
 
-    function navigateTo(pageId) {
+    function navigateTo(pageId, pushToHistory = true) {
       const allPages = document.querySelectorAll('.view-page');
       allPages.forEach(p => { p.classList.remove('active-view'); });
       const target = document.getElementById(`page-${pageId}`);
@@ -2019,6 +2053,10 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
       closeDrawer();
+
+      if (pushToHistory) {
+        history.pushState({ page: pageId }, '', `#${pageId}`);
+      }
     }
 
     function openPhotoCategory(catKey) {
